@@ -1,0 +1,18 @@
+# Folder editor
+.vscode/
+
+# Sistem OS
+.DS_Store
+Thumbs.db
+
+# Log
+*.log
+
+# Kalau pakai npm
+node_modules/
+dist/
+build/
+
+# File rahasia (kalau ada)
+.env
+*.env
