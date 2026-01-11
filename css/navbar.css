@@ -1,0 +1,66 @@
+/* ================================
+   NAVBAR STYLES
+   Styling untuk navigation bar
+   ================================ */
+
+/* ===== NAVBAR CONTAINER ===== */
+/* Navbar tetap di atas saat scroll dengan backdrop blur effect */
+.navbar {
+    background: rgba(10, 22, 40, 0.95); /* Background semi-transparent */
+    backdrop-filter: blur(10px);         /* Efek blur pada background */
+    padding: 1rem 0;
+    transition: all 0.3s ease;          /* Animasi smooth saat berubah */
+    z-index: 1000;                      /* Pastikan navbar di atas element lain */
+}
+
+/* Style navbar saat di-scroll */
+.navbar.scrolled {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5); /* Shadow saat scroll */
+}
+
+/* ===== LOGO ===== */
+/* Container icon logo dengan background */
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-blue);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Text logo brand */
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* ===== NAVIGATION LINKS ===== */
+/* Style untuk link menu navigasi */
+.nav-link {
+    color: var(--white) !important;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s ease;        /* Animasi perubahan warna */
+    font-weight: 500;
+}
+
+/* Hover effect pada nav link */
+.nav-link:hover {
+    color: var(--accent-blue) !important;
+}
+
+/* ===== SPECIAL NAV LINK (FAKTA) ===== */
+/* Style khusus untuk menu Fakta dengan border */
+.nav-fakta {
+    border: 2px solid var(--white);
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem !important;
+}
+
+/* Hover effect khusus untuk menu Fakta */
+.nav-fakta:hover {
+    background: var(--white);
+    color: var(--primary-dark) !important;
+}

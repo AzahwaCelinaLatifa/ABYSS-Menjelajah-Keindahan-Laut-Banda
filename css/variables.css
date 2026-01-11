@@ -1,0 +1,34 @@
+/* ================================
+   CSS VARIABLES & GLOBAL STYLES
+   Variabel warna dan style global
+   ================================ */
+
+/* ===== RESET STYLES ===== */
+/* Menghilangkan margin dan padding default browser */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== CSS VARIABLES ===== */
+/* Variabel warna untuk konsistensi design */
+:root {
+    /* Color Variables - Warna utama website */
+    --primary-dark: #0A1628;      /* Biru gelap utama untuk background */
+    --secondary-dark: #1E3A5F;    /* Biru gelap sekunder untuk section */
+    --accent-blue: #4A90E2;       /* Biru terang untuk accent/highlight */
+    --light-blue: #6AABD8;        /* Biru muda untuk hover state */
+    --white: #FFFFFF;             /* Putih untuk text dan element */
+    --light-gray: #F5F5F5;        /* Abu-abu terang */
+    --text-gray: #B0B0B0;         /* Abu-abu untuk text sekunder */
+}
+
+/* ===== BODY STYLES ===== */
+/* Style dasar untuk seluruh halaman */
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--primary-dark);
+    color: var(--white);
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+}

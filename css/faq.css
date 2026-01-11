@@ -1,0 +1,51 @@
+/* ================================
+   FAQ/FAKTA STYLES
+   Styling untuk section FAQ dengan accordion
+   ================================ */
+
+/* ===== ACCORDION ITEM ===== */
+/* Container untuk setiap item accordion */
+.accordion-item {
+    background: var(--secondary-dark);
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    overflow: hidden;                   /* Rounded corners */
+}
+
+/* ===== ACCORDION BUTTON ===== */
+/* Tombol/header accordion yang bisa diklik */
+.accordion-button {
+    background: var(--secondary-dark);
+    color: var(--white);
+    font-weight: 600;
+    padding: 1.5rem;
+    border: none;
+    font-size: 1.05rem;
+}
+
+/* State saat accordion dibuka/expanded */
+.accordion-button:not(.collapsed) {
+    background: var(--accent-blue);     /* Background biru saat expanded */
+    color: var(--white);
+}
+
+/* Remove default focus outline */
+.accordion-button:focus {
+    box-shadow: none;
+    border: none;
+}
+
+/* Icon arrow accordion - invert warna agar terlihat */
+.accordion-button::after {
+    filter: invert(1);
+}
+
+/* ===== ACCORDION BODY ===== */
+/* Konten accordion yang di-expand */
+.accordion-body {
+    background: rgba(10, 22, 40, 0.5);
+    color: var(--text-gray);
+    padding: 1.5rem;
+    line-height: 1.8;                   /* Line height untuk readability */
+}

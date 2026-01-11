@@ -1,0 +1,63 @@
+/* ================================
+   HERO SECTION STYLES
+   Styling untuk section beranda/hero
+   ================================ */
+
+/* ===== HERO CONTAINER ===== */
+/* Section hero dengan full viewport height */
+.hero-section {
+    position: relative;
+    min-height: 100vh;                  /* Minimal tinggi 100% viewport */
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+    padding-top: 80px;                  /* Offset untuk navbar */
+}
+
+/* ===== HERO OVERLAY ===== */
+/* Overlay gradient untuk efek visual */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(74, 144, 226, 0.1) 0%, transparent 50%);
+}
+
+/* ===== HERO TEXT ===== */
+/* Judul utama hero section */
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 1s ease;        /* Animasi fade in dari bawah */
+}
+
+/* Subtitle/deskripsi hero section */
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.8;
+    max-width: 500px;                   /* Batasi lebar untuk readability */
+    animation: fadeInUp 1s ease 0.2s backwards; /* Animasi delay 0.2s */
+}
+
+/* ===== HERO IMAGE ===== */
+/* Gambar hero dengan animasi float */
+.hero-image {
+    border-radius: 20px;
+    animation: float 3s ease-in-out infinite; /* Animasi mengambang terus-menerus */
+}
+
+/* ===== SCROLL DOWN INDICATOR ===== */
+/* Icon scroll down di bagian bawah hero */
+.scroll-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);        /* Center horizontal */
+    font-size: 2rem;
+    color: var(--accent-blue);
+    animation: bounce 2s infinite;      /* Animasi bounce */
+    cursor: pointer;
+}

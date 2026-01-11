@@ -1,0 +1,77 @@
+/* ================================
+   FLORA & FAUNA STYLES
+   Styling untuk section flora dan fauna
+   ================================ */
+
+/* ===== FLORA & FAUNA CARDS ===== */
+/* Cards untuk Flora & Fauna dengan hover effect */
+.flora-card,
+.fauna-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;                   /* Hide overflow untuk efek zoom */
+    cursor: pointer;                    /* Cursor pointer menandakan clickable */
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect - card naik sedikit */
+.flora-card:hover,
+.fauna-card:hover {
+    transform: scale(1.05);             /* Zoom 105% */
+}
+
+/* ===== CARD IMAGES ===== */
+/* Gambar dalam card dengan fixed height */
+.flora-card img,
+.fauna-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;                  /* Crop gambar agar fit */
+    transition: transform 0.3s ease;
+}
+
+/* Zoom effect pada gambar saat hover */
+.flora-card:hover img,
+.fauna-card:hover img {
+    transform: scale(1.1);              /* Zoom in 110% */
+}
+
+/* ===== CARD OVERLAY ===== */
+/* Overlay gradient untuk menampilkan judul */
+.flora-overlay,
+.fauna-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 1.5rem;
+    color: var(--white);
+}
+
+/* Judul dalam overlay */
+.flora-overlay h5,
+.fauna-overlay h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* ===== CAROUSEL CONTROLS ===== */
+/* Tombol prev/next untuk carousel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(74, 144, 226, 0.8); /* Background biru semi-transparent */
+    border-radius: 50%;                   /* Bentuk bulat */
+    top: 50%;
+    transform: translateY(-50%);          /* Center vertical */
+    opacity: 1;                           /* Selalu terlihat */
+}
+
+/* Hover effect untuk carousel controls */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: var(--accent-blue);       /* Background solid saat hover */
+}

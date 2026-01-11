@@ -1,0 +1,54 @@
+/* ================================
+   SECTION STYLES
+   Styling untuk header dan layout section
+   ================================ */
+
+/* ===== SECTION HEADERS ===== */
+/* Label kecil di atas judul section */
+.section-label {
+    color: var(--accent-blue);
+    font-weight: 600;
+    letter-spacing: 3px;                /* Spasi antar huruf */
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Judul utama setiap section */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+}
+
+/* ===== SECTION BACKGROUNDS ===== */
+/* Background untuk section flora & fauna */
+.flora-section,
+.fauna-section {
+    background: var(--primary-dark);
+    padding: 5rem 0;
+}
+
+/* Background untuk section galeri */
+.galeri-section {
+    background: var(--secondary-dark);
+    padding: 5rem 0;
+}
+
+/* Background untuk section FAQ */
+.faq-section {
+    background: var(--primary-dark);
+    padding: 5rem 0;
+}
+
+/* Background untuk section lokasi */
+.lokasi-section {
+    background: var(--secondary-dark);
+    padding: 5rem 0;
+}
+
+/* Background untuk section kontak */
+.kontak-section {
+    background: var(--primary-dark);
+    padding: 5rem 0;
+}

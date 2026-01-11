@@ -1,0 +1,39 @@
+/* ================================
+   ANIMATIONS
+   Keyframe animations untuk website
+   ================================ */
+
+/* ===== FADE IN UP ===== */
+/* Animasi fade in dari bawah ke atas */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);    /* Mulai dari 30px di bawah */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);        /* Berakhir di posisi normal */
+    }
+}
+
+/* ===== FLOAT ===== */
+/* Animasi mengambang naik-turun */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);        /* Posisi normal */
+    }
+    50% {
+        transform: translateY(-20px);    /* Naik 20px di tengah animasi */
+    }
+}
+
+/* ===== BOUNCE ===== */
+/* Animasi bounce untuk scroll indicator */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px); /* Naik 10px */
+    }
+}

@@ -1,0 +1,157 @@
+<!-- ============================================
+     FAUNA SECTION
+     Bagian ini menampilkan berbagai jenis fauna
+     laut Banda dengan carousel dan modal detail
+     ============================================ -->
+<section id="fauna" class="fauna-section py-5">
+    <!-- Container utama untuk konten -->
+    <div class="container">
+        <!-- Header section dengan label dan judul -->
+        <div class="section-header text-center mb-5">
+            <!-- Label kecil di atas judul -->
+            <p class="section-label">FAUNA</p>
+            <!-- Judul utama section -->
+            <h2 class="section-title">Beragam ikan dan biota laut hidup di<br>perairan tropis yang masih alami.</h2>
+        </div>
+
+        <!-- Fauna Carousel untuk menampilkan card fauna -->
+        <div class="row">
+            <div class="col-12">
+                <!-- Carousel Bootstrap dengan auto-slide -->
+                <div id="faunaCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Slide aktif dengan 4 fauna card -->
+                        <div class="carousel-item active">
+                            <!-- Grid dengan 4 kolom responsive -->
+                            <div class="row g-4">
+                                <!-- Card 1: Ikan Napoleon -->
+                                <div class="col-md-3">
+                                    <!-- Card yang dapat dibuka modal saat diklik -->
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal1">
+                                        <!-- Gambar fauna -->
+                                        <img src="https://via.placeholder.com/300x250/E74C3C/FFFFFF?text=Napoleon+Fish" alt="Ikan Napoleon">
+                                        <!-- Overlay dengan nama fauna -->
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Napoleon</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 2: Ikan Kerapu -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal2">
+                                        <img src="https://via.placeholder.com/300x250/F39C12/FFFFFF?text=Grouper" alt="Ikan Kerapu">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Kerapu</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 3: Ubur-ubur -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal3">
+                                        <img src="https://via.placeholder.com/300x250/9B59B6/FFFFFF?text=Jellyfish" alt="Ubur-ubur">
+                                        <div class="fauna-overlay">
+                                            <h5>Ubur-ubur</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 4: Penyu Laut -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal4">
+                                        <img src="https://via.placeholder.com/300x250/16A085/FFFFFF?text=Sea+Turtle" alt="Penyu">
+                                        <div class="fauna-overlay">
+                                            <h5>Penyu Laut</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tombol navigasi carousel Previous -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#faunaCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    
+                    <!-- Tombol navigasi carousel Next -->
+                    <button class="carousel-control-next" type="button" data-bs-target="#faunaCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     MODALS UNTUK FAUNA
+     Modal popup untuk menampilkan detail fauna
+     ============================================ -->
+
+<!-- Modal Fauna 1 - Ikan Napoleon -->
+<div class="modal fade" id="faunaModal1" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Header modal dengan judul dan tombol close -->
+            <div class="modal-header">
+                <h5 class="modal-title">Ikan Napoleon</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Body modal dengan gambar dan deskripsi lengkap -->
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/E74C3C/FFFFFF?text=Napoleon+Fish" class="img-fluid mb-3" alt="Ikan Napoleon">
+                <p>Ikan Napoleon atau Napoleon Wrasse adalah salah satu spesies ikan karang terbesar di dunia yang dapat ditemukan di Laut Banda. Ikan ini memiliki ciri khas berupa tonjolan di dahinya dan dapat tumbuh hingga 2 meter. Mereka berperan penting dalam ekosistem terumbu karang dengan memakan bintang laut berduri yang merusak karang.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 2 - Ikan Kerapu -->
+<div class="modal fade" id="faunaModal2" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ikan Kerapu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/F39C12/FFFFFF?text=Grouper" class="img-fluid mb-3" alt="Ikan Kerapu">
+                <p>Ikan Kerapu adalah predator terumbu karang yang penting di Laut Banda. Dengan mulut besar dan tubuh yang kuat, mereka memangsa ikan-ikan kecil dan krustasea. Kerapu juga bernilai ekonomis tinggi dan menjadi target penangkapan ikan berkelanjutan di wilayah ini.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 3 - Ubur-ubur -->
+<div class="modal fade" id="faunaModal3" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ubur-ubur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/9B59B6/FFFFFF?text=Jellyfish" class="img-fluid mb-3" alt="Ubur-ubur">
+                <p>Ubur-ubur di Laut Banda hadir dalam berbagai spesies dan ukuran. Meskipun beberapa spesies memiliki sengatan yang menyakitkan, mereka merupakan bagian penting dari rantai makanan laut. Ubur-ubur memakan plankton dan menjadi makanan bagi penyu serta beberapa jenis ikan.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 4 - Penyu Laut -->
+<div class="modal fade" id="faunaModal4" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Penyu Laut</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/16A085/FFFFFF?text=Sea+Turtle" class="img-fluid mb-3" alt="Penyu">
+                <p>Penyu Laut adalah reptil laut yang dilindungi dan sering terlihat di perairan Laut Banda. Mereka bermigrasi jarak jauh untuk bertelur di pantai-pantai tertentu. Penyu memakan ubur-ubur, rumput laut, dan spons, serta berperan penting dalam menjaga kesehatan ekosistem laut.</p>
+            </div>
+        </div>
+    </div>
+</div>

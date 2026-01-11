@@ -1,0 +1,90 @@
+<!-- ============================================
+     KONTAK SECTION
+     Bagian ini menampilkan form kontak dan
+     informasi kontak untuk menghubungi
+     ============================================ -->
+<section id="kontak" class="kontak-section py-5">
+    <!-- Container utama untuk konten -->
+    <div class="container">
+        <div class="row">
+            <!-- Kolom kiri: Contact Form -->
+            <div class="col-lg-6 mb-4">
+                <!-- Judul form kontak -->
+                <h2 class="mb-4">Contact Form</h2>
+                <!-- Deskripsi singkat -->
+                <p class="mb-4">Please fill out this form below</p>
+                
+                <!-- Form kontak dengan id untuk JavaScript handling -->
+                <form id="contactForm">
+                    <!-- Input Nama -->
+                    <div class="mb-3">
+                        <!-- Label untuk input nama -->
+                        <label for="name" class="form-label">Name</label>
+                        <!-- Input field nama dengan validasi required -->
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <!-- Input Email -->
+                    <div class="mb-3">
+                        <!-- Label untuk input email -->
+                        <label for="email" class="form-label">Email</label>
+                        <!-- Input field email dengan validasi email dan required -->
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+                    </div>
+                    
+                    <!-- Input Message/Pesan -->
+                    <div class="mb-3">
+                        <!-- Label untuk textarea pesan -->
+                        <label for="message" class="form-label">Message</label>
+                        <!-- Textarea untuk pesan dengan 5 baris dan validasi required -->
+                        <textarea class="form-control" id="message" rows="5" placeholder="Write your message here" required></textarea>
+                    </div>
+                    
+                    <!-- Tombol Submit -->
+                    <button type="submit" class="btn btn-primary px-5">SUBMIT</button>
+                </form>
+            </div>
+
+            <!-- Kolom kanan: Contact Information -->
+            <div class="col-lg-6">
+                <!-- Judul informasi kontak -->
+                <h2 class="mb-4">Contact Information</h2>
+                <!-- Deskripsi singkat -->
+                <p class="mb-4">Please fill out this form below</p>
+                
+                <!-- Item kontak 1: Telepon -->
+                <div class="contact-info-item mb-4">
+                    <!-- Icon telepon -->
+                    <i class="fas fa-phone-alt me-3"></i>
+                    <div>
+                        <!-- Label dan nomor telepon -->
+                        <h6>Phone</h6>
+                        <p>+62 345 2140</p>
+                    </div>
+                </div>
+
+                <!-- Item kontak 2: Email -->
+                <div class="contact-info-item mb-4">
+                    <!-- Icon email -->
+                    <i class="fas fa-envelope me-3"></i>
+                    <div>
+                        <!-- Label dan alamat email -->
+                        <h6>Email</h6>
+                        <p>lautbanda@7@gmail.com</p>
+                    </div>
+                </div>
+
+                <!-- Item kontak 3: Lokasi -->
+                <div class="contact-info-item">
+                    <!-- Icon lokasi -->
+                    <i class="fas fa-map-marker-alt me-3"></i>
+                    <div>
+                        <!-- Label dan alamat lokasi -->
+                        <h6>Location</h6>
+                        <p>Java St & Dairy, Country</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

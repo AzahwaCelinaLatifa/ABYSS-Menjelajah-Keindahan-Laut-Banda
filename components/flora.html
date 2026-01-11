@@ -1,0 +1,157 @@
+<!-- ============================================
+     FLORA SECTION
+     Bagian ini menampilkan berbagai jenis flora
+     laut Banda dengan carousel dan modal detail
+     ============================================ -->
+<section id="flora" class="flora-section py-5">
+    <!-- Container utama untuk konten -->
+    <div class="container">
+        <!-- Header section dengan label dan judul -->
+        <div class="section-header text-center mb-5">
+            <!-- Label kecil di atas judul -->
+            <p class="section-label">FLORA</p>
+            <!-- Judul utama section -->
+            <h2 class="section-title">Macam flora laut Banda yang menjaga<br>keseimbangan ekosistemnya</h2>
+        </div>
+
+        <!-- Flora Carousel untuk menampilkan card flora -->
+        <div class="row">
+            <div class="col-12">
+                <!-- Carousel Bootstrap dengan auto-slide -->
+                <div id="floraCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Slide 1 dengan 4 flora card -->
+                        <div class="carousel-item active">
+                            <!-- Grid dengan 4 kolom responsive -->
+                            <div class="row g-4">
+                                <!-- Card 1: Terumbu Karang -->
+                                <div class="col-md-3">
+                                    <!-- Card yang dapat dibuka modal saat diklik -->
+                                    <div class="flora-card" data-bs-toggle="modal" data-bs-target="#floraModal1">
+                                        <!-- Gambar flora -->
+                                        <img src="https://via.placeholder.com/300x250/4A90E2/FFFFFF?text=Coral+Reef" alt="Terumbu Karang">
+                                        <!-- Overlay dengan nama flora -->
+                                        <div class="flora-overlay">
+                                            <h5>Terumbu Karang</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 2: Rumput Laut -->
+                                <div class="col-md-3">
+                                    <div class="flora-card" data-bs-toggle="modal" data-bs-target="#floraModal2">
+                                        <img src="https://via.placeholder.com/300x250/2E5C8A/FFFFFF?text=Sea+Grass" alt="Rumput Laut">
+                                        <div class="flora-overlay">
+                                            <h5>Rumput Laut</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 3: Mangrove -->
+                                <div class="col-md-3">
+                                    <div class="flora-card" data-bs-toggle="modal" data-bs-target="#floraModal3">
+                                        <img src="https://via.placeholder.com/300x250/1A4D6D/FFFFFF?text=Mangrove" alt="Mangrove">
+                                        <div class="flora-overlay">
+                                            <h5>Mangrove</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 4: Alga Laut -->
+                                <div class="col-md-3">
+                                    <div class="flora-card" data-bs-toggle="modal" data-bs-target="#floraModal4">
+                                        <img src="https://via.placeholder.com/300x250/0D2C40/FFFFFF?text=Algae" alt="Alga">
+                                        <div class="flora-overlay">
+                                            <h5>Alga Laut</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tombol navigasi carousel Previous -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#floraCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    
+                    <!-- Tombol navigasi carousel Next -->
+                    <button class="carousel-control-next" type="button" data-bs-target="#floraCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     MODALS UNTUK FLORA
+     Modal popup untuk menampilkan detail flora
+     ============================================ -->
+
+<!-- Modal Flora 1 - Terumbu Karang -->
+<div class="modal fade" id="floraModal1" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Header modal dengan judul dan tombol close -->
+            <div class="modal-header">
+                <h5 class="modal-title">Terumbu Karang (Coral Reefs)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Body modal dengan gambar dan deskripsi lengkap -->
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=Coral+Reef" class="img-fluid mb-3" alt="Terumbu Karang">
+                <p>Terumbu karang di Laut Banda adalah ekosistem bawah laut yang kaya dan beragam, yang menjadi bagian penting dari Taman Wisata Perairan (TWP) Laut Banda di Kepulauan Banda. Ekosistem ini merupakan rumah bagi ratusan spesies ikan dan berbagai jenis karang yang tersebar di area sekitar pulau-pulau seperti Banda Neira, termasuk di dalamnya terumbu karang jenis Acropora yang mendominasi.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Flora 2 - Rumput Laut -->
+<div class="modal fade" id="floraModal2" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rumput Laut</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/2E5C8A/FFFFFF?text=Sea+Grass" class="img-fluid mb-3" alt="Rumput Laut">
+                <p>Rumput laut di Laut Banda menjadi habitat penting bagi berbagai biota laut dan berperan dalam menjaga ekosistem pesisir. Padang lamun ini menyediakan tempat berlindung dan sumber makanan bagi ikan-ikan kecil serta penyu laut.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Flora 3 - Mangrove -->
+<div class="modal fade" id="floraModal3" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mangrove</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/1A4D6D/FFFFFF?text=Mangrove" class="img-fluid mb-3" alt="Mangrove">
+                <p>Hutan mangrove di pesisir Laut Banda berperan sebagai pelindung pantai dari abrasi dan tsunami. Akarnya yang kuat menjadi tempat berkembang biak berbagai jenis ikan dan krustasea, serta menjaga keseimbangan ekosistem pesisir.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Flora 4 - Alga Laut -->
+<div class="modal fade" id="floraModal4" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alga Laut</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://via.placeholder.com/800x400/0D2C40/FFFFFF?text=Algae" class="img-fluid mb-3" alt="Alga">
+                <p>Alga laut merupakan produsen primer dalam rantai makanan laut yang menyediakan oksigen dan makanan bagi organisme laut lainnya. Di Laut Banda, berbagai jenis alga tumbuh subur dan mendukung kehidupan ekosistem laut yang kompleks.</p>
+            </div>
+        </div>
+    </div>
+</div>

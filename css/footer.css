@@ -1,0 +1,24 @@
+/* ================================
+   FOOTER STYLES
+   Styling untuk footer website
+   ================================ */
+
+/* ===== FOOTER CONTAINER ===== */
+/* Container utama footer */
+.footer {
+    background: var(--secondary-dark);
+    border-top: 1px solid rgba(74, 144, 226, 0.2); /* Border atas */
+}
+
+/* ===== FOOTER LINKS ===== */
+/* Link di footer */
+.footer-link {
+    color: var(--text-gray);
+    text-decoration: none;              /* Remove underline */
+    transition: color 0.3s ease;
+}
+
+/* Hover effect untuk footer link */
+.footer-link:hover {
+    color: var(--accent-blue);
+}

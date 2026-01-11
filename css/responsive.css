@@ -1,0 +1,56 @@
+/* ================================
+   RESPONSIVE STYLES
+   Media queries untuk berbagai ukuran layar
+   ================================ */
+
+/* ===== TABLET & MOBILE (max-width: 768px) ===== */
+@media (max-width: 768px) {
+    /* Hero title lebih kecil di mobile */
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    /* Section title lebih kecil di mobile */
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    /* Sidebar full width di mobile */
+    .news-sidebar {
+        width: 100%;
+        right: -100%;               /* Tersembunyi di luar layar */
+    }
+    
+    /* Sidebar toggle lebih ke kanan di mobile */
+    .sidebar-toggle {
+        right: 20px;
+    }
+    
+    /* Navbar collapse dengan background di mobile */
+    .navbar-collapse {
+        background: rgba(10, 22, 40, 0.98);
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 10px;
+    }
+}
+
+/* ===== MOBILE SMALL (max-width: 576px) ===== */
+@media (max-width: 576px) {
+    /* Hero title lebih kecil lagi di mobile kecil */
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    /* Section title lebih kecil di mobile kecil */
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    /* Sidebar toggle lebih kecil di mobile kecil */
+    .sidebar-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}

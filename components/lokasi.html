@@ -1,0 +1,64 @@
+<!-- ============================================
+     LOKASI SECTION
+     Bagian ini menampilkan peta lokasi Laut Banda
+     dengan Google Maps embed dan informasi lokasi
+     ============================================ -->
+<section id="lokasi" class="lokasi-section py-5">
+    <!-- Container utama untuk konten -->
+    <div class="container">
+        <!-- Header section dengan label -->
+        <div class="section-header text-center mb-5">
+            <!-- Label section -->
+            <p class="section-label">LOKASI</p>
+        </div>
+
+        <!-- Row dengan kolom terpusat -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Container untuk Google Maps iframe -->
+                <div class="map-container">
+                    <!-- Google Maps iframe embed untuk menampilkan lokasi Laut Banda -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1016565.1885573805!2d129.0!3d-4.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d1bf1b9e4c9c5a9%3A0x6e0e0e0e0e0e0e0e!2sBanda%20Sea!5e0!3m2!1sen!2sid!4v1234567890" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+                
+                <!-- Informasi lokasi-lokasi penting di Laut Banda -->
+                <div class="location-info text-center mt-4">
+                    <div class="row">
+                        <!-- Lokasi 1: Pulau Nailaka -->
+                        <div class="col-md-4">
+                            <div class="info-item">
+                                <!-- Icon lokasi -->
+                                <i class="fas fa-map-marker-alt mb-2"></i>
+                                <!-- Nama lokasi -->
+                                <h6>Pulau Nailaka (Run Island)</h6>
+                            </div>
+                        </div>
+                        
+                        <!-- Lokasi 2: Banda Neira -->
+                        <div class="col-md-4">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt mb-2"></i>
+                                <h6>Banda Neira</h6>
+                            </div>
+                        </div>
+                        
+                        <!-- Lokasi 3: Pulai Banda -->
+                        <div class="col-md-4">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt mb-2"></i>
+                                <h6>Pulai Banda (Banda Islands)</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

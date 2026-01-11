@@ -1,0 +1,115 @@
+/* ================================
+   SIDEBAR BERITA STYLES
+   Styling untuk sidebar berita terkini
+   ================================ */
+
+/* ===== SIDEBAR CONTAINER ===== */
+/* Sidebar untuk menampilkan berita terkini, bisa dibuka/tutup */
+.news-sidebar {
+    position: fixed;
+    right: -400px;                      /* Tersembunyi di luar layar kanan */
+    top: 80px;
+    width: 380px;
+    height: calc(100vh - 100px);       /* Tinggi full viewport dikurangi offset */
+    background: rgba(30, 58, 95, 0.98); /* Background semi-transparent */
+    backdrop-filter: blur(10px);        /* Efek blur */
+    padding: 2rem;
+    overflow-y: auto;                   /* Scroll vertical jika konten panjang */
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animasi smooth */
+    z-index: 999;                       /* Di bawah navbar tapi di atas konten */
+    border-radius: 15px 0 0 15px;      /* Rounded corner kiri */
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3); /* Shadow di sisi kiri */
+}
+
+/* State saat sidebar aktif/terbuka */
+.news-sidebar.active {
+    right: 0; /* Muncul dari kanan saat di-toggle */
+}
+
+/* ===== SIDEBAR TITLE ===== */
+/* Judul sidebar */
+.sidebar-title {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--accent-blue); /* Garis bawah sebagai separator */
+    padding-bottom: 0.5rem;
+}
+
+/* ===== NEWS CARD ===== */
+/* Card untuk setiap item berita */
+.news-card {
+    background: rgba(10, 22, 40, 0.6);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;                    /* Cursor pointer menandakan clickable */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect untuk news card */
+.news-card:hover {
+    transform: translateY(-5px);       /* Naik sedikit saat hover */
+    box-shadow: 0 5px 20px rgba(74, 144, 226, 0.3); /* Shadow biru */
+}
+
+/* ===== NEWS CONTENT ===== */
+/* Gambar berita */
+.news-image img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Tanggal berita */
+.news-date {
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Judul berita */
+.news-title {
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Ringkasan/excerpt berita */
+.news-excerpt {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ===== SIDEBAR TOGGLE BUTTON ===== */
+/* Tombol Toggle Sidebar - Selalu terlihat dan mengikuti scroll */
+.sidebar-toggle {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);       /* Center vertical */
+    width: 50px;
+    height: 50px;
+    background: var(--accent-blue);
+    border: none;
+    border-radius: 50%;                 /* Bentuk bulat */
+    color: var(--white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;                      /* Di atas sidebar */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4); /* Shadow biru */
+}
+
+/* Hover effect untuk toggle button */
+.sidebar-toggle:hover {
+    background: var(--light-blue);
+    transform: translateY(-50%) scale(1.1); /* Sedikit membesar */
+}
+
+/* Icon rotate saat sidebar aktif */
+.sidebar-toggle.active i {
+    transform: rotate(180deg);          /* Putar 180 derajat */
+}

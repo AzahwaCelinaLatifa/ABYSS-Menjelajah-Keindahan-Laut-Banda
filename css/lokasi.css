@@ -1,0 +1,33 @@
+/* ================================
+   LOKASI STYLES
+   Styling untuk section lokasi dengan map
+   ================================ */
+
+/* ===== MAP CONTAINER ===== */
+/* Container untuk Google Maps iframe */
+.map-container {
+    border-radius: 15px;
+    overflow: hidden;                   /* Rounded corners untuk iframe */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Shadow untuk depth */
+}
+
+/* ===== INFO ITEM ===== */
+/* Card untuk setiap lokasi penting */
+.info-item {
+    padding: 1.5rem;
+    background: rgba(74, 144, 226, 0.1); /* Background biru transparan */
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect untuk info item */
+.info-item:hover {
+    transform: translateY(-5px);         /* Naik sedikit */
+    background: rgba(74, 144, 226, 0.2); /* Background lebih solid saat hover */
+}
+
+/* Icon lokasi */
+.info-item i {
+    font-size: 2rem;
+    color: var(--accent-blue);
+}

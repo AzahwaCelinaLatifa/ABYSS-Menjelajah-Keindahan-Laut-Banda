@@ -1,0 +1,43 @@
+/* ================================
+   MODAL STYLES
+   Styling untuk pop-up modal Flora & Fauna
+   ================================ */
+
+/* ===== MODAL CONTENT ===== */
+/* Container utama modal */
+.modal-content {
+    background: var(--secondary-dark);
+    border: none;
+    border-radius: 15px;
+}
+
+/* ===== MODAL HEADER ===== */
+/* Header modal dengan judul */
+.modal-header {
+    border-bottom: 1px solid rgba(74, 144, 226, 0.3);
+    padding: 1.5rem 2rem;
+}
+
+/* Judul modal */
+.modal-title {
+    color: var(--white);
+    font-weight: 600;
+}
+
+/* Tombol close modal - invert warna agar terlihat */
+.btn-close {
+    filter: invert(1);
+}
+
+/* ===== MODAL BODY ===== */
+/* Konten utama modal */
+.modal-body {
+    padding: 2rem;
+    color: var(--text-gray);
+    line-height: 1.8;                   /* Line height untuk readability */
+}
+
+/* Gambar dalam modal */
+.modal-body img {
+    border-radius: 10px;
+}

@@ -1,0 +1,60 @@
+<!-- ============================================
+     SIDEBAR BERITA
+     Sidebar yang dapat dibuka/tutup untuk menampilkan
+     berita terkini tentang Laut Banda
+     ============================================ -->
+
+<!-- Sidebar container yang positioned fixed di sisi kanan -->
+<div class="news-sidebar" id="newsSidebar">
+    <div class="sidebar-content">
+        <!-- Judul sidebar -->
+        <h5 class="sidebar-title mb-4">Berita Terkini</h5>
+        
+        <!-- News Item 1: Gempa Laut Banda -->
+        <div class="news-card" onclick="openNews('https://example.com/gempa-laut-banda')">
+            <!-- Gambar berita -->
+            <div class="news-image">
+                <img src="https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=Gempa+M5.2" alt="Gempa Laut Banda">
+            </div>
+            <!-- Konten berita -->
+            <div class="news-content">
+                <!-- Tanggal berita -->
+                <p class="news-date">Senin, 20 Oktober 2025</p>
+                <!-- Judul berita -->
+                <h6 class="news-title">Gempa M5,2 Guncang Laut Banda Maluku, BMKG</h6>
+                <!-- Ringkasan berita -->
+                <p class="news-excerpt">Gempa berkekuatan 5,2 terjadi di Laut Banda dengan kedalaman 60 km.</p>
+            </div>
+        </div>
+
+        <!-- News Item 2: BMKG Imbau Waspada -->
+        <div class="news-card" onclick="openNews('https://example.com/bmkg-imbau-waspada')">
+            <div class="news-image">
+                <img src="https://via.placeholder.com/300x200/2E5C8A/FFFFFF?text=BMKG+Warning" alt="BMKG Warning">
+            </div>
+            <div class="news-content">
+                <p class="news-date">Senin, 3 November 2025</p>
+                <h6 class="news-title">BMKG Imbau Waspada Gelombang Tinggi di Laut Banda Timur</h6>
+                <p class="news-excerpt">BMKG Kendari mengeluarkan peringatan gelombang tinggi di perairan Laut Banda Timur.</p>
+            </div>
+        </div>
+
+        <!-- News Item 3: Kebakaran Kapal -->
+        <div class="news-card" onclick="openNews('https://example.com/kebakaran-kapal')">
+            <div class="news-image">
+                <img src="https://via.placeholder.com/300x200/E74C3C/FFFFFF?text=Ship+Fire" alt="Kebakaran Kapal">
+            </div>
+            <div class="news-content">
+                <p class="news-date">Kamis, 16 Oktober 2025</p>
+                <h6 class="news-title">Kebakaran Kapal BBM di Laut Banda</h6>
+                <p class="news-excerpt">Kebakaran kapal BBM di Laut Banda menyebabkan evakuasi cepat ABK oleh tim SAR.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tombol Toggle untuk membuka/menutup sidebar -->
+<button class="sidebar-toggle" id="sidebarToggle">
+    <!-- Icon chevron yang akan berubah arah -->
+    <i class="fas fa-chevron-left"></i>
+</button>

@@ -1,0 +1,80 @@
+/* ================================
+   KONTAK STYLES
+   Styling untuk section kontak dengan form
+   ================================ */
+
+/* ===== FORM CONTROLS ===== */
+/* Styling untuk input dan textarea */
+.form-control {
+    background: rgba(30, 58, 95, 0.5);   /* Background dark transparan */
+    border: 1px solid rgba(74, 144, 226, 0.3); /* Border biru transparan */
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+}
+
+/* State saat input di-focus */
+.form-control:focus {
+    background: rgba(30, 58, 95, 0.7);   /* Background lebih solid */
+    border-color: var(--accent-blue);    /* Border biru solid */
+    color: var(--white);
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25); /* Glow effect */
+}
+
+/* Placeholder text color */
+.form-control::placeholder {
+    color: var(--text-gray);
+}
+
+/* ===== FORM LABEL ===== */
+/* Label untuk setiap input field */
+.form-label {
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+/* Tombol submit form */
+.btn-primary {
+    background: var(--accent-blue);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;                 /* Rounded button */
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect untuk submit button */
+.btn-primary:hover {
+    background: var(--light-blue);
+    transform: translateY(-2px);         /* Naik sedikit */
+    box-shadow: 0 5px 20px rgba(74, 144, 226, 0.4); /* Shadow biru */
+}
+
+/* ===== CONTACT INFO ===== */
+/* Container untuk setiap item kontak */
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Icon dalam contact info */
+.contact-info-item i {
+    font-size: 1.5rem;
+    color: var(--accent-blue);
+    margin-top: 0.25rem;
+}
+
+/* Heading contact info */
+.contact-info-item h6 {
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+/* Text contact info */
+.contact-info-item p {
+    color: var(--text-gray);
+    margin: 0;
+}
