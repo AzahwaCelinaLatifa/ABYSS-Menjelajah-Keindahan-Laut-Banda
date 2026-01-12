@@ -31,6 +31,13 @@
     font-size: 1.2rem;
 }
 
+/* Styling untuk gambar logo SVG */
+.logo-icon-img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1); /* Membuat SVG putih */
+}
+
 /* Text logo brand */
 .logo-text {
     font-size: 1.5rem;
