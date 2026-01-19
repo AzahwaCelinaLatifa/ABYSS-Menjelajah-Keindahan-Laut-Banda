@@ -21,6 +21,7 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(to bottom, rgba(0,67,137,0.6) 0%, rgba(0,17,35,0.6) 100%);
+    z-index: 1; /* pastikan overlay di belakang konten teks */
 }
 
 /* ===== HERO TEXT ===== */
@@ -30,23 +31,42 @@
     font-weight: bold;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    animation: fadeInUp 1s ease;        /* Animasi fade in dari bawah */
+    color: #ffffff;
+    /* Efek timbul: bayangan gelap + highlight tipis untuk kontras */
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.65),
+        0 1px 0 rgba(255, 255, 255, 0.06);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    z-index: 6; /* pastikan judul berada di depan overlay dan gambar */
 }
 
 /* Subtitle/deskripsi hero section */
 .hero-subtitle {
     font-size: 1.1rem;
-    color: var(--text-gray);
+    color: #ffffff;
     line-height: 1.8;
     max-width: 500px;                   /* Batasi lebar untuk readability */
-    animation: fadeInUp 1s ease 0.2s backwards; /* Animasi delay 0.2s */
+    /* Sedikit shadow untuk menjaga keterbacaan pada background */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 6; /* pastikan subtitle berada di depan */
 }
 
 /* ===== HERO IMAGE ===== */
 /* Gambar hero dengan animasi float */
 .hero-image {
+    position: relative;
+    z-index: 2; /* gambar di belakang teks */
     border-radius: 20px;
     animation: float 3s ease-in-out infinite; /* Animasi mengambang terus-menerus */
+}
+
+/* Pastikan konten hero (container) berada di atas overlay */
+.hero-section .container {
+    position: relative;
+    z-index: 5;
 }
 
 /* ===== SCROLL DOWN INDICATOR ===== */

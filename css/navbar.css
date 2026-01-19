@@ -6,7 +6,7 @@
 /* ===== NAVBAR CONTAINER ===== */
 /* Navbar tetap di atas saat scroll dengan backdrop blur effect */
 .navbar {
-    background: rgba(10, 22, 40, 0.95); /* Background semi-transparent */
+     /* Background semi-transparent */
     backdrop-filter: blur(10px);         /* Efek blur pada background */
     padding: 1rem 0;
     transition: all 0.3s ease;          /* Animasi smooth saat berubah */
@@ -21,21 +21,15 @@
 /* ===== LOGO ===== */
 /* Container icon logo dengan background */
 .logo-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--accent-blue);
-    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    background: transparent; /* buat transparan supaya icon menyatu dengan header */
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-}
-
-/* Styling untuk gambar logo SVG */
-.logo-icon-img {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1); /* Membuat SVG putih */
+    overflow: visible;
 }
 
 /* Text logo brand */
@@ -59,15 +53,79 @@
 }
 
 /* ===== SPECIAL NAV LINK (FAKTA) ===== */
-/* Style khusus untuk menu Fakta dengan border */
+/* Style khusus untuk menu Fakta — tampilkan seperti link lain saat tidak aktif */
 .nav-fakta {
-    border: 2px solid var(--white);
+    /* Pastikan tidak ada garis/outline saat tidak aktif */
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
     border-radius: 25px;
-    padding: 0.5rem 1.5rem !important;
+    padding: 0.5rem 1rem !important;
+    background: transparent !important;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 /* Hover effect khusus untuk menu Fakta */
 .nav-fakta:hover {
     background: var(--white);
     color: var(--primary-dark) !important;
+}
+
+/* ===== NAV LINK ACTIVE / FOCUS ===== */
+/* Saat item menu aktif (klik) tampilkan gaya seperti menu "Fakta" */
+.nav-link.active,
+.nav-link:active,
+.nav-link:focus {
+    background: var(--white);
+    color: var(--primary-dark) !important;
+    border: 2px solid var(--white) !important;
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem !important;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* Jika .nav-fakta berada di state aktif, tunjukkan gaya faktaa */
+.nav-fakta.active {
+    background: var(--white) !important;
+    color: var(--primary-dark) !important;
+    border: 2px solid var(--white) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+    padding: 0.5rem 1.5rem !important;
+}
+
+/* Hapus outline default pada semua nav links saat fokus */
+.nav-link:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Pastikan hover pada link aktif tidak mengubah warna lagi */
+.nav-link.active:hover {
+    background: var(--white);
+    color: var(--primary-dark) !important;
+}
+
+/* ===== REMOVE OUTLINE FOR NAV FAKTA WHEN NOT PRESSED ===== */
+/* Hapus outline/box-shadow default agar tidak terlihat kecuali saat aktif */
+.nav-fakta {
+    outline: none;
+    box-shadow: none;
+}
+
+.nav-fakta:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Force-remove garis/border/box-shadow saat TIDAK aktif */
+.nav-fakta:not(.active),
+.nav-fakta:not(.active):hover,
+.nav-fakta:not(.active):focus {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: var(--white) !important;
+    padding: 0.5rem 1rem !important; /* samakan padding dengan .nav-link default */
 }
