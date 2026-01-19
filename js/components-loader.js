@@ -194,6 +194,9 @@ function initSmoothScroll() {
                 if (navbarCollapse.classList.contains('show')) {
                     navbarCollapse.classList.remove('show');
                 }
+                // Set active class immediately on click for instant feedback
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
             }
         });
     });
