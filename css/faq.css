@@ -17,7 +17,7 @@
 /* Tombol/header accordion yang bisa diklik */
 .accordion-button {
     background: var(--secondary-dark);
-    color: var(--white);
+    color: var(--black);
     font-weight: 600;
     padding: 1.5rem;
     border: none;
