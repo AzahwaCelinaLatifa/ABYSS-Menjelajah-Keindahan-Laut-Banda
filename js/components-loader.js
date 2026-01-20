@@ -119,6 +119,24 @@ function openNews(url) {
 // Membuat navbar berubah style saat di-scroll
 function initNavbar() {
     const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+    
+    // Fungsi untuk set active menu (hanya satu yang aktif)
+    function setActiveMenu(menuId) {
+        // Hapus active dari semua nav links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Tambahkan active ke menu yang sesuai
+        if (menuId) {
+            const activeLink = document.querySelector(`.nav-link[href="#${menuId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
     
     // Efek navbar saat scroll
     window.addEventListener('scroll', function() {
@@ -130,30 +148,32 @@ function initNavbar() {
         }
     });
     
-    // Highlight menu aktif berdasarkan section yang terlihat
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
+    // Update active menu berdasarkan section yang sedang terlihat
     window.addEventListener('scroll', function() {
         let current = '';
         
         // Cek section mana yang sedang terlihat
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
             
-            // Cek apakah section sedang terlihat di viewport
+            // Cek apakah section sedang terlihat di viewport (dengan offset 100px)
             if (window.scrollY >= sectionTop - 100) {
                 current = section.getAttribute('id');
             }
         });
         
-        // Update active state pada nav links
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
+        // Set active menu sesuai section yang terlihat
+        setActiveMenu(current);
+    });
+    
+    // Event listener untuk setiap nav link saat diklik
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Ambil target id dari href
+            const targetId = this.getAttribute('href').substring(1); // Remove '#'
+            
+            // Set active menu langsung (tanpa menunggu scroll event)
+            setActiveMenu(targetId);
         });
     });
 }
@@ -182,12 +202,9 @@ function initSmoothScroll() {
                 
                 // Tutup navbar mobile jika terbuka
                 const navbarCollapse = document.querySelector('.navbar-collapse');
-                if (navbarCollapse.classList.contains('show')) {
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
                     navbarCollapse.classList.remove('show');
                 }
-                // Set active class immediately on click for instant feedback
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
             }
         });
     });
