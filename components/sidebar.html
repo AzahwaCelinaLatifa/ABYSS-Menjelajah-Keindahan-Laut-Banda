@@ -11,10 +11,10 @@
         <h5 class="sidebar-title mb-4">Berita Terkini</h5>
         
         <!-- News Item 1: Gempa Laut Banda -->
-        <div class="news-card" onclick="openNews('https://example.com/gempa-laut-banda')">
+        <div class="news-card" onclick="openNews('https://news.okezone.com/read/2025/10/20/340/3177870/gempa-m5-2-guncang-laut-banda-maluku-bmkg-akibat-deformasi-batuan')">
             <!-- Gambar berita -->
             <div class="news-image">
-                <img src="https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=Gempa+M5.2" alt="Gempa Laut Banda">
+                <img src="foto-figma\picture.svg" alt="Gempa Laut Banda">
             </div>
             <!-- Konten berita -->
             <div class="news-content">
@@ -28,9 +28,9 @@
         </div>
 
         <!-- News Item 2: BMKG Imbau Waspada -->
-        <div class="news-card" onclick="openNews('https://example.com/bmkg-imbau-waspada')">
+        <div class="news-card" onclick="openNews('https://sultra.antaranews.com/berita/261155/bmkg-ketinggian-gelombang-laut-banda-30-meter')">
             <div class="news-image">
-                <img src="https://via.placeholder.com/300x200/2E5C8A/FFFFFF?text=BMKG+Warning" alt="BMKG Warning">
+                <img src="foto-figma\Berita 2.svg" alt="BMKG Warning">
             </div>
             <div class="news-content">
                 <p class="news-date">Senin, 3 November 2025</p>
@@ -40,9 +40,9 @@
         </div>
 
         <!-- News Item 3: Kebakaran Kapal -->
-        <div class="news-card" onclick="openNews('https://example.com/kebakaran-kapal')">
+        <div class="news-card" onclick="openNews('https://regional.kompas.com/read/2025/10/16/203553778/kapal-angkut-bbm-terbakar-saat-pindahkan-muatan-di-laut-banda')">
             <div class="news-image">
-                <img src="https://via.placeholder.com/300x200/E74C3C/FFFFFF?text=Ship+Fire" alt="Kebakaran Kapal">
+                <img src="foto-figma\Berita3.svg" alt="Kebakaran Kapal">
             </div>
             <div class="news-content">
                 <p class="news-date">Kamis, 16 Oktober 2025</p>
@@ -55,6 +55,9 @@
 
 <!-- Tombol Toggle untuk membuka/menutup sidebar -->
 <button class="sidebar-toggle" id="sidebarToggle">
-    <!-- Icon chevron yang akan berubah arah -->
-    <i class="fas fa-chevron-left"></i>
+    <!-- SVG Custom Icon -->
+    <svg class="toggle-icon" width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="-0.5" y="0.5" width="79" height="79" rx="29.5" transform="matrix(-1 0 0 1 79 0)" class="toggle-border"/>
+        <path d="M35.6209 40.2367L52.1209 23.7367C52.7281 23.108 53.0641 22.266 53.0565 21.392C53.0489 20.518 52.6984 19.682 52.0803 19.064C51.4623 18.4459 50.6263 18.0954 49.7523 18.0878C48.8783 18.0802 48.0363 18.4162 47.4076 19.0234L28.5509 37.88C27.926 38.5051 27.575 39.3528 27.575 40.2367C27.575 41.1206 27.926 41.9683 28.5509 42.5934L47.4076 61.45C48.0363 62.0572 48.8783 62.3932 49.7523 62.3856C50.6263 62.378 51.4623 62.0274 52.0803 61.4094C52.6984 60.7914 53.0489 59.9553 53.0565 59.0814C53.0641 58.2074 52.7281 57.3654 52.1209 56.7367L35.6209 40.2367Z" class="toggle-arrow" fill="white"/>
+    </svg>
 </button>

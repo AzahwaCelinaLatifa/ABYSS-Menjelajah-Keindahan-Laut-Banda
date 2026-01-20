@@ -3,6 +3,39 @@
    Styling untuk sidebar berita terkini
    ================================ */
 
+/* ===== CONTENT SHIFT EFFECT ===== */
+/* Effect ketika sidebar dibuka, content bergeser ke kiri dan mengecil */
+
+/* Wrapping containers untuk content yang akan di-transform */
+body.sidebar-open {
+    overflow-x: hidden;
+}
+
+body.sidebar-open #beranda-container,
+body.sidebar-open #flora-container,
+body.sidebar-open #fauna-container,
+body.sidebar-open #galeri-container,
+body.sidebar-open #fakta-container,
+body.sidebar-open #lokasi-container,
+body.sidebar-open #kontak-container,
+body.sidebar-open #footer-container {
+    transform: translateX(-190px) scale(0.83);
+    transform-origin: top center;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Default state - content normal */
+#beranda-container,
+#flora-container,
+#fauna-container,
+#galeri-container,
+#fakta-container,
+#lokasi-container,
+#kontak-container,
+#footer-container {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* ===== SIDEBAR CONTAINER ===== */
 /* Sidebar untuk menampilkan berita terkini, bisa dibuka/tutup */
 .news-sidebar {
@@ -11,7 +44,7 @@
     top: 80px;
     width: 380px;
     height: calc(100vh - 100px);       /* Tinggi full viewport dikurangi offset */
-    background: rgba(30, 58, 95, 0.98); /* Background semi-transparent */
+    background: rgba(0, 17, 35, 0.98); /* Background semi-transparent */
     backdrop-filter: blur(10px);        /* Efek blur */
     padding: 2rem;
     overflow-y: auto;                   /* Scroll vertical jika konten panjang */
@@ -45,6 +78,7 @@
     margin-bottom: 1.5rem;
     cursor: pointer;                    /* Cursor pointer menandakan clickable */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid rgba(74, 144, 226, 0.3); /* Garis tepi biru semi-transparan */
 }
 
 /* Hover effect untuk news card */
@@ -92,24 +126,60 @@
     transform: translateY(-50%);       /* Center vertical */
     width: 50px;
     height: 50px;
-    background: var(--accent-blue);
+    background: transparent;           /* Default transparent */
     border: none;
-    border-radius: 50%;                 /* Bentuk bulat */
-    color: var(--white);
-    font-size: 1.2rem;
+    border-radius: 50%;                /* Bentuk bulat */
     cursor: pointer;
-    z-index: 1000;                      /* Di atas sidebar */
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4); /* Shadow biru */
+    z-index: 1000;                     /* Di atas sidebar */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Hover effect untuk toggle button */
-.sidebar-toggle:hover {
-    background: var(--light-blue);
-    transform: translateY(-50%) scale(1.1); /* Sedikit membesar */
+/* SVG icon styling */
+.sidebar-toggle .toggle-icon {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Border SVG default - putih transparan */
+.sidebar-toggle .toggle-border {
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.5;
+    transition: stroke 0.3s ease, opacity 0.3s ease;
+}
+
+/* Arrow SVG default */
+.sidebar-toggle .toggle-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effect - border jadi biru terang */
+.sidebar-toggle:hover .toggle-border {
+    stroke: var(--accent-blue);
+    opacity: 1;
+}
+
+/* Tombol bergeser mengikuti sidebar saat aktif */
+.sidebar-toggle.active {
+    right: 390px;                      /* Geser ke kiri seiring sidebar terbuka */
+    background: rgba(74, 144, 226, 0.15);
+    box-shadow: inset 0 0 20px rgba(74, 144, 226, 0.3);
+}
+
+/* Saat aktif - border biru penuh */
+.sidebar-toggle.active .toggle-border {
+    stroke: var(--accent-blue);
+    opacity: 1;
 }
 
 /* Icon rotate saat sidebar aktif */
-.sidebar-toggle.active i {
-    transform: rotate(180deg);          /* Putar 180 derajat */
+.sidebar-toggle.active .toggle-icon {
+    transform: rotate(180deg);         /* Putar 180 derajat */
 }
