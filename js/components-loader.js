@@ -85,22 +85,13 @@ function initSidebar() {
     // Cek apakah element sidebar dan toggle ada
     if (!sidebar || !sidebarToggle) return;
     
-    const toggleIcon = sidebarToggle.querySelector('i');
-    
     // Event listener untuk tombol toggle
     sidebarToggle.addEventListener('click', function() {
         // Toggle class 'active' untuk sidebar dan tombol
         sidebar.classList.toggle('active');
         sidebarToggle.classList.toggle('active');
-        
-        // Ubah arah icon panah
-        if (sidebar.classList.contains('active')) {
-            toggleIcon.classList.remove('fa-chevron-left');
-            toggleIcon.classList.add('fa-chevron-right');
-        } else {
-            toggleIcon.classList.remove('fa-chevron-right');
-            toggleIcon.classList.add('fa-chevron-left');
-        }
+        // Toggle class pada body untuk shift content
+        document.body.classList.toggle('sidebar-open');
     });
     
     // Tutup sidebar saat klik di luar area sidebar
@@ -112,8 +103,8 @@ function initSidebar() {
         if (!isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains('active')) {
             sidebar.classList.remove('active');
             sidebarToggle.classList.remove('active');
-            toggleIcon.classList.remove('fa-chevron-right');
-            toggleIcon.classList.add('fa-chevron-left');
+            // Remove class dari body saat sidebar ditutup
+            document.body.classList.remove('sidebar-open');
         }
     });
 }
