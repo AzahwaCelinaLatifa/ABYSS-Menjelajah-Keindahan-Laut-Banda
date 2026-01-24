@@ -42,4 +42,33 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
     padding: 1rem;
     color: var(--white);
+    color: #FFF;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.50);
+    font-family: Poppins;
+    font-size: 20.336px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 22.37px */
+}
+
+.galeri-location {
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 16.341px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.section-label {
+    color: #C2E8FF;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 33px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; /* 33px */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    
 }
