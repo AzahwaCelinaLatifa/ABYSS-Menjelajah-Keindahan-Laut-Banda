@@ -31,3 +31,18 @@
     font-size: 2rem;
     color: var(--accent-blue);
 }
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-top: 0.5rem;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 50.6px */
+
+}
