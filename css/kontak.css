@@ -6,6 +6,8 @@
 /* ===== FORM CONTROLS ===== */
 /* Styling untuk input dan textarea */
 .form-control {
+    width: 500px;
+    height: 59.772px;
     background-color: transparent;  /* Background transparan */
     border: 1px solid rgba(255, 255, 255, 1); /* Border putih transparan */
     color: var(--white);
@@ -52,6 +54,7 @@
     border-radius: 35px;
     border: 1px solid #FFF;
     background: #04070B;
+    margin-bottom: 100px;
 }
 
 /* Hover effect untuk submit button */
@@ -90,6 +93,40 @@
 .contact-info-item p {
     color: var(--text-white);
     margin: 0;
+    
+}
+
+/* Teks Please fill form */
+.fillform {
+    margin-left: 20px;
+    width: 454px;
+    height: 65px;
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 110%; /* 34.1px */
+   
+}
+
+/* Teks Contact */
+.contactform {
+    margin-top: 110px;
+    margin-left: 20px;
+    width: 529px;
+    height: 68px;
+    color: var(--white);
+    font-family: Poppins;
+    font-size: 80px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 81.4px */
+    
+}
+
+.contactinfo {
+    margin-left: 20px;
     
 }
 
