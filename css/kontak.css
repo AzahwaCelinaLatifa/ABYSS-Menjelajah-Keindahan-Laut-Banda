@@ -6,11 +6,13 @@
 /* ===== FORM CONTROLS ===== */
 /* Styling untuk input dan textarea */
 .form-control {
-    background: rgba(30, 58, 95, 0.5);   /* Background dark transparan */
-    border: 1px solid rgba(74, 144, 226, 0.3); /* Border biru transparan */
+    width: 500px;
+    height: 59.772px;
+    background-color: transparent;  /* Background transparan */
+    border: 1px solid rgba(255, 255, 255, 1); /* Border putih transparan */
     color: var(--white);
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: 30px;
 }
 
 /* State saat input di-focus */
@@ -23,7 +25,7 @@
 
 /* Placeholder text color */
 .form-control::placeholder {
-    color: var(--text-gray);
+    color: var(--text-white);
 }
 
 /* ===== FORM LABEL ===== */
@@ -43,6 +45,16 @@
     border-radius: 25px;                 /* Rounded button */
     font-weight: 600;
     transition: all 0.3s ease;
+    color: #C6E9FF;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%; /* 51.7px */
+    border-radius: 35px;
+    border: 1px solid #FFF;
+    background: #04070B;
+    margin-bottom: 100px;
 }
 
 /* Hover effect untuk submit button */
@@ -69,12 +81,52 @@
 /* Heading contact info */
 .contact-info-item h6 {
     color: var(--white);
-    font-weight: 600;
     margin-bottom: 0.25rem;
+    color: #FFF;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 112% */
 }
 
 /* Text contact info */
 .contact-info-item p {
-    color: var(--text-gray);
+    color: var(--text-white);
     margin: 0;
+    
 }
+
+/* Teks Please fill form */
+.fillform {
+    margin-left: 20px;
+    width: 454px;
+    height: 65px;
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 110%; /* 34.1px */
+   
+}
+
+/* Teks Contact */
+.contactform {
+    margin-top: 110px;
+    margin-left: 20px;
+    width: 529px;
+    height: 68px;
+    color: var(--white);
+    font-family: Poppins;
+    font-size: 80px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 81.4px */
+    
+}
+
+.contactinfo {
+    margin-left: 20px;
+    
+}
+
