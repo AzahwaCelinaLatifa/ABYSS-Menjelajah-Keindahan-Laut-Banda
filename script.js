@@ -181,3 +181,4 @@ console.log('%cKode terorganisir dengan component-based architecture', 'color: #
 // ===== EXPORT FUNCTIONS (jika diperlukan di file lain) =====
 // Uncomment jika menggunakan ES6 modules
 // export { isMobile, debounce, preloadImages };
+

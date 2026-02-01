@@ -58,17 +58,6 @@
 }
 
 /* ===== CAROUSEL CONTROLS ===== */
-/* Tombol prev/next untuk carousel */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 50px;
-    height: 50px;
-    background: rgba(74, 144, 226, 0.8); /* Background biru semi-transparent */
-    border-radius: 50%;                   /* Bentuk bulat */
-    top: 50%;
-    transform: translateY(-50%);          /* Center vertical */
-    opacity: 1;                           /* Selalu terlihat */
-}
 
 /* Hover effect untuk carousel controls */
 .carousel-control-prev:hover,
