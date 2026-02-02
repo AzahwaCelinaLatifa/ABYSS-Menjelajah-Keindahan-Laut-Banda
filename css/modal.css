@@ -14,7 +14,7 @@
 /* ===== MODAL HEADER ===== */
 /* Header modal dengan judul */
 .modal-header {
-    border-bottom: 1px solid rgba(74, 144, 226, 0.3);
+    border-bottom: 1px solid transparent;
     padding: 1.5rem 2rem;
 }
 
@@ -44,35 +44,24 @@
 
 /* ===== MODAL PAGINATION ===== */
 /* Pagination footer styling */
-.modal-pagination {
+/*.modal-pagination {
     padding: 1.5rem 2rem;
     background: transparent;
     gap: 2rem;
 }
 
-/* Pagination buttons */
-.btn-pagination-prev,
-.btn-pagination-next {
-    background: transparent;
-    border: 1.5px solid #7C9FC9;
-    color: var(--white);
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+/* Override Bootstrap carousel control styling */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: transparent !important;
+    background: transparent !important;
 }
 
-.btn-pagination-prev:hover,
-.btn-pagination-next:hover {
-    background: var(--accent-blue);
-    color: var(--primary-dark);
-    box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: transparent !important;
 }
+
 
 /* Pagination indicator text */
 .pagination-indicator {
@@ -82,3 +71,5 @@
     min-width: 60px;
     text-align: center;
 }
+
+
