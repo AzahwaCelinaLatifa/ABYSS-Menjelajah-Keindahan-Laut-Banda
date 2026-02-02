@@ -3,6 +3,7 @@
      Bagian ini menampilkan berbagai jenis fauna
      laut Banda dengan carousel dan modal detail
      ============================================ -->
+
 <section id="fauna" class="fauna-section py-5">
     <!-- Container utama untuk konten -->
     <div class="container">
@@ -11,7 +12,7 @@
             <!-- Label kecil di atas judul -->
             <p class="section-label">FAUNA</p>
             <!-- Judul utama section -->
-            <h2 class="section-title">Beragam ikan dan biota laut hidup di<br>perairan tropis yang masih alami.</h2>
+            <h2 class="section-title">Beragam ikan dan biota laut hidup di <br>perairan tropis yang masih alami.</h2>
         </div>
 
         <!-- Fauna Carousel untuk menampilkan card fauna -->
@@ -20,137 +21,729 @@
                 <!-- Carousel Bootstrap dengan auto-slide -->
                 <div id="faunaCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <!-- Slide aktif dengan 4 fauna card -->
+                        <!-- Slide 1 dengan 4 flora card -->
                         <div class="carousel-item active">
                             <!-- Grid dengan 4 kolom responsive -->
                             <div class="row g-4">
-                                <!-- Card 1: Ikan Napoleon -->
+                                <!-- Card 1: Terumbu Karang -->
                                 <div class="col-md-3">
                                     <!-- Card yang dapat dibuka modal saat diklik -->
                                     <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal1">
-                                        <!-- Gambar fauna -->
-                                        <img src="foto-figma\napoleon.svg" alt="Ikan Napoleon">
+                                        <!-- Gambar flora -->
+                                        <img src="assets\fauna\Ikan Napoleon (Cheilinus undulatus).svg" alt="Ikan Napoleon">
                                         <!-- Overlay dengan nama fauna -->
                                         <div class="fauna-overlay">
-                                            <h5>Ikan Napoleon</h5>
+                                            <h5>Ikan Napoleon (Cheilinus undulatus)</h5>
                                         </div>
                                     </div>
+                                    <p><br>Ikan besar berwarna hijau kebiruan yang hidup soliter di terumbu karang dangkal Laut Banda.</p>
                                 </div>
                                 
-                                <!-- Card 2: Ikan Kerapu -->
+                                <!-- Card 2: KAKAP -->
                                 <div class="col-md-3">
                                     <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal2">
-                                        <img src="foto-figma\kakap.svg" alt="Ikan Kerapu">
+                                        <img src="assets\fauna\Ikan Kakap (Lutjanidae family).svg" alt="Ikan Kakap">
                                         <div class="fauna-overlay">
-                                            <h5>Ikan Kakap</h5>
+                                            <h5>Ikan Kakap (Lutjanidae family)</h5>
                                         </div>
                                     </div>
+                                    <p><br>Predator aktif yang berburu pada malam hari dengan penglihatan dan kecepatan tinggi.</p>
                                 </div>
                                 
-                                <!-- Card 3: Ubur-ubur -->
+                                <!-- Card 3:Kerapu -->
                                 <div class="col-md-3">
                                     <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal3">
-                                        <img src="foto-figma\kerapu.svg" alt="Ubur-ubur">
+                                        <img src="assets\fauna\Ikan Kerapu.svg" alt="Kerapu">
                                         <div class="fauna-overlay">
-                                            <h5>Ubur-ubur</h5>
+                                            <h5>Ikan Kerapu</h5>
                                         </div>
                                     </div>
+                                    <p><br>Predator karang oportunistik yang gemar bersembunyi dan menyerang mangsa dari celah karang.</p>
                                 </div>
                                 
-                                <!-- Card 4: Penyu Laut -->
+                                <!-- Card 4: tuna sirip kuning -->
                                 <div class="col-md-3">
                                     <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal4">
-                                        <img src="foto-figma\tuna.svg" alt="Penyu">
+                                        <img src="assets\fauna\Ikan Tuna Sirip Kuning (Thunnus Albacares).svg" alt="tuna sirip kuning">
                                         <div class="fauna-overlay">
-                                            <h5>Penyu Laut</h5>
+                                            <h5>Ikan Tuna Sirip Kuning (Thunnus Albacares)</h5>
                                         </div>
                                     </div>
+                                    <p><br>Ikan migratori cepat yang sering bergerak dalam kawanan besar di laut terbuka.</p>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <!-- Slide Kedua -->
+                         <!-- Card 5: kurisi -->
+                        <div class="carousel-item">
+                            <div class="row g-4">
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal5">
+                                        <img src="assets\fauna\IKAN KURISI(Threadfin Bream).svg" alt="Ikan Kurisi">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Kurisi (Threadfin Bream)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan demersal berwarna kemerahan dengan sirip benang panjang yang hidup berkelompok di dasar laut.</p>
+                                </div>
+
+                                <!-- Card 6: Hiu Martil -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal6">
+                                        <img src="assets\fauna\Hiu Martil (Hammerhead Shark).svg" alt="Hiu Martil">
+                                        <div class="fauna-overlay">
+                                            <h5>Hiu Martil (Hammerhead Shark)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Predator berkepala martil dengan pandangan 360 derajat dan sensor listrik untuk mendeteksi mangsa di dasar laut.</p>
+                                </div>
+
+                                <!-- Card 7: paus pilot -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal7">
+                                        <img src="assets\fauna\Paus pilot (Globicephala).svg" alt="paus pilot">
+                                        <div class="fauna-overlay">
+                                            <h5>Paus Pilot (Globicephala)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Dolphin besar berkepala bulat tanpa moncong yang hidup berkelompok di bawah pimpinan satu pemimpin.</p>
+                                </div>
+
+                                <!-- Card 8: Great Barracuda -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal8">
+                                        <img src="assets\fauna\Great Barracuda (Sphyraena barracuda).svg" alt="Great Barracuda">
+                                        <div class="fauna-overlay">
+                                            <h5>Great Barracuda (Sphyraena barracuda)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan pemangsa bertubuh panjang dengan rahang kuat dan gigi taring tajam menyerupai tombak.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- Slide Ketiga -->
+                         <!-- Card 9: blackfin barracuda-->
+                        <div class="carousel-item">
+                            <div class="row g-4">
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal9">
+                                        <img src="assets\fauna\Blackfin Barracuda (Sphyraena qenie).svg" alt="Blackfin Barracuda">
+                                        <div class="fauna-overlay">
+                                            <h5>Blackfin Barracuda (Sphyraena qenie)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan pemangsa dengan 18–22 pita hitam berbentuk V yang melingkari tubuhnya.</p>
+                                </div>
+
+                                <!-- Card 10: Banded Sea Krait-->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal10">
+                                        <img src="assets\fauna\Banded Sea Krait (Laticaudacolubrina).svg" alt="Banded Sea Krait (Laticaudacolubrina)">
+                                        <div class="fauna-overlay">
+                                            <h5>Banded Sea Krait (Laticaudacolubrina)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ular laut berkepala hitam dengan bibir dan moncong berwarna kuning yang memanjang hingga ke belakang mata.</p>
+                                </div>
+
+                                 <!-- Card 11: Olive Sea Snake -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal11">
+                                        <img src="assets\fauna\Olive Sea Snake.svg" alt="Olive Sea Snake (Aipysurus laevis)">
+                                        <div class="fauna-overlay">
+                                            <h5>Olive Sea Snake (Aipysurus laevis)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ular laut berbisa berekor dayung yang hidup sepenuhnya di terumbu karang untuk berburu mangsa.</p>
+                                </div>
+
+                                <!-- Card 12: ikan badut -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal12">
+                                        <img src="assets\fauna\Ikan Badut atau Ikan Giru (Genus Amphiprion).svg" alt="Ikan badut atau giru">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Badut atau Ikan Giru (Genus Amphiprion)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan berwarna cerah yang hidup simbiosis dengan anemon sebagai tempat perlindungan dan sumber nutrisi.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide Keempat -->
+                        <!-- Card 13: Ikan Triggerfish-->
+                        <div class="carousel-item">
+                            <div class="row g-4">
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal13">
+                                        <img src="assets\fauna\Ikan Triggerfish Hitam.svg" alt="Ikan Triggerfish Hitam">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Triggerfish Hitam</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan cerdas dan ramah yang dapat mengeluarkan suara serta membutuhkan ruang renang luas.</p>
+                                </div>
+
+                                <!-- Card 14: Ikan kepe kepe -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal14">
+                                        <img src="assets\fauna\Ikan Kepe-kepe (Butterflyfish).svg" alt="Ikan Kepe-kepe">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Kepe-kepe (Butterflyfish)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan karang berwarna cerah dengan tubuh pipih yang menjadi indikator kesehatan terumbu karang.</p>
+                                </div>
+
+                                <!-- Card 15: Ikan Sersan -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal15">
+                                        <img src="assets\fauna\Ikan Sersan (Pomacentridae).svg" alt="Ikan Sersan">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Sersan (Pomacentridae)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan karang berwarna perak dengan garis gelap dan sirip ekor bercabang yang hidup di perairan tropis.</p>
+                                </div>
+
+                                <!-- Card 16: Ikan Singa -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal16">
+                                        <img src="assets\fauna\Ikan Singa (Lionfish).svg" alt="ikan singa">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Singa (Lionfish)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan hias bersirip kipas dan berduri bisa yang menjadi predator nokturnal di terumbu karang.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide Kelima -->
+                        <!-- Card 17: Penyu Hijau -->
+                        <div class="carousel-item">
+                            <div class="row g-4">
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal17">
+                                        <img src="assets\fauna\Penyu Hijau (Chelonia mydas).svg" alt="penyu hijau">
+                                        <div class="fauna-overlay">
+                                            <h5>Penyu Hijau (Chelonia mydas)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Penyu laut bercangkang keras yang memiliki lemak hijau dan sering diburu untuk diambil telur serta dagingnya.</p>
+                                </div>
+
+                                <!-- Card 18: Penyu Sisik -->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal18">
+                                        <img src="assets\fauna\Penyu Sisik (Eretmochelys imbricata).svg" alt="penyu sisik">
+                                        <div class="fauna-overlay">
+                                            <h5>Penyu Sisik (Eretmochelys imbricata)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Penyu laut berparuh melengkung dengan pinggiran cangkang bergerigi yang warnanya dapat berubah sesuai suhu.</p>
+                                </div>
+
+                                 <!-- Card 19: Pygmy Seahorse-->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal19">
+                                        <img src="assets\fauna\Pygmy Seahorse.svg" alt="pygmy seahorse">
+                                        <div class="fauna-overlay">
+                                            <h5>Pygmy Seahorse (Hippocampus bargibanti)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Kuda laut sangat kecil berukuran kurang dari 2 cm dengan mulut tabung yang hidup di kawasan Segitiga Karang.</p>
+                                </div>
+
+                                <!-- Card 20: Ikan Mandarin-->
+                                <div class="col-md-3">
+                                    <div class="fauna-card" data-bs-toggle="modal" data-bs-target="#faunaModal20">
+                                        <img src="assets\fauna\Ikan Mandarin (Synchiropus splendidus).svg" alt="ikan mandarin">
+                                        <div class="fauna-overlay">
+                                            <h5>Ikan Mandarin (Synchiropus splendidus)</h5>
+                                        </div>
+                                    </div>
+                                    <p><br>Ikan mungil berwarna-warni yang hidup di celah karang dan aktif mencari makan pada pagi serta malam hari.</p>
+                                </div>
                     
-                    <!-- Tombol navigasi carousel Previous -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#faunaCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    
-                    <!-- Tombol navigasi carousel Next -->
-                    <button class="carousel-control-next" type="button" data-bs-target="#faunaCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Pagination untuk carousel flora -->
+        <div style="display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
+            <!-- Tombol navigasi carousel Previous -->
+            <div class="modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaCarousel" data-bs-slide="prev" >‹</button>
+            </div>
+            <div class="flora-pagination-wrapper">
+                <!-- Pagination Numbers -->
+                <nav aria-label="Page navigation">
+                    <ul class="flora-pagination-custom">
+
+                        <li class="page-item"><a class="page-link" href="#"data-bs-target="#faunaCarousel" data-bs-slide-to="0">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#"data-bs-target="#faunaCarousel" data-bs-slide-to="1">2</a></li>
+                        <li class="page-item active"><a class="page-link" href="#"data-bs-target="#faunaCarousel" data-bs-slide-to="2">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#"data-bs-target="#faunaCarousel" data-bs-slide-to="3">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#"data-bs-target="#faunaCarousel" data-bs-slide-to="4">5</a></li>
+                        
+                        
+                        
+                    </ul>
+                </nav>
+            </div>
+            <!-- Tombol navigasi carousel Next -->
+            <div class="modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaCarousel" data-bs-slide="next" data-bs-dismiss="modal">›</button>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ============================================
-     MODALS UNTUK FAUNA
-     Modal popup untuk menampilkan detail fauna
+     MODALS UNTUK FLORA
+     Modal popup untuk menampilkan detail flora
      ============================================ -->
 
-<!-- Modal Fauna 1 - Ikan Napoleon -->
+<!-- Modal Flora 1 - Terumbu Karang -->
 <div class="modal fade" id="faunaModal1" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content text-center">
             <!-- Header modal dengan judul dan tombol close -->
             <div class="modal-header">
-                <h5 class="modal-title">Ikan Napoleon</h5>
+                <h5 class="modal-title w-100 text-center">Ikan Napoleon (Cheilinus undulatus)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Body modal dengan gambar dan deskripsi lengkap -->
-            <div class="modal-body">
-                <img src="https://via.placeholder.com/800x400/E74C3C/FFFFFF?text=Napoleon+Fish" class="img-fluid mb-3" alt="Ikan Napoleon">
-                <p>Ikan Napoleon atau Napoleon Wrasse adalah salah satu spesies ikan karang terbesar di dunia yang dapat ditemukan di Laut Banda. Ikan ini memiliki ciri khas berupa tonjolan di dahinya dan dapat tumbuh hingga 2 meter. Mereka berperan penting dalam ekosistem terumbu karang dengan memakan bintang laut berduri yang merusak karang.</p>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Napoleon (Cheilinus undulatus).svg" class="img-fluid mb-3" alt="Ikan Napoleon">
+                <p>Terumbu karang di Laut Banda adalah ekosistem bawah laut yang kaya dan beragam, yang menjadi bagian penting dari Taman Wisata Perairan (TWP) Laut Banda di Kepulauan Banda. Ekosistem ini merupakan rumah bagi ratusan spesies ikan dan berbagai jenis karang yang tersebar di area sekitar pulau-pulau seperti Banda Neira, termasuk di dalamnya terumbu karang jenis Acropora yang mendominasi. Selain sebagai habitat alami, terumbu karang di Laut Banda juga memiliki nilai ekonomi, tetapi saat ini terancam oleh pencemaran dan kerusakan akibat aktivitas manusia. </p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal5" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">1 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal2" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Fauna 2 - Ikan Kerapu -->
+<!-- Modal Flora 2 - Kima -->
 <div class="modal fade" id="faunaModal2" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Ikan Kerapu</h5>
+                <h5 class="modal-title w-100 text-center">Ikan Kakap (Lutjanidae family)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <img src="https://via.placeholder.com/800x400/F39C12/FFFFFF?text=Grouper" class="img-fluid mb-3" alt="Ikan Kerapu">
-                <p>Ikan Kerapu adalah predator terumbu karang yang penting di Laut Banda. Dengan mulut besar dan tubuh yang kuat, mereka memangsa ikan-ikan kecil dan krustasea. Kerapu juga bernilai ekonomis tinggi dan menjadi target penangkapan ikan berkelanjutan di wilayah ini.</p>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Kakap (Lutjanidae family).svg" class="img-fluid mb-3" alt="Ikan Kakap">
+                <p>Ikan Kakap merupakan ikan yang termasuk dalam keluarga Lutjanidae dan dikenal dengan warna cerah serta ukuran yang bervariasi. Ikan ini sering ditemukan di terumbu karang dan memiliki peran penting dalam ekosistem laut sebagai predator yang membantu menjaga keseimbangan populasi ikan lain. Selain itu, ikan kakap juga memiliki nilai ekonomi yang tinggi bagi nelayan lokal dan menjadi daya tarik bagi penyelam dan penggemar kehidupan laut.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal1" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">2 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal3" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Fauna 3 - Ubur-ubur -->
+<!-- Modal Fauna 3 - Ikan Kerapu -->
 <div class="modal fade" id="faunaModal3" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Ubur-ubur</h5>
+                <h5 class="modal-title w-100 text-center">Ikan Kerapu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <img src="https://via.placeholder.com/800x400/9B59B6/FFFFFF?text=Jellyfish" class="img-fluid mb-3" alt="Ubur-ubur">
-                <p>Ubur-ubur di Laut Banda hadir dalam berbagai spesies dan ukuran. Meskipun beberapa spesies memiliki sengatan yang menyakitkan, mereka merupakan bagian penting dari rantai makanan laut. Ubur-ubur memakan plankton dan menjadi makanan bagi penyu serta beberapa jenis ikan.</p>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Kerapu.svg" class="img-fluid mb-3" alt="Ikan Kerapu">
+                <p>Ikan Kerapu adalah ikan yang hidup di perairan tropis dan subtropis, dikenal dengan tubuhnya yang besar dan warna yang bervariasi. Ikan ini sering ditemukan di terumbu karang dan memiliki peran penting dalam menjaga keseimbangan ekosistem laut sebagai predator puncak. Selain itu, ikan kerapu juga memiliki nilai ekonomi yang tinggi bagi nelayan dan menjadi daya tarik bagi penyelam dan penggemar kehidupan laut.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal2" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">3 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal4" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Fauna 4 - Penyu Laut -->
+<!-- Modal Fauna 4 - Ikan Tuna Sirip Kuning -->
 <div class="modal fade" id="faunaModal4" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Penyu Laut</h5>
+                <h5 class="modal-title w-100 text-center">Ikan Tuna Sirip Kuning (Thunnus Albacares)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <img src="https://via.placeholder.com/800x400/16A085/FFFFFF?text=Sea+Turtle" class="img-fluid mb-3" alt="Penyu">
-                <p>Penyu Laut adalah reptil laut yang dilindungi dan sering terlihat di perairan Laut Banda. Mereka bermigrasi jarak jauh untuk bertelur di pantai-pantai tertentu. Penyu memakan ubur-ubur, rumput laut, dan spons, serta berperan penting dalam menjaga kesehatan ekosistem laut.</p>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Tuna Sirip Kuning (Thunnus Albacares).svg" class="img-fluid mb-3" alt="Ikan Tuna Sirip Kuning">
+                <p>Ikan Tuna Sirip Kuning adalah ikan pelagis yang hidup di perairan tropis dan subtropis, dikenal dengan tubuhnya yang ramping dan sirip kuning yang mencolok. Ikan ini merupakan salah satu spesies tuna yang penting secara ekonomi dan sering ditangkap untuk konsumsi manusia. Selain itu, ikan tuna sirip kuning juga berperan dalam ekosistem laut sebagai predator yang membantu mengontrol populasi ikan lain.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal3" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">4 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal5" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 5 - Kurisi -->
+<div class="modal fade" id="faunaModal5" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Kurisi (Threadfin Bream)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\IKAN KURISI(Threadfin Bream).svg" class="img-fluid mb-3" alt="Kurisi">
+                <p>Ikan Kurisi, atau yang dikenal secara internasional sebagai Threadfin Bream, merupakan jenis ikan demersal yang menghuni zona bawah laut dengan penampilan yang cukup modis. Ikan ini memiliki ciri khas tubuh memanjang dengan gradasi warna keperakan atau kemerahan yang cantik, dipermanis oleh sirip berwarna kekuningan serta filamen atau benang panjang yang menjuntai pada sirip punggung dan ekornya. Hidup secara bergerombol di dasar perairan yang berpasir atau berlumpur, ikan ini biasanya ditemukan dengan ukuran rata-rata 15–22 cm, meskipun beberapa individu yang cukup beruntung bisa tumbuh maksimal hingga mencapai panjang 33 cm.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal4" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal6" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 6 - Hiu Martil -->
+<div class="modal fade" id="faunaModal6" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Hiu Martil (Hammerhead Shark)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Hiu Martil (Hammerhead Shark).svg" class="img-fluid mb-3" alt="Hiu Martil">
+                <p>Hiu Martil dari famili Sphyrnidae merupakan predator laut unik yang dikenal lewat bentuk kepala pipih melebar menyerupai palu atau martil. Struktur ikonik yang disebut sefalofoil (cephalofoil) ini berfungsi layaknya sayap untuk meningkatkan kemampuan manuver saat berenang, sekaligus memberikan pandangan 360 derajat yang luar biasa karena posisi mata berada di kedua ujung kiri dan kanan. Keunggulan sensoriknya semakin lengkap berkat pori-pori Ampullae of Lorenzini di bagian bawah kepala yang mampu mendeteksi sinyal listrik mangsa, seperti ikan pari yang bersembunyi di dasar pasir, menjadikannya pemburu yang sangat efisien. Dengan potensi panjang mencapai 6 meter dan berat hingga 500 kg, hiu ini membuktikan bahwa desain tubuh yang tak biasa memberikan keunggulan evolusioner yang sangat tangguh di lautan.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal5" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal7" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 7 - Paus Pilot -->
+<div class="modal fade" id="faunaModal7" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Paus pilot (Globicephala)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Paus pilot (Globicephala).svg" class="img-fluid mb-3" alt="Paus Pilot">
+                <p>Meskipun menyandang nama "paus", satwa ini sebenarnya merupakan anggota keluarga lumba-lumba samudra terbesar kedua setelah Orca, yang namanya diambil dari keyakinan bahwa kelompok mereka selalu dipandu oleh seorang pemimpin atau "pilot." Sesuai dengan nama ilmiahnya, Globicephala, ciri fisik yang paling mencolok adalah kepalanya yang berbentuk bulat menonjol (bulbus) tanpa moncong yang jelas, serta tubuh berwarna gelap yang membuatnya sering dijuluki sebagai "ikan hitam" (blackfish). Paus Pilot memiliki corak unik berbentuk jangkar di bagian dada dan sirip punggung tebal yang letaknya agak ke depan, di mana ukuran tubuh mereka menunjukkan perbedaan gender yang nyata; jantan dapat tumbuh hingga 7 meter dengan berat mencapai 3 ton, sementara betina biasanya hanya mencapai panjang sekitar 5 meter.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal6" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal8" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 8 - Great Barracuda-->
+<div class="modal fade" id="faunaModal8" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Great Barracuda (Sphyraena barracuda)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Great Barracuda (Sphyraena barracuda).svg" class="img-fluid mb-3" alt="Great Barracuda">
+                <p>Barakuda besar adalah ikan memanjang dengan rahang yang kuat . Rahang bawah dari mulutnya yang besar menonjol lebih jauh daripada rahang atasnya . Barakuda memiliki gigi yang kuat, seperti taring , yang ukurannya tidak sama, tertanam di rongga pada rahang dan di langit-langit mulut . Kepalanya cukup besar, runcing, dan tampak seperti ikan tombak .</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal7" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal9" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 9 - Blackfin Barracuda-->
+<div class="modal fade" id="faunaModal9" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Blackfin Barracuda (Sphyraena qenie)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Blackfin Barracuda (Sphyraena qenie).svg" class="img-fluid mb-3" alt="Blackfin Barracuda">
+                <p>Barakuda sirip hitam mencapai ukuran maksimum 140 cm (55 in). Barakuda sirip hitam dikenal karena pita lateral hitam panjang yang melingkari tubuhnya. Pita-pita ini memanjang secara lateral ke bawah tubuh dan berbentuk V dengan puncaknya menghadap ke depan. Terdapat sekitar 18 hingga 22 pita yang ada di tubuh ikan. Jumlah pita tersebut membedakannya dari spesies serupa,</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal8" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal10" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 10 - Banded Sea Krait -->
+<div class="modal fade" id="faunaModal10" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Banded Sea Krait (Laticaudacolubrina)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Banded Sea Krait (Laticaudacolubrina).svg" class="img-fluid mb-3" alt="Banded Sea Krait">
+                <p>Kepala ular laut bibir kuning berwarna hitam, dengan lubang hidung lateral dan sisik rostral yang tidak terbagi . Bibir atas dan moncongnya berwarna kuning, dan warna kuning tersebut memanjang ke belakang di setiap sisi kepala di atas mata hingga sisik temporal.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal9" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal11" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 11 - Olive Sea Snake -->
+<div class="modal fade" id="faunaModal11" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Olive Sea Snake</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Olive Sea Snake.svg" class="img-fluid mb-3" alt="Olive Sea Snake">
+                <p>Tidak seperti ular darat, ular laut zaitun sepenuhnya hidup di laut mereka menghabiskan seluruh hidup mereka di laut dan hanya muncul ke permukaan untuk bernapas . Mereka dapat tumbuh hingga lebih dari 1,25 meter (4,1 kaki) panjangnya, dengan ekor seperti dayung yang membantu mereka berenang dengan mudah . Ular ini paling sering ditemukan di terumbu karang dan perairan pantai dangkal , tempat mereka berburu kepiting, ikan, udang, dan telur ikan . Seperti kebanyakan ular laut, mereka sangat berbisa, menggunakan bisanya untuk menaklukkan mangsanya .</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal10" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal12" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 12 - Ikan Badut -->
+<div class="modal fade" id="faunaModal12" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Ikan Badut atau Ikan Giru (Genus Amphiprion)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Badut atau Ikan Giru (Genus Amphiprion).svg" class="img-fluid mb-3" alt="Ikan Badut">
+                <p>Ikan laut yang ditemukan di perairan hangat dan tropis di Indo-Pasifik. Ikan badut terutama menghuni terumbu karang dan memiliki corak warna yang khas, biasanya terdiri dari garis-garis putih vertikal dengan warna dasar merah, jingga, kuning, cokelat, atau hitam. Ikan badut menjalin hubungan simbiosis yang saling menguntungkan dengan anemon laut, tempat mereka bergantung untuk mencari perlindungan dan pertahanan dari pemangsa. Sebagai gantinya, ikan badut melindungi anemon dari ikan pemakan anemon, serta membersihkan dan mengipasi anemon tersebut, dan menarik mikroorganisme yang bermanfaat melalui kotoran mereka.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal11" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal13" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 13 - Triggerfish Hitam -->
+<div class="modal fade" id="faunaModal13" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Ikan Triggerfish Hitam </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Triggerfish Hitam.svg" class="img-fluid mb-3" alt="Triggerfish Hitam">
+                <p>ikan yang mempesona adalah salah satu jenis Triggerfish yang paling tidak agresif dan mudah dipelihara di akuarium yang lebih besar. Ikan cerdas ini tidak hanya dapat belajar makan dari tangan Anda, tetapi juga mampu mengeluarkan suara dalam beberapa cara berbeda. Kunci keberhasilan memelihara spesies ini adalah menyediakan ruang berenang yang luas</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal12" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal14" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 14 - Kepe-kepe -->
+<div class="modal fade" id="faunaModal14" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Ikan Kepe-kepe (Butterflyfish)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Kepe-kepe (Butterflyfish).svg" class="img-fluid mb-3" alt="Kepe-kepe">
+                <p>ikan karang tropis dari famili Chaetodontidae yang dikenal dengan warna cerah dan pola mencolok (kuning, putih, hitam, biru, oranye), tubuh pipih, dan sirip khas, aktif diurnal, hidup berpasangan di terumbu karang, makan polip karang, alga, & plankton, berenang anggun, serta merupakan indikator kesehatan terumbu karang. Spesifikasi umum meliputi ukuran 12-30 cm (tergantung jenis), moncong bervariasi (panjang pada genus Forcipiger), dan memiliki sekitar 120 spesies.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal13" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal15" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 15 - Ikan Sersan-->
+<div class="modal fade" id="faunaModal15" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Ikan Sersan (Pomacentridae)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Sersan (Pomacentridae).svg" class="img-fluid mb-3" alt="Ikan Sersan">
+                <p>Dengan ciri khas warna keperakan dengan garis-garis gelap keabu-abuan atau kehitaman, tubuhnya bisa mencapai sekitar 22,9 cm, memiliki sirip yang khas (terutama sirip ekor bercabang dan sirip dorsal dengan pita gelap), dan sering ditemukan di perairan karang tropis dan subtropis.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal14" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal15" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 16 - Hiu Singa -->
+<div class="modal fade" id="faunaModal16" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Ikan Singa (Lionfish)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Singa (Lionfish).svg" class="img-fluid mb-3" alt="Ikan Singa">
+                <p>Ikan laut cantik dari genus Pterois yang terkenal karena siripnya yang mengembang seperti kipas dan corak warnanya yang cerah, namun berbahaya karena memiliki duri berbisa yang bisa menimbulkan luka parah dan nyeri pada manusia. Ikan ini merupakan predator, aktif di malam hari, dan populer di kalangan pecinta ikan hias karena keunikannya, meskipun populasi invasi spesies ini mengancam ekosistem terumbu karang di wilayah seperti Karibia.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal15" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal17" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 17 - Penyu Hijau -->
+<div class="modal fade" id="faunaModal17" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Penyu Hijau (Chelonia mydas)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Penyu Hijau (Chelonia mydas).svg" class="img-fluid mb-3" alt="Penyu Hijau">
+                <p>Penyu laut besar yang termasuk dalam keluarga Cheloniidae. Hewan ini adalah satu-satunya spesies dalam golongan Chelonia.[1] Mereka hidup di semua laut tropis dan subtropis, terutama di Samudera Atlantik dan Samudera Pasifik. Namanya didapat dari lemak bewarna hijau yang terletak di bawah cangkang mereka. Jumlah Penyu Hijau semakin berkurang karena banyak diburu untuk diambil pelindung tubuhnya (karapaks dan plastron) sebagai hiasan, telurnya sebagai sumber protein tinggi dan obat, juga dagingnya sebagai bahan makanan.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal16" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal18" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 18 - Penyu Sisik -->
+<div class="modal fade" id="faunaModal18" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Penyu Sisik (Eretmochelys imbricata)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Penyu Sisik (Eretmochelys imbricata).svg" class="img-fluid mb-3" alt="Penyu Sisik">
+                <p>Penampilan penyu sisik mirip dengan penyu lainnya. Penyu ini umumnya memiliki bentuk tubuh yang datar, dengan sebuah karapaks sebagai pelindung, dan sirip menyerupai lengan yang beradaptasi untuk berenang di samudra terbuka. Perbedaan E. imbricata dari penyu lainnya yang sangat mudah dibedakan adalah paruhnya yang melengkung dengan bibir atas yang menonjol, dan tampilan pinggiran cangkangnya yang seperti gergaji. Cangkang penyu sisik dapat berubah warna, sesuai dengan temperatur air.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal17" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal19" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 19 - Pygmy Seahorse -->
+<div class="modal fade" id="faunaModal19" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Pygmy Seahorse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Pygmy Seahorse.svg" class="img-fluid mb-3" alt="Pygmy Seahorse">
+                <p>Terdiri dari beberapa spesies kuda laut kecil dalam famili Syngnathidae (kuda laut dan ikan pipa) dan dalam ordo Syngnathiformes , yang berisi ikan dengan rahang menyatu yang menghisap makanan ke dalam mulut berbentuk tabung. Kuda laut kerdil ditemukan di Asia Tenggara di daerah Segitiga Karang. Mereka adalah beberapa spesies kuda laut terkecil di dunia, biasanya berukuran kurang dari 2 sentimeter (0,79 inci) tingginya.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal18" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal20" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fauna 20 - Ikan Mandarin -->
+<div class="modal fade" id="faunaModal20" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">Ikan Mandarin (Synchiropus splendidus)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets\fauna\Ikan Mandarin (Synchiropus splendidus).svg" class="img-fluid mb-3" alt="Ikan Mandarin">
+                <p>Ikan mandarin memiliki tubuh yang panjang dan 2 sirip punggung. Panjang ikan ini mencapai sekitar 6 cm. Ikan mandarin memiliki garis-garis warna hijau, jingga, dan kuning, dengan warna biru menyelimuti sekujur tubuhnya. Ikan mandarin biasa makan krustasea kecil dan hewan invertebrata lainnya. Hidupnya seperti main ‘petak-umpet’ di antara susunan terumbu karang yang penuh celah, sibuk mencari makan sambil menghindari ikan besar pemangsanya. Ikan yang menjadi ikon pariwisata internasional ini berpanjang tubuh berkisar antara 8 hingga 15 centimeter dan biasanya keluar dari karang untuk mencari makan hanya pagi dan malam hari.</p>
+            </div>
+            <!-- Pagination footer -->
+            <div class="modal-footer modal-pagination justify-content-center">
+                <button type="button" class="btn btn-pagination-prev" data-bs-target="#faunaModal19" data-bs-toggle="modal" data-bs-dismiss="modal">‹</button>
+                <span class="pagination-indicator">5 / 5</span>
+                <button type="button" class="btn btn-pagination-next" data-bs-target="#faunaModal1" data-bs-toggle="modal" data-bs-dismiss="modal">›</button>
             </div>
         </div>
     </div>
