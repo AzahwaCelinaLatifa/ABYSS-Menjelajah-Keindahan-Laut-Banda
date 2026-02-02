@@ -3,6 +3,17 @@
    Styling untuk pop-up modal Flora & Fauna
    ================================ */
 
+/* ===== MODAL BACKDROP BLUR ===== */
+/* Blur effect untuk background saat modal terbuka */
+.modal.show {
+    backdrop-filter: blur(6px);
+}
+
+.modal-backdrop.show {
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 /* ===== MODAL CONTENT ===== */
 /* Container utama modal */
 .modal-content {
