@@ -52,3 +52,30 @@
     background: var(--primary-dark);
     padding: 5rem 0;
 }
+
+/* ===== SECTION OVERLAY CIRCLES ===== */
+/* Garis lingkaran tipis seperti desain mockup */
+.galeri-section,
+.flora-section,
+.fauna-section,
+.faq-section,
+.lokasi-section {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate; /* Pastikan pseudo-element tetap di bawah konten */
+}
+
+.galeri-section::before,
+.flora-section::before,
+.fauna-section::before,
+.faq-section::before,
+
+
+.galeri-section .container,
+.flora-section .container,
+.fauna-section .container,
+.faq-section .container,
+.lokasi-section .container {
+    position: relative;
+    z-index: 1;
+}
