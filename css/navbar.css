@@ -54,20 +54,26 @@
     color: var(--accent-blue) !important;
 }
 
-/* ===== NAV LINK ACTIVE ===== */
-/* Saat item menu aktif (hanya satu yang bisa aktif) */
-.nav-link.active {
-    background: var(--white);
-    color: var(--primary-dark) !important;
-    border: 2px solid var(--white);
-    padding: 0.5rem 1.5rem !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+/* Click effect pada nav link */
+.nav-link:active {
+    background: rgba(255, 255, 255, 0.3);
+    color: var(--white) !important;
 }
 
-/* Hover pada link yang sedang aktif tetap mempertahankan style */
+/* ===== NAV LINK ACTIVE ===== */
+/* Saat item menu aktif (hanya satu yang bisa aktif) - hanya border putih */
+.nav-link.active {
+    background: transparent;
+    color: var(--white) !important;
+    border: 2px solid var(--white);
+    padding: 0.5rem 1.5rem !important;
+    box-shadow: none;
+}
+
+/* Hover pada link yang sedang aktif tetap mempertahankan style border */
 .nav-link.active:hover {
-    background: var(--white);
-    color: var(--primary-dark) !important;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white) !important;
     border: 2px solid var(--white);
 }
 

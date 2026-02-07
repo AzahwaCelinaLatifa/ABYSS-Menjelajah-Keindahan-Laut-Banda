@@ -11,7 +11,7 @@
     border-radius: 15px;
     overflow: hidden;                   /* Hide overflow untuk efek zoom */
     cursor: pointer;                    /* Cursor pointer menandakan clickable */
-    transition: transform 0.3s ease;
+    transition: transform 0.8s ease;    /* Perlambat transisi card */
 }
 
 /* Hover effect - card naik sedikit */
@@ -27,7 +27,7 @@
     width: 100%;
     height: 250px;
     object-fit: cover;                  /* Crop gambar agar fit */
-    transition: transform 0.3s ease;
+    transition: transform 0.8s ease;    /* Perlambat transisi gambar */
 }
 
 /* Zoom effect pada gambar saat hover */
@@ -59,6 +59,11 @@
 
 /* ===== CAROUSEL CONTROLS ===== */
 
+/* Transition untuk carousel item - memperlambat pergeseran slide */
+.carousel-item {
+    transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out !important;
+}
+
 /* Hover effect untuk carousel controls */
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
@@ -79,7 +84,7 @@
 .flora-pagination-custom {
     border: 2px solid #7C9FC9;
     border-radius: 50px;
-    padding: 8px 12px;
+    padding: 12px 20px;
     display: inline-flex;
     gap: 8px;
     list-style: none;
@@ -119,11 +124,67 @@
     color: #FFFFFF;
     background-color: #7C9FC9;
     border: none;
+    border-radius: 50%;
     font-weight: 700;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
 }
 
 .flora-pagination-custom .page-item.active .page-link:hover {
     background-color: #5481B2;
     transform: scale(1.08);
+}
+
+/* ===== CHEVRON PAGINATION BUTTONS ===== */
+.chevron-pagination-btn {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #5481B2;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    box-shadow: none;
+}
+
+.chevron-pagination-btn:hover {
+    border-color: #7C9FC9;
+    background-color: rgba(84, 129, 178, 0.15);
+    transform: scale(1.08);
+}
+
+.chevron-pagination-btn:active {
+    transform: scale(0.95);
+    background-color: rgba(84, 129, 178, 0.25);
+}
+
+.chevron-pagination-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.chevron-pagination-btn:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+.chevron-pagination-btn::before,
+.chevron-pagination-btn::after {
+    display: none;
+}
+
+.chevron-pagination-btn svg {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
