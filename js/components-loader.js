@@ -58,8 +58,28 @@ document.addEventListener('DOMContentLoaded', async function() {
     initializeFeatures();
 });
 
+// ===== FUNGSI UNTUK MEMPOSISIKAN ULANG MODALS KE BODY =====
+// Ini memperbaiki masalah modal content yang tidak tampil karena overflow:hidden pada parent sections
+function repositionModals() {
+    // Ambil semua modal elements
+    const modals = document.querySelectorAll('.modal');
+    
+    // Pindahkan setiap modal ke body agar tidak terpotong oleh overflow:hidden
+    modals.forEach(modal => {
+        // Jika modal ada di dalam container flora/fauna
+        const parentContainer = modal.closest('#flora-container, #fauna-container');
+        if (parentContainer) {
+            // Pindahkan modal ke body
+            document.body.appendChild(modal);
+        }
+    });
+}
+
 // ===== INISIALISASI SEMUA FITUR SETELAH COMPONENTS DIMUAT =====
 function initializeFeatures() {
+    // Pindahkan modals ke body PERTAMA KALI sebelum inisialisasi lainnya
+    repositionModals();
+    
     // Inisialisasi sidebar toggle
     initSidebar();
     
