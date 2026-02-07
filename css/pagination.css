@@ -8,6 +8,7 @@
 
 /* Previous & Next Buttons */
 .pagination-nav-btn {
+
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -45,7 +46,7 @@
 .pagination-custom {
   border: 2px solid #7C9FC9;
   border-radius: 50px;
-  padding: 8px 12px;
+  padding: 12px 20px;
   display: inline-flex;
   gap: 8px;
   list-style: none;
@@ -61,7 +62,7 @@
 
 .pagination-custom .page-link {
   color: #FFFFFF;
-  border: none;
+  border: 2px solid transparent;
   background-color: transparent;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -76,19 +77,28 @@
   justify-content: center;
 }
 
+/* Hover effect pada pagination link */
 .pagination-custom .page-link:hover:not(.active .page-link) {
-  background-color: rgba(124, 159, 201, 0.15);
+  background-color: rgba(124, 159, 201, 0.2);
   transform: scale(1.08);
 }
 
+/* Click effect pada pagination link */
+.pagination-custom .page-link:active {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+}
+
+/* Active state - hanya border putih */
 .pagination-custom .page-item.active .page-link {
   color: #FFFFFF;
-  background-color: #7C9FC9;
-  border: none;
+  background-color: transparent;
+  border: 2px solid var(--accent-blue);
   font-weight: 700;
+  box-shadow: none;
 }
 
 .pagination-custom .page-item.active .page-link:hover {
-  background-color: #5481B2;
+  background-color: rgba(124, 159, 201, 0.2);
   transform: scale(1.08);
 }

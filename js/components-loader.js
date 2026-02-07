@@ -69,6 +69,9 @@ function initializeFeatures() {
     // Inisialisasi smooth scrolling
     initSmoothScroll();
     
+    // Inisialisasi carousel pagination
+    initCarouselPagination();
+    
     // Inisialisasi contact form
     initContactForm();
     
@@ -207,6 +210,63 @@ function initSmoothScroll() {
                 }
             }
         });
+    });
+}
+
+// ===== FUNGSI CAROUSEL PAGINATION =====
+// Menangani carousel dan update pagination saat slide berubah
+function initCarouselPagination() {
+    // Ambil semua carousel di halaman
+    const carousels = document.querySelectorAll('.carousel');
+    
+    carousels.forEach(carousel => {
+        const carouselId = carousel.getAttribute('id');
+        
+        // Cek apakah carousel memiliki ID
+        if (!carouselId) return;
+        
+        // Ambil bootstrap carousel instance
+        const bootstrapCarousel = new bootstrap.Carousel(carousel, {
+            interval: 2000 // Auto-slide setiap 2 detik
+        });
+        
+        // Ambil semua pagination links untuk carousel ini
+        const paginationLinks = document.querySelectorAll(`a[data-bs-target="#${carouselId}"][data-bs-slide-to]`);
+        
+        // Inisialisasi active state pagination
+        function updatePagination() {
+            const activeSlide = carousel.querySelector('.carousel-item.active');
+            const activeIndex = Array.from(carousel.querySelectorAll('.carousel-item')).indexOf(activeSlide);
+            
+            // Hapus active dari semua pagination links
+            paginationLinks.forEach(link => {
+                link.parentElement.classList.remove('active');
+            });
+            
+            // Tambahkan active ke pagination link yang sesuai
+            if (paginationLinks[activeIndex]) {
+                paginationLinks[activeIndex].parentElement.classList.add('active');
+            }
+        }
+        
+        // Update pagination saat carousel berubah
+        carousel.addEventListener('slid.bs.carousel', function() {
+            updatePagination();
+        });
+        
+        // Handle pagination link clicks
+        paginationLinks.forEach((link, index) => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default href behavior
+                
+                // Slide ke index yang ditentukan
+                bootstrapCarousel.to(index);
+                updatePagination();
+            });
+        });
+        
+        // Initial update pagination
+        updatePagination();
     });
 }
 
