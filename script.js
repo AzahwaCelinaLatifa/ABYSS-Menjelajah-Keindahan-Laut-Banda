@@ -172,13 +172,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 500);
 });
 
-// ===== CONSOLE MESSAGE =====
-// Pesan untuk developer di console browser
-console.log('%c🌊 Website Laut Banda - Abyss', 'color: #4A90E2; font-size: 20px; font-weight: bold;');
-console.log('%cDeveloped with ❤️', 'color: #6AABD8; font-size: 14px;');
-console.log('%cKode terorganisir dengan component-based architecture', 'color: #2E5C8A; font-size: 12px;');
-
-// ===== EXPORT FUNCTIONS (jika diperlukan di file lain) =====
-// Uncomment jika menggunakan ES6 modules
-// export { isMobile, debounce, preloadImages };
 
