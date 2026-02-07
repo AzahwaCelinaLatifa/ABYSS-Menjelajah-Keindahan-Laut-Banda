@@ -140,12 +140,13 @@
 }
 
 /* ===== CHEVRON PAGINATION BUTTONS ===== */
+/* Circular chevron buttons positioned inside carousel */
 .chevron-pagination-btn {
     width: 45px;
     height: 45px;
     border: 1px solid #5481B2;
     border-radius: 50%;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.3);
     cursor: pointer;
     padding: 0;
     display: flex;
@@ -153,38 +154,52 @@
     justify-content: center;
     transition: all 0.2s ease-in-out;
     outline: none;
-    box-shadow: none;
+    box-shadow: 0 0 0 0 rgba(84, 129, 178, 0);
+    position: relative;
+    z-index: 10;
 }
 
+/* Hover state - brighter border with glow */
 .chevron-pagination-btn:hover {
     border-color: #7C9FC9;
-    background-color: rgba(84, 129, 178, 0.15);
+    background-color: rgba(0, 0, 0, 0.5);
     transform: scale(1.08);
+    box-shadow: 0 0 12px rgba(124, 159, 201, 0.4);
 }
 
+/* Active/Click state */
 .chevron-pagination-btn:active {
     transform: scale(0.95);
-    background-color: rgba(84, 129, 178, 0.25);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
+/* Focus state - clean, no outline */
 .chevron-pagination-btn:focus {
     outline: none;
-    box-shadow: none;
+    box-shadow: 0 0 12px rgba(124, 159, 201, 0.4);
 }
 
 .chevron-pagination-btn:focus-visible {
     outline: none;
-    box-shadow: none;
+    box-shadow: 0 0 12px rgba(124, 159, 201, 0.4);
 }
 
+/* Remove default button pseudo-elements */
 .chevron-pagination-btn::before,
 .chevron-pagination-btn::after {
     display: none;
 }
 
+/* SVG icon styling - white, 24px */
 .chevron-pagination-btn svg {
     width: 24px;
     height: 24px;
     display: block;
+    color: #FFFFFF;
+    stroke: #FFFFFF;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
