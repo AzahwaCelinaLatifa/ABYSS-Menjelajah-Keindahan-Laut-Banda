@@ -1,0 +1,103 @@
+/* =========================================================
+   index.css — Tailwind v4 + Custom Theme untuk Abyss
+   =========================================================
+   Google Fonts dimuat via <link> di index.html.
+   ========================================================= */
+
+@import "tailwindcss";
+
+/* =========================================================
+   @theme — Design Tokens
+   ========================================================= */
+@theme {
+  --color-primary:    #0A1628;
+  --color-secondary:  #1E3A5F;
+  --color-accent:     #4A90E2;
+  --color-light-blue: #C6E9FF;
+  --color-card:       #112240;
+  --color-dark:       #060e1a;
+
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   Keyframe Animations
+   ========================================================= */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
+
+@keyframes bounceY {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* =========================================================
+   Custom Utility Classes
+   ========================================================= */
+.animate-float    { animation: float 3s ease-in-out infinite; }
+.animate-bounce-y { animation: bounceY 2s infinite; }
+
+/* Navbar glass effect */
+.navbar-glass {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Thin scrollbar for sidebar */
+.thin-scrollbar::-webkit-scrollbar       { width: 4px; }
+.thin-scrollbar::-webkit-scrollbar-track  { background: transparent; }
+.thin-scrollbar::-webkit-scrollbar-thumb  { background: var(--color-accent); border-radius: 9999px; }
+
+/* =========================================================
+   Swiper Overrides
+   ========================================================= */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-accent) !important;
+  background: rgba(10, 22, 40, 0.7);
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+}
+.swiper-pagination-bullet {
+  background: var(--color-accent) !important;
+  opacity: 0.4;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   Accordion (CSS-only transition for FAQ)
+   ========================================================= */
+.accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.accordion-body.open {
+  grid-template-rows: 1fr;
+}
+.accordion-body > div {
+  overflow: hidden;
+}
