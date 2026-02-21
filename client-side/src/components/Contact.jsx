@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Phone, Mail, MapPin, Send } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+
 const contactInfo = [
   { icon: Phone,   label: 'Phone',    value: '+62 345 2140' },
   { icon: Mail,    label: 'Email',    value: 'lautbanda7@gmail.com' },
@@ -22,7 +23,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="kontak" className="relative py-24 bg-gradient-to-b from-rgba(0, 17, 35, 1)   to-secondary overflow-hidden">
+    <section id="kontak" className="relative py-24 bg-gradient-to-b from-[#001123]/50  to-[#04070B]/100 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
 
         {/* ===== TOP ROW: Judul Form + Form ===== */}
@@ -51,7 +52,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Enter your name"
                 required
-                className="w-full bg-card border border-white focus:border-accent text-white placeholder-white rounded-full px-4 py-3 text-sm outline-none transition-colors"
+                className="w-full bg-transparent border border-white focus:border-accent text-white placeholder-white rounded-full px-4 py-3 text-sm outline-none transition-colors"
               />
             </div>
             <div>
@@ -64,7 +65,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Enter your email address"
                 required
-                className="w-full bg-card border border-white focus:border-accent text-white placeholder-white rounded-full px-4 py-3 text-sm outline-none transition-colors"
+                className="w-full bg-transparent border border-white focus:border-accent text-white placeholder-white rounded-full px-4 py-3 text-sm outline-none transition-colors"
               />
             </div>
             <div>
@@ -77,7 +78,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Write your message here"
                 required
-                className="w-full bg-card border border-white focus:border-accent text-white placeholder-white rounded-4xl px-4 py-3 text-sm outline-none transition-colors resize-none"
+                className="w-full bg-transparent border border-white focus:border-accent text-white placeholder-white rounded-4xl px-4 py-3 text-sm outline-none transition-colors resize-none"
               />
             </div>
             <button
@@ -109,8 +110,8 @@ export default function Contact() {
           <div className="flex flex-col gap-6 justify-center">
             {contactInfo.map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
-                  <Icon size={18} className="text-accent" />
+                <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                  <Icon size={18} className="text-accent"/>
                 </div>
                 <div>
                   <h6 className="text-white font-semibold text-sm">{label}</h6>

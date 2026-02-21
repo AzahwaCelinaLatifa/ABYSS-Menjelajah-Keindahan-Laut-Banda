@@ -32,12 +32,12 @@ export default function Fakta() {
   const toggle = (i) => setOpenIndex(prev => (prev === i ? null : i))
 
   return (
-    <section id="fakta" className="relative py-24 bg-primary overflow-hidden">
+    <section id="fakta" className="relative py-24 bg-gradient-to-b from-[#010F1F]/50 via-accent/50 to-[#000204] overflow-hidden">
       {/* Decorative circles */}
       <img src={circleSvg} alt="" aria-hidden className="absolute -bottom-16 -left-16 w-64 opacity-20 pointer-events-none" />
       <img src={circleSvg} alt="" aria-hidden className="absolute top-10 right-10 w-48 opacity-10 pointer-events-none" />
 
-      <div className="relative z-[1] max-w-3xl mx-auto px-6">
+      <div className="relative z-[1] max-w-4xl mx-auto px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,30 +56,34 @@ export default function Fakta() {
 
         {/* Accordion */}
         <div className="flex flex-col gap-3">
-          {faqItems.map((item, i) => (
+          {faqItems.map((item, i) => {
+            const isOpen = openIndex === i
+            return (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-white rounded-3xl overflow-hidden border border-white/5 hover:border-accent/40 transition-colors"
+                className="rounded-3xl overflow-hidden border border-white/5 hover:border-accent/40 transition-colors"
             >
-              {/* Question button */}
+                    {/* Question button — shadow-lg when open */}
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left group"
+                  className={`w-full flex items-center justify-between gap-4 px-6 py-5 text-left group
+                    bg-white transition-shadow duration-300
+                    ${isOpen ? 'shadow-[inset_0_-4px_8px_rgba(0,0,0,0.15),_0_4px_12px_rgba(0,0,0,0.1)]' : ''}`}
               >
-                <span className={`text-sm sm:text-base font-medium transition-colors duration-200 ${openIndex === i ? 'text-dark' : 'text-dark group-hover:text-accent'}`}>
+                  <span className={`text-sm sm:text-base font-medium transition-colors duration-200 ${isOpen ? 'text-dark' : 'text-dark group-hover:text-accent'}`}>
                   {item.q}
                 </span>
-                <span className={`flex-shrink-0 text-accent transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`}>
+                  <span className={`flex-shrink-0 text-accent transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                   <ChevronDown size={20} />
                 </span>
               </button>
 
-              {/* Answer — uses grid-based accordion from index.css */}
-              <div className={`accordion-body ${openIndex === i ? 'open' : ''}`}>
+                {/* Answer — CSS grid accordion */}
+                <div className={`accordion-body ${isOpen ? 'open' : ''}`}>
                 <div className="overflow-hidden">
                   <p className="px-6 pb-5 bg-light-blue text-dark text-sm leading-relaxed">
                     {item.a}
@@ -87,7 +91,8 @@ export default function Fakta() {
                 </div>
               </div>
             </motion.div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

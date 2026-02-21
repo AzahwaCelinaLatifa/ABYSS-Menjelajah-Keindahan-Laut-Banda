@@ -10,13 +10,13 @@ export default function Hero() {
       className="relative min-h-screen flex items-center text-white overflow-hidden"
       style={{
         background: `
-          radial-gradient(ellipse at center, rgba(10,22,40,0) 0%, rgba(5,15,30,0.7) 70%, rgba(0,0,0,0.85) 100%),
+          radial-gradient(ellipse at center, rgba(10,22,40,0) 0%, rgba(5,15,30,0.7) 70%, rgba(0,0,0,0.85) 100%), 
           url(${backgroundHeader}) center / cover no-repeat
         `,
       }}
     >
       {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,67,137,0.55)] to-[rgba(0,17,35,0.65)] z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,67,137,0.55)]/70 to-[#000000]/70 z-0" />
 
       {/* Content wrapper */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-24 pb-16">
