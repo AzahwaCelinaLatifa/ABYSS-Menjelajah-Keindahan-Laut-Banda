@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion' // Import motion
+import { motion } from 'framer-motion'
 
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -10,16 +10,20 @@ import Location from './components/Location'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Sidebar from './components/Sidebar'
+// IMPORT BACKGROUND LAUTNYA DI SINI
+import OceanBackground from './components/OceanBackground' 
 
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-primary text-white font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-primary text-white font-sans overflow-x-hidden">
       
+      {/* --- BACKGROUND LAUT BANDA GLOBAL --- */}
+      <OceanBackground />
+
       <Sidebar open={isSidebarOpen} setOpen={setIsSidebarOpen} />
       
-      {/* INI KUNCINYA: Gunakan <motion.div> bukan <div> biasa */}
       <motion.div 
         animate={{ 
           paddingRight: isSidebarOpen ? '320px' : '0px' 
@@ -29,10 +33,11 @@ export default function App() {
           bounce: 0, 
           duration: 0.4 
         }}
-        className="w-full"
+        // Tambahkan relative z-10 di sini supaya konten ada di atas gelembung
+        className="w-full relative z-10"
       >
         <Navbar />
-        <main className="relative z-0">
+        <main className="relative z-10">
           <Hero />
           <InfoSections />
           <Gallery />

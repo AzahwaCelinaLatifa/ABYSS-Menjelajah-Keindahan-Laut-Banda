@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import circleSvg from '../assets/circle.svg'
 
 const faqItems = [
   {
@@ -70,7 +69,6 @@ export default function Fakta() {
 
   return (
     <section id="fakta" className="relative py-24 bg-gradient-to-b from-[#010F1F]/50 via-accent/50 to-[#000204] overflow-hidden">
-      <img src={circleSvg} alt="" aria-hidden className="absolute -bottom-16 -left-16 w-64 opacity-20 pointer-events-none" />
       
       <div className="relative z-[1] max-w-4xl mx-auto px-6">
         <motion.div

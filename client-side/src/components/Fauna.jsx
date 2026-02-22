@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import circleSvg from '../assets/circle.svg'
 
 /* ============================================================
    Import semua gambar fauna
@@ -239,8 +238,6 @@ export default function Fauna() {
 
   return (
     <section id="fauna" className="relative py-24 bg-gradient-to-b from-[#010F1F]/70 to-[#000]/70 overflow-hidden">
-      <img src={circleSvg} alt="" aria-hidden className="absolute -bottom-20 -left-20 w-72 opacity-20 pointer-events-none" />
-      <img src={circleSvg} alt="" aria-hidden className="absolute -top-20 -right-20 w-56 opacity-10 pointer-events-none" />
 
       <div className="relative z-[1] max-w-7xl mx-auto px-6 lg:px-8">
         

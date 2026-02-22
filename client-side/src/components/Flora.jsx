@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import circleSvg from '../assets/circle.svg'
 
 /* ============================================================
    Import semua gambar flora
@@ -230,7 +229,6 @@ export default function Flora() {
 
   return (
     <section id="flora" className="relative py-24 bg-gradient-to-b from-[#000000]/89 to-[#010F1F]/70 overflow-hidden">
-      <img src={circleSvg} alt="" aria-hidden className="absolute -bottom-20 -right-20 w-72 opacity-20 pointer-events-none" />
 
       <div className="relative z-[1] max-w-7xl mx-auto px-6 lg:px-8">
         

@@ -8,7 +8,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import circleSvg from '../assets/circle.svg'
 
 // Import gambar galeri (TIDAK BERUBAH)
 import menyelam from '../assets/galeri/Menyelam (Scuba Diving).svg'
@@ -88,7 +87,6 @@ export default function Gallery() {
 
   return (
     <section id="galeri" className="relative py-20 bg-gradient-to-b from-[#000]/70 to-[#010F1F]/50 overflow-hidden">
-      <img src={circleSvg} className="absolute -bottom-20 -left-20 w-72 opacity-20 pointer-events-none" alt="" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">

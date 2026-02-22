@@ -1,7 +1,5 @@
 /* =========================================================
    index.css — Tailwind v4 + Custom Theme untuk Abyss
-   =========================================================
-   Google Fonts dimuat via <link> di index.html.
    ========================================================= */
 
 @import "tailwindcss";
@@ -47,11 +45,59 @@ body {
   50%      { transform: translateX(-50%) translateY(-10px); }
 }
 
+/* --- ANIMASI LAUT BANDA (VERSI LEBIH KALEM/SOFT) --- */
+/* Opacity diturunkan agar tidak mengganggu konten utama */
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+  /* Naikkan opacity dari 0.3 jadi 0.5 (50%) biar gelembung lebih terlihat */
+  15% { opacity: 0.5; }
+  85% { opacity: 0.5; }
+  100% { transform: translateY(-120vh) translateX(40px) scale(1.2) rotate(45deg); opacity: 0; }
+}
+
+@keyframes swimRight {
+  0% { transform: translateX(0) translateY(0); opacity: 0; }
+  /* Opacity diturunkan ke 0.5 (50%) */
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateX(120vw) translateY(-50px); opacity: 0; }
+}
+
+@keyframes swimLeft {
+  0% { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
+  /* Opacity diturunkan ke 0.45 (45%) */
+  10% { opacity: 0.45; transform: translateX(-10vw) translateY(10px) scaleX(-1); }
+  90% { opacity: 0.45; transform: translateX(-100vw) translateY(30px) scaleX(-1); }
+  100% { transform: translateX(-120vw) translateY(40px) scaleX(-1); opacity: 0; }
+}
+
 /* =========================================================
    Custom Utility Classes
    ========================================================= */
 .animate-float    { animation: float 3s ease-in-out infinite; }
 .animate-bounce-y { animation: bounceY 2s infinite; }
+
+/* --- UTILITY KELAS LAUT BANDA --- */
+.animate-bubble {
+  animation: floatUp infinite linear;
+  will-change: transform, opacity;
+}
+
+.animate-swim-right {
+  animation: swimRight 35s infinite linear;
+  will-change: transform, opacity;
+}
+
+.animate-swim-left {
+  animation: swimLeft 40s infinite linear;
+  will-change: transform, opacity;
+}
+
+.delay-1 { animation-delay: 0s; animation-duration: 15s; }
+.delay-2 { animation-delay: 4s; animation-duration: 22s; }
+.delay-3 { animation-delay: 8s; animation-duration: 18s; }
+.delay-4 { animation-delay: 12s; animation-duration: 25s; }
 
 /* Navbar glass effect */
 .navbar-glass {
