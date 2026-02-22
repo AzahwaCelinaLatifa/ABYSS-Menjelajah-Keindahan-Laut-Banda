@@ -5,6 +5,9 @@ export default function Location() {
   // t=k (satelit), z=15 (zoom-in pas agar terlihat pemukiman & tidak kosong)
   const mapSrc = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15915.244033284768!2d129.9042578!3d-4.5208643!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d6f7f6a738c82a5%3A0xc3f0b069695d8526!2sBanda%20Neira!5e1!3m2!1sid!2sid!4v1708520000000!5m2!1sid!2sid&maptype=satellite";
 
+  // --- Memisahkan string untuk animasi split text ---
+  const headerText = "Laut Banda terletak di provinsi Maluku, Indonesia".split(" ")
+
   return (
     <section
       id="lokasi"
@@ -21,10 +24,47 @@ export default function Location() {
         >
           <span className="inline-flex items-center justify-center border border-white/30 rounded-full px-6 py-2 text-light-blue font-bold tracking-widest uppercase text-xl">
             Lokasi
-          </span>         
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold leading-snug text-white">
-            Laut Banda terletak di provinsi Maluku, Indonesia
-          </h2>
+          </span>        
+          
+          {/* ====================================================
+              BAGIAN YANG DIUBAH: React Bits Split Text Style 
+              Trigger via whileInView (scroll), once: true
+              ==================================================== */}
+          <motion.h2 
+            variants={{
+              hidden: { opacity: 1 },
+              visible: { 
+                opacity: 1, 
+                transition: { 
+                  staggerChildren: 0.08, 
+                  delayChildren: 0.3     
+                } 
+              }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            className="mt-4 text-3xl sm:text-4xl font-bold leading-snug text-white"
+          >
+            {headerText.map((word, i) => (
+              <motion.span 
+                key={`loc-${i}`} 
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { type: 'spring', damping: 15, stiffness: 150 } 
+                  }
+                }}
+                className="inline-block mr-[0.25em]"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h2>
+          {/* ==================================================== */}
+
         </motion.div>
 
         {/* Map Container */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion } from 'framer-motion' 
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -9,7 +10,7 @@ import 'swiper/css/pagination'
 
 import circleSvg from '../assets/circle.svg'
 
-// Import tetap sama
+// Import gambar galeri (TIDAK BERUBAH)
 import menyelam from '../assets/galeri/Menyelam (Scuba Diving).svg'
 import gunungApi from '../assets/galeri/Gunung Api Banda.svg'
 import lumbaLumba from '../assets/galeri/Tur Lumba-Lumba.svg'
@@ -42,16 +43,51 @@ export default function Gallery() {
   const [flippedIndex, setFlippedIndex] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
 
+  // Cek ukuran layar
   useEffect(() => {
-    // Breakpoint: Sekarang layar Tablet (768px ke atas) dianggap sudah "Desktop Mode"
     const handleResize = () => setIsMobile(window.innerWidth < 768)
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // === LOGIKA AUTO CLOSE (BALIK KARTU) ===
+  useEffect(() => {
+    // 1. Tutup (balik kartu) kalau user klik di luar area Galeri
+    const handleClickOutside = (e) => {
+      const galeriSection = document.getElementById('galeri');
+      if (galeriSection && !galeriSection.contains(e.target)) {
+        setFlippedIndex(null);
+      }
+    };
+
+    // 2. Tutup kalau user scroll menjauh dan area Galeri hilang dari layar
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            setFlippedIndex(null);
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+
+    const galeriEl = document.getElementById('galeri');
+    if (galeriEl) observer.observe(galeriEl);
+    
+    document.addEventListener('click', handleClickOutside);
+    window.addEventListener('hashchange', () => setFlippedIndex(null));
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('hashchange', () => setFlippedIndex(null));
+      if (galeriEl) observer.unobserve(galeriEl);
+    };
+  }, []);
+
   return (
-    <section id="galeri" className="relative py-20 bg-black overflow-hidden">
+    <section id="galeri" className="relative py-20 bg-gradient-to-b from-[#000]/70 to-[#010F1F]/50 overflow-hidden">
       <img src={circleSvg} className="absolute -bottom-20 -left-20 w-72 opacity-20 pointer-events-none" alt="" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -80,17 +116,31 @@ export default function Gallery() {
               galeriItems.map((item, idx) => (
                 <SwiperSlide key={`mob-${idx}`} className="pb-12">
                   <div className="px-4"> 
-                    <GalleryCard item={item} index={`mob-${idx}`} flippedIndex={flippedIndex} setFlippedIndex={setFlippedIndex} isMobile={true} />
+                    <GalleryCard 
+                      item={item} 
+                      index={`mob-${idx}`} 
+                      delayIndex={0} 
+                      flippedIndex={flippedIndex} 
+                      setFlippedIndex={setFlippedIndex} 
+                      isMobile={true} 
+                    />
                   </div>
                 </SwiperSlide>
               ))
             ) : (
-              // Tablet & Laptop sekarang punya tampilan yang SAMA (Grid)
               [0, 1].map((pageIdx) => (
                 <SwiperSlide key={`desk-${pageIdx}`} className="pb-12">
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {galeriItems.slice(pageIdx * 6, (pageIdx + 1) * 6).map((item, i) => (
-                      <GalleryCard key={i} item={item} index={`desk-${pageIdx}-${i}`} flippedIndex={flippedIndex} setFlippedIndex={setFlippedIndex} isMobile={false} />
+                      <GalleryCard 
+                        key={i} 
+                        item={item} 
+                        index={`desk-${pageIdx}-${i}`} 
+                        delayIndex={i}
+                        flippedIndex={flippedIndex} 
+                        setFlippedIndex={setFlippedIndex} 
+                        isMobile={false} 
+                      />
                     ))}
                   </div>
                 </SwiperSlide>
@@ -109,12 +159,19 @@ export default function Gallery() {
 
       <style jsx global>{`
         .perspective-1000 { perspective: 1000px; }
+        
         .flip-card-inner {
           position: relative; width: 100%; height: 100%;
-          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease-in-out;
           transform-style: preserve-3d;
+          border-radius: 1.5rem; 
         }
-        .is-flipped { transform: rotateY(180deg); }
+
+        .is-flipped { 
+          transform: rotateY(180deg);
+          box-shadow: 0 0 20px rgba(124, 161, 211, 0.7); 
+        }
+
         .flip-front, .flip-back {
           position: absolute; width: 100%; height: 100%;
           backface-visibility: hidden; border-radius: 1.5rem;
@@ -133,10 +190,14 @@ export default function Gallery() {
   )
 }
 
-function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile }) {
+function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, delayIndex = 0 }) {
   const isFlipped = flippedIndex === index;
   return (
-    <div 
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
       className={`relative w-full perspective-1000 cursor-pointer ${isMobile ? 'aspect-[4/5]' : 'h-64 lg:h-72'}`}
       onClick={() => setFlippedIndex(isFlipped ? null : index)}
     >
@@ -146,13 +207,12 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile }) {
             src={item.img} 
             className="w-full h-full object-cover" 
             alt={item.title}
-            // MEMPERTAJAM FOTO: Pakai rendering contrast tinggi & crisp-edges
             style={{ 
               imageRendering: 'high-quality',
               WebkitBackfaceVisibility: 'hidden'
             }} 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent flex items-end p-6">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#000]/70 via-[#010F1F]/10 to-[#010F1F]/50 flex items-end p-6">
             <p className="text-white font-bold text-lg leading-tight tracking-wide">{item.title}</p>
           </div>
         </div>
@@ -163,6 +223,6 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile }) {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

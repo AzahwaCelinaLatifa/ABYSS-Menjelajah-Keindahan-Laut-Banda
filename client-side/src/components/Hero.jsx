@@ -3,7 +3,34 @@ import { motion } from 'framer-motion'
 import backgroundHeader from '../assets/background-header.svg'
 import ikanPari from '../assets/Ikan Pari-header.svg'
 
+// 1. Siapkan Varian Animasi untuk Container (Pembungkus)
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      // Jeda kemunculan antar kata/elemen (0.15 detik)
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+// 2. Siapkan Varian Animasi untuk tiap Kata & Paragraf
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.6, ease: 'easeOut' } 
+  },
+}
+
 export default function Hero() {
+  // Pecah teks menjadi array per kata
+  const line1 = "Menjelajahi Keindahan".split(" ")
+  const line2 = "Laut Banda".split(" ")
+
   return (
     <section
       id="beranda"
@@ -23,27 +50,49 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 min-h-[calc(100vh-8rem)]">
 
           {/* Left — Text */}
+          {/* Ubah menjadi initial="hidden" dan animate="visible" untuk trigger variants */}
           <motion.div
             className="flex-1 text-center lg:text-left"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
             <h1
               className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold leading-tight mb-6"
               style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}
             >
-              Menjelajahi Keindahan
+              {/* Render Baris Pertama */}
+              {line1.map((word, i) => (
+                <motion.span 
+                  key={`line1-${i}`} 
+                  variants={itemVariants} 
+                  className="inline-block mr-[0.25em]" // mr-[0.25em] sebagai pengganti spasi
+                >
+                  {word}
+                </motion.span>
+              ))}
               <br />
-              Laut Banda
+              {/* Render Baris Kedua */}
+              {line2.map((word, i) => (
+                <motion.span 
+                  key={`line2-${i}`} 
+                  variants={itemVariants} 
+                  className="inline-block mr-[0.25em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
             </h1>
-            <p
+            
+            {/* Paragraf ikut menggunakan itemVariants agar muncul setelah judul selesai */}
+            <motion.p
+              variants={itemVariants}
               className="text-base sm:text-lg text-white/85 leading-relaxed max-w-xl mx-auto lg:mx-0"
               style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
             >
               Temukan keindahan bawah laut, keanekaragaman hayati, dan nilai sejarah
               Banda Neira sebagai bagian penting dari warisan maritim Indonesia.
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Right — Image */}
@@ -51,7 +100,7 @@ export default function Hero() {
             className="flex-1 flex justify-center"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }} // Delay disesuaikan agar pas dengan teks
           >
             <img
               src={ikanPari}

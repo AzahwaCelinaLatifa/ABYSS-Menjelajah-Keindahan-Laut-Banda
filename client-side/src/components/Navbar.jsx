@@ -44,9 +44,10 @@ export default function Navbar() {
     return () => observer.disconnect()
   }, [])
 
+  // Auto-close menu
   const handleClick = useCallback((href) => {
     setActiveLink(href)
-    setMobileOpen(false)
+    setMobileOpen(false) 
   }, [])
 
   return (
@@ -55,7 +56,8 @@ export default function Navbar() {
         scrolled ? 'shadow-[0_2px_24px_rgba(0,0,0,0.55)]' : ''
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      {/* Container pakai max-w-7xl biar rapi */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
@@ -64,8 +66,8 @@ export default function Navbar() {
             <span className="text-xl font-bold tracking-tight text-white">Abyss</span>
           </a>
 
-          {/* Desktop links */}
-          <ul className="hidden lg:flex items-center gap-1">
+          {/* Desktop & Tablet links -> Diubah dari lg:flex ke md:flex */}
+          <ul className="hidden md:flex items-center gap-1">
             {navLinks.map(({ href, label }) => {
               const isActive = activeLink === href
               return (
@@ -76,7 +78,7 @@ export default function Navbar() {
                     className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
                       ${isActive
                         ? 'text-white border-2 border-white'
-                        : 'text-white text-lg font-semibold hover:text-white hover:bg-white/10'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
                       }`}
                   >
                     {label}
@@ -86,47 +88,51 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger -> Diubah dari lg:hidden ke md:hidden */}
           <button
-            className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors z-[120]"
             onClick={() => setMobileOpen(o => !o)}
             aria-label="Menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
-      </div>
 
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="lg:hidden overflow-hidden border-t border-white/10 bg-primary/95 backdrop-blur-lg"
-          >
-            <ul className="flex flex-col gap-1 px-6 py-4">
-              {navLinks.map(({ href, label }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    onClick={() => handleClick(href)}
-                    className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
-                      ${activeLink === href
-                        ? 'bg-white/10 text-white border border-white/20'
-                        : 'text-white/70 hover:bg-white/5 hover:text-white'
-                      }`}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Mobile Dropdown -> Diubah dari lg:hidden ke md:hidden */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -15, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -15, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="absolute right-4 top-[4.5rem] w-40 z-[110] md:hidden"
+            >
+              <div className="bg-[#0A192F]/95 backdrop-blur-lg border border-white/20 p-2 rounded-2xl shadow-2xl">
+                <div className="flex flex-col gap-1.5">
+                  {navLinks.map(({ href, label }) => {
+                    const isActive = activeLink === href
+                    return (
+                      <a
+                        key={href}
+                        href={href}
+                        onClick={() => handleClick(href)}
+                        className={`block px-3 py-2 text-center rounded-full text-sm font-medium transition-all duration-300
+                          ${isActive
+                            ? 'text-white border-2 border-white bg-white/5'
+                            : 'text-white/70 hover:text-white hover:bg-white/10 border-2 border-transparent'
+                          }`}
+                      >
+                        {label}
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </nav>
   )
 }

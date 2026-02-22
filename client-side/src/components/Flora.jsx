@@ -98,7 +98,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
           {/* Tombol Close (X) */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-[60] bg-[#7CA1D3]/20 border border-[#7CA1D3]/50 text-white hover:bg-[#7CA1D3]/50 rounded-full p-2 transition-all shadow-md backdrop-blur-sm"
+            className="absolute top-4 right-4 z-[60] text-white rounded-full p-2 transition-all shadow-md backdrop-blur-sm"
             aria-label="Tutup modal"
           >
             <X size={20} strokeWidth={2.5} />
@@ -224,6 +224,10 @@ export default function Flora() {
     return () => clearInterval(timer)
   }, [totalPages, modalIndex])
 
+  // --- Memisahkan string untuk animasi split text ---
+  const headerLine1 = "Macam flora laut Banda yang menjaga".split(" ")
+  const headerLine2 = "keseimbangan ekosistemnya".split(" ")
+
   return (
     <section id="flora" className="relative py-24 bg-gradient-to-b from-[#000000]/89 to-[#010F1F]/70 overflow-hidden">
       <img src={circleSvg} alt="" aria-hidden className="absolute -bottom-20 -right-20 w-72 opacity-20 pointer-events-none" />
@@ -241,9 +245,63 @@ export default function Flora() {
           <span className="inline-flex items-center justify-center border border-white/30 rounded-full px-6 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-xl">
             Flora
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white">
-            Macam flora laut Banda yang menjaga<br className="hidden sm:block" /> keseimbangan ekosistemnya
-          </h2>
+          
+          {/* ====================================================
+              BAGIAN YANG DIUBAH: React Bits Split Text Style 
+              Trigger via whileInView (scroll)
+              ==================================================== */}
+          <motion.h2 
+            variants={{
+              hidden: { opacity: 1 },
+              visible: { 
+                opacity: 1, 
+                transition: { 
+                  staggerChildren: 0.08, 
+                  delayChildren: 0.3     
+                } 
+              }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            className="mt-4 text-3xl sm:text-4xl font-bold text-white"
+          >
+            {headerLine1.map((word, i) => (
+              <motion.span 
+                key={`fl1-${i}`} 
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { type: 'spring', damping: 15, stiffness: 150 } 
+                  }
+                }}
+                className="inline-block mr-[0.25em]"
+              >
+                {word}
+              </motion.span>
+            ))}
+            <br className="hidden sm:block" />
+            {headerLine2.map((word, i) => (
+              <motion.span 
+                key={`fl2-${i}`} 
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { type: 'spring', damping: 15, stiffness: 150 } 
+                  }
+                }}
+                className="inline-block mr-[0.25em]"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h2>
+          {/* ==================================================== */}
+          
         </motion.div>
 
         {/* Cards Wrapper */}
