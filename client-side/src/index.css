@@ -1,0 +1,191 @@
+/* =========================================================
+   index.css — Tailwind v4 + Custom Theme untuk Abyss
+   ========================================================= */
+
+@import "tailwindcss";
+
+/* =========================================================
+   @theme — Design Tokens
+   ========================================================= */
+/* tw-config */
+@theme {
+  --color-primary:    #0A1628;
+  --color-secondary:  #1E3A5F;
+  --color-accent:     #4A90E2;
+  --color-light-blue: #C6E9FF;
+  --color-card:       #112240;
+  --color-dark:       #060e1a;
+
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   Keyframe Animations
+   ========================================================= */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
+
+@keyframes bounceY {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* --- ANIMASI LAUT BANDA (VERSI LEBIH KALEM/SOFT) --- */
+/* Opacity diturunkan agar tidak mengganggu konten utama */
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+  /* Naikkan opacity dari 0.3 jadi 0.5 (50%) biar gelembung lebih terlihat */
+  15% { opacity: 0.5; }
+  85% { opacity: 0.5; }
+  100% { transform: translateY(-120vh) translateX(40px) scale(1.2) rotate(45deg); opacity: 0; }
+}
+
+@keyframes swimRight {
+  0% { transform: translateX(0) translateY(0); opacity: 0; }
+  /* Opacity diturunkan ke 0.5 (50%) */
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateX(120vw) translateY(-50px); opacity: 0; }
+}
+
+@keyframes swimLeft {
+  0% { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
+  /* Opacity diturunkan ke 0.45 (45%) */
+  10% { opacity: 0.45; transform: translateX(-10vw) translateY(10px) scaleX(-1); }
+  90% { opacity: 0.45; transform: translateX(-100vw) translateY(30px) scaleX(-1); }
+  100% { transform: translateX(-120vw) translateY(40px) scaleX(-1); opacity: 0; }
+}
+
+/* =========================================================
+   Custom Utility Classes
+   ========================================================= */
+.animate-float    { animation: float 3s ease-in-out infinite; }
+.animate-bounce-y { animation: bounceY 2s infinite; }
+
+/* --- UTILITY KELAS LAUT BANDA --- */
+.animate-bubble {
+  animation: floatUp infinite linear;
+  will-change: transform, opacity;
+}
+
+.animate-swim-right {
+  animation: swimRight 35s infinite linear;
+  will-change: transform, opacity;
+}
+
+.animate-swim-left {
+  animation: swimLeft 40s infinite linear;
+  will-change: transform, opacity;
+}
+
+.delay-1 { animation-delay: 0s; animation-duration: 15s; }
+.delay-2 { animation-delay: 4s; animation-duration: 22s; }
+.delay-3 { animation-delay: 8s; animation-duration: 18s; }
+.delay-4 { animation-delay: 12s; animation-duration: 25s; }
+
+/* Navbar glass effect */
+.navbar-glass {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Thin scrollbar for sidebar */
+.thin-scrollbar::-webkit-scrollbar       { width: 4px; }
+.thin-scrollbar::-webkit-scrollbar-track  { background: transparent; }
+.thin-scrollbar::-webkit-scrollbar-thumb  { background: var(--color-accent); border-radius: 9999px; }
+
+/* =========================================================
+   Swiper Overrides
+   ========================================================= */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-accent) !important;
+  background: rgba(10, 22, 40, 0.7);
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+}
+.swiper-pagination-bullet {
+  background: var(--color-accent) !important;
+  opacity: 0.4;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   Accordion (CSS-only transition for FAQ)
+   ========================================================= */
+.accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.accordion-body.open {
+  grid-template-rows: 1fr;
+}
+.accordion-body > div {
+  overflow: hidden;
+}
+
+/* --- Flip Card Styles --- */
+.perspective-1000 { perspective: 1000px; }
+
+.flip-card-inner {
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease-in-out;
+  transform-style: preserve-3d;
+  border-radius: 1.5rem; 
+}
+
+.is-flipped { 
+  transform: rotateY(180deg);
+  box-shadow: 0 0 20px rgba(124, 161, 211, 0.7); 
+}
+
+.flip-front, .flip-back {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.flip-back { transform: rotateY(180deg); }
+
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 30px !important;
+}
+
+.swiper-pagination-bullet { 
+  background: white !important; 
+  opacity: 0.3 !important; 
+  width: 10px; 
+  height: 10px; 
+}
+
+.swiper-pagination-bullet-active { 
+  background: #7CA1D3 !important; 
+  opacity: 1 !important; 
+  transform: scale(1.2); 
+}
