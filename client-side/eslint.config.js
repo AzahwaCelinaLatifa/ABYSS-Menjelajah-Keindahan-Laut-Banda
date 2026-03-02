@@ -23,7 +23,9 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // PERBAIKAN DI SINI:
+      // Menambahkan 'motion' agar tidak dianggap error jika diimport tapi tidak dipanggil langsung sebagai fungsi
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]|motion' }],
     },
   },
 ])

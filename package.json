@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "framer-motion": "^12.34.2"
+    "sharp": "^0.34.5"
   }
 }

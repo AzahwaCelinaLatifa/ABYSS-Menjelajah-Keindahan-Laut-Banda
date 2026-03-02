@@ -202,12 +202,6 @@ export default function Flora() {
   const itemsPerPage = isMobile ? 1 : 4
   const totalPages = Math.ceil(floraData.length / itemsPerPage)
 
-  useEffect(() => {
-    if (page >= totalPages && totalPages > 0) {
-      setPage(0)
-    }
-  }, [totalPages])
-
   const visibleItems = floraData.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
 
   const prevPage = () => setPage(p => (p === 0 ? totalPages - 1 : p - 1))

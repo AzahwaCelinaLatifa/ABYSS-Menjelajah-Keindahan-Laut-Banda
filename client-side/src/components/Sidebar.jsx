@@ -144,7 +144,7 @@ export default function Sidebar({ open, setOpen }) {
         className="fixed inset-y-0 right-0 w-80 z-[90] bg-[#001123] border border-white shadow-2xl thin-scrollbar overflow-y-auto overscroll-contain"
       >
         <div className="p-6">
-          <div className="flex items-center justify-between mt-12 mb-6 border-b border-white/10 pb-3">
+          <div className="flex items-center justify-between mt-4 mb-6 border-b border-white/10 pb-3">
             <h5 className="text-lg font-bold text-white">Berita Terkini</h5>
             <button 
               onClick={() => setOpen(false)} 

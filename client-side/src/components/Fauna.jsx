@@ -211,12 +211,6 @@ export default function Fauna() {
   const itemsPerPage = isMobile ? 1 : 4
   const totalPages = Math.ceil(faunaData.length / itemsPerPage)
 
-  useEffect(() => {
-    if (page >= totalPages && totalPages > 0) {
-      setPage(0)
-    }
-  }, [totalPages])
-
   const visibleItems = faunaData.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
 
   const prevPage = () => setPage(p => (p === 0 ? totalPages - 1 : p - 1))
