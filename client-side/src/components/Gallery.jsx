@@ -10,18 +10,18 @@ import 'swiper/css/pagination'
 
 
 // Import gambar galeri (TIDAK BERUBAH)
-import menyelam from '../assets/galeri/Menyelam (Scuba Diving).svg'
-import gunungApi from '../assets/galeri/Gunung Api Banda.svg'
-import lumbaLumba from '../assets/galeri/Tur Lumba-Lumba.svg'
-import benteng from '../assets/galeri/Benteng Belgica.svg'
-import bungHatta from '../assets/galeri/Rumah Pengasingan Bung Hatta.svg'
-import pulauHatta from '../assets/galeri/Pulau Hatta.svg'
-import gerejaT from '../assets/galeri/Gereja Tua Banda Neira.svg'
-import istanaMini from '../assets/galeri/Istana Mini.svg'
-import lavaFlow from '../assets/galeri/Lava Flow.svg'
-import parigi from '../assets/galeri/Monumen Parigi Rante.svg'
-import perkebun from '../assets/galeri/Perkebunan Pala.svg'
-import pulauRun from '../assets/galeri/Pulau Run.svg'
+import menyelam from '../assets/galeri/Menyelam (Scuba Diving).webp'
+import gunungApi from '../assets/galeri/Gunung Api Banda.webp'
+import lumbaLumba from '../assets/galeri/Tur Lumba-Lumba.webp'
+import benteng from '../assets/galeri/Benteng Belgica.webp'
+import bungHatta from '../assets/galeri/Rumah Pengasingan Bung Hatta.webp'
+import pulauHatta from '../assets/galeri/Pulau Hatta.webp'
+import gerejaT from '../assets/galeri/Gereja Tua Banda Neira.webp'
+import istanaMini from '../assets/galeri/Istana Mini.webp'
+import lavaFlow from '../assets/galeri/Lava Flow.webp'
+import parigi from '../assets/galeri/Monumen Parigi Rante.webp'
+import perkebun from '../assets/galeri/Perkebunan Pala.webp'
+import pulauRun from '../assets/galeri/Pulau Run.webp'
 
 const galeriItems = [
   { img: menyelam, title: 'Menyelam (Scuba Diving)', desc: 'Menjelajahi keindahan bawah laut Banda yang jernih dengan jarak pandang yang luar biasa. Kamu bisa menemukan terumbu karang purba dan ribuan spesies ikan tropis di situs penyelaman kelas dunia ini.' },

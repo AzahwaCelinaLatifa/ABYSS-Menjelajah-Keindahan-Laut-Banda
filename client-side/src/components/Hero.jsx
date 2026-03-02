@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
-import backgroundHeader from '../assets/background-header.svg'
-import ikanPari from '../assets/Ikan Pari-header.svg'
+import backgroundHeader from '../assets/background-header.webp'
+import ikanPari from '../assets/Ikan Pari-header.webp'
 
 // 1. Siapkan Varian Animasi untuk Container (Pembungkus)
 const containerVariants = {

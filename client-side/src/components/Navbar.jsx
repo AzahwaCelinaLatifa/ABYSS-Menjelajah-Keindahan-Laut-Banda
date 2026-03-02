@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import logoSvg from '../assets/logo.svg'
+import logoSvg from '../assets/logo.webp'
 
 const navLinks = [
   { href: '#beranda', label: 'Beranda' },

@@ -1,6 +1,6 @@
 import React from 'react'
-import circleSvg from '../assets/circle.svg'
-import ikanKecil from '../assets/ikan kecil.svg'
+import circleSvg from '../assets/circle.webp'
+import ikanKecil from '../assets/ikan kecil.webp'
 
 export default function OceanBackground() {
   // Efek bayangan yang jauh lebih tipis dan halus agar tidak mencolok

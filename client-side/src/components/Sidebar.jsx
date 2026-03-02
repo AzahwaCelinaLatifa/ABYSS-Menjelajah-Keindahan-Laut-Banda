@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-import toggleSvg from '../assets/toggle-button-sidebar.svg'
-import berita1 from '../assets/berita/Berita1.svg'
-import berita2 from '../assets/berita/Berita 2.svg'
-import berita3 from '../assets/berita/Berita3.svg'
+import toggleSvg from '../assets/toggle-button-sidebar.webp'
+import berita1 from '../assets/berita/Berita1.webp'
+import berita2 from '../assets/berita/Berita 2.webp'
+import berita3 from '../assets/berita/Berita3.webp'
 
 const newsItems = [
   {
