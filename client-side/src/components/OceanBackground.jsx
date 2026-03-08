@@ -3,28 +3,31 @@ import circleSvg from '../assets/circle.webp'
 import ikanKecil from '../assets/ikan kecil.webp'
 
 export default function OceanBackground() {
-  // Efek bayangan yang jauh lebih tipis dan halus agar tidak mencolok
-  const subtleGlow = "drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]";
+  const base = "absolute mix-blend-screen pointer-events-none select-none opacity-0";
 
   return (
-    <div className="fixed inset-0 z-[0] overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-[#07101E]">
       
-      {/* === GELEMBUNG AIR === */}
-      <img src={circleSvg} className={`absolute left-[10%] -bottom-20 w-16 opacity-0 animate-bubble delay-1 motion-reduce:hidden ${subtleGlow}`} alt="" />
-      <img src={circleSvg} className={`absolute left-[35%] -bottom-20 w-24 opacity-0 animate-bubble delay-2 motion-reduce:hidden ${subtleGlow}`} alt="" />
-      <img src={circleSvg} className={`absolute left-[50%] -bottom-20 w-10 opacity-0 animate-bubble delay-2 motion-reduce:hidden ${subtleGlow}`} alt="" />
-      <img src={circleSvg} className={`absolute left-[70%] -bottom-20 w-12 opacity-0 animate-bubble delay-3 motion-reduce:hidden ${subtleGlow}`} alt="" />
-      <img src={circleSvg} className={`absolute left-[85%] -bottom-20 w-32 opacity-0 animate-bubble delay-4 motion-reduce:hidden ${subtleGlow}`} alt="" />
-
-      {/* === IKAN KECIL (Ukuran Sudah Diperkecil) === */}
-      {/* Ikan 1: Kiri ke Kanan (Atas) - Sekarang w-12 */}
-      <img src={ikanKecil} className={`absolute top-[25%] -left-32 w-12 opacity-0 animate-swim-right delay-1 motion-reduce:hidden ${subtleGlow}`} alt="" />
+      {/* === PASUKAN GELEMBUNG (Visibilitas Tinggi) === */}
+      {/* Kiri */}
+      <img src={circleSvg} className={`${base} left-[5%] -bottom-16 w-5 b-visible`} alt="" />
+      <img src={circleSvg} className={`${base} left-[15%] -bottom-16 w-8 b-visible b-delay-2 blur-[1px]`} alt="" />
       
-      {/* Ikan 2: Kanan ke Kiri (Tengah) - Sekarang w-10 */}
-      <img src={ikanKecil} className={`absolute top-[60%] -right-32 w-10 opacity-0 animate-swim-left delay-3 motion-reduce:hidden ${subtleGlow}`} alt="" />
+      {/* Tengah */}
+      <img src={circleSvg} className={`${base} left-[35%] -bottom-16 w-4 b-visible b-delay-1`} alt="" />
+      <img src={circleSvg} className={`${base} left-[50%] -bottom-16 w-10 b-visible b-delay-3 blur-[2px]`} alt="" />
+      <img src={circleSvg} className={`${base} left-[60%] -bottom-16 w-6 b-visible`} alt="" />
+      
+      {/* Kanan */}
+      <img src={circleSvg} className={`${base} left-[80%] -bottom-16 w-9 b-visible b-delay-2 blur-[1px]`} alt="" />
+      <img src={circleSvg} className={`${base} left-[92%] -bottom-16 w-4 b-visible b-delay-1`} alt="" />
+      <img src={circleSvg} className={`${base} left-[20%] -bottom-16 w-6 b-visible b-delay-3 delay-[8s]`} alt="" />
 
-      {/* Ikan 3: Kiri ke Kanan (Bawah, Lebih Lambat) - Sekarang w-8 */}
-      <img src={ikanKecil} className={`absolute top-[85%] -left-32 w-8 opacity-0 animate-swim-right delay-4 motion-reduce:hidden ${subtleGlow}`} alt="" />
+      {/* === PASUKAN IKAN (Anti-Mundur) === */}
+      <img src={ikanKecil} className={`${base} top-[25%] w-16 i-fast`} alt="" />
+      <img src={ikanKecil} className={`${base} top-[55%] w-12 i-med`} alt="" />
+      <img src={ikanKecil} className={`${base} top-[85%] w-8 i-slow blur-[1px]`} alt="" />
+
     </div>
   )
 }

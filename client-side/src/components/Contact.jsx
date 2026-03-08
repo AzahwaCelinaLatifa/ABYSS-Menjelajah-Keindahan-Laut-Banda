@@ -18,24 +18,26 @@ export default function Contact() {
     e.preventDefault()
     setSent(true)
     setForm({ name: '', email: '', message: '' })
-    // Toast akan hilang otomatis dalam 5 detik
     setTimeout(() => setSent(false), 5000) 
   }
 
-  // --- Varian animasi untuk item form (masuk dari kanan ke tengah) ---
   const formItemVariants = {
     hidden: { opacity: 0, x: 50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
   }
 
   return (
-    <section id="kontak" className="relative py-24 bg-gradient-to-b from-[#001123]/50  to-[#04070B]/100 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section 
+      id="kontak" 
+      // PERBAIKAN: min-h-screen dan py-6 agar konten benar-benar masuk di satu layar penuh
+      className="relative min-h-screen py-6 flex flex-col justify-center bg-gradient-to-b from-[#001123]/50 to-[#04070B]/100 overflow-hidden"
+    >
+      <div className="max-w-4xl mx-auto px-6 lg:px-8 w-full">
 
         {/* ===== TOP ROW: Judul Form + Form ===== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+        {/* PERBAIKAN: gap-6 dan mb-6 untuk menghemat ruang vertikal */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-center">
           
-          {/* Judul form (Animasi dari kiri ke tengah) */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -43,14 +45,14 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center"
           >
-            <h2 className="text-4xl sm:text-5xl font-medium text-white mb-4">Contact Form</h2>
-            <p className="text-white text-base">Please fill out this form</p>
+            {/* PERBAIKAN: text-2xl di desktop agar pas */}
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white mb-1">Contact Form</h2>
+            <p className="text-white/70 text-xs">Please fill out this form</p>
           </motion.div>
 
-          {/* Form (Animasi dari kanan ke tengah & berurutan) */}
           <motion.form 
             onSubmit={handleSubmit} 
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-2"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -58,12 +60,12 @@ export default function Contact() {
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
-                transition: { staggerChildren: 0.15 } // Jarak waktu muncul antar kotak
+                transition: { staggerChildren: 0.1 } 
               }
             }}
           >
             <motion.div variants={formItemVariants}>
-              <label htmlFor="name" className="block text-lg text-white mb-1">Name</label>
+              <label htmlFor="name" className="block text-[10px] uppercase tracking-wider text-white/50 mb-1">Name</label>
               <input
                 id="name"
                 name="name"
@@ -72,50 +74,51 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Enter your name"
                 required
-                className="w-full bg-transparent border border-white focus:border-accent text-white placeholder-white rounded-full px-4 py-3 text-sm outline-none transition-colors"
+                className="w-full bg-transparent border border-white/40 focus:border-white text-white placeholder-white/20 rounded-full px-4 py-2 text-xs outline-none transition-all"
               />
             </motion.div>
             
             <motion.div variants={formItemVariants}>
-              <label htmlFor="email" className="block text-lg text-white mb-1">Email</label>
+              <label htmlFor="email" className="block text-[10px] uppercase tracking-wider text-white/50 mb-1">Email</label>
               <input
                 id="email"
                 name="email"
                 type="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="Enter your email address"
+                placeholder="Enter your email"
                 required
-                className="w-full bg-transparent border border-white focus:border-accent text-white placeholder-white rounded-full px-4 py-3 text-sm outline-none transition-colors"
+                className="w-full bg-transparent border border-white/40 focus:border-white text-white placeholder-white/20 rounded-full px-4 py-2 text-xs outline-none transition-all"
               />
             </motion.div>
             
             <motion.div variants={formItemVariants}>
-              <label htmlFor="message" className="block text-lg text-white mb-1">Message</label>
+              <label htmlFor="message" className="block text-[10px] uppercase tracking-wider text-white/50 mb-1">Message</label>
               <textarea
                 id="message"
                 name="message"
-                rows={3}
+                rows={2} 
                 value={form.message}
                 onChange={handleChange}
-                placeholder="Write your message here"
+                placeholder="Write your message"
                 required
-                className="w-full bg-transparent border border-white focus:border-accent text-white placeholder-white rounded-4xl px-4 py-3 text-sm outline-none transition-colors resize-none"
+                className="w-full bg-transparent border border-white/40 focus:border-white text-white placeholder-white/20 rounded-xl px-4 py-2 text-xs outline-none transition-all resize-none"
               />
             </motion.div>
             
             <motion.button
               variants={formItemVariants}
               type="submit"
-              className="self-start inline-flex items-center gap-2 bg-dark border border-white hover:bg-light-blue hover:text-white text-light-blue font-semibold px-8 py-3 rounded-full transition-colors duration-300"
+              // IDENTITAS ASLI: Warna dan hover tetap dijaga 100%
+              className="self-start inline-flex items-center gap-2 bg-dark border border-white hover:bg-light-blue hover:text-white text-light-blue font-semibold px-6 py-2 rounded-full transition-colors duration-300 text-[10px] tracking-widest"
             >
               SUBMIT
             </motion.button>
           </motion.form>
         </div>
 
-        {/* Divider */}
-        <div className="mb-16" />
+        {/* Divider Ramping */}
+        <div className="w-full h-[1px] bg-white/10 mb-6" />
 
         {/* ===== BOTTOM ROW: Judul Info + Info ===== */}
         <motion.div
@@ -123,22 +126,22 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
         >
           <div className="flex flex-col justify-center">
-            <h2 className="text-4xl sm:text-5xl font-medium text-white mb-4">Contact<br />Information</h2>
-            <p className="text-white text-base">Please feel free to contact us</p>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white mb-1 leading-tight">Contact<br />Information</h2>
+            <p className="text-white/70 text-xs">Please feel free to contact us</p>
           </div>
 
-          <div className="flex flex-col gap-6 justify-center">
-            {contactInfo.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon size={18} className="text-accent"/>
+          <div className="flex flex-col gap-3 justify-center">
+            {contactInfo.map(({ icon: IconComponent, label, value }) => (
+              <div key={label} className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
+                  <IconComponent size={12} className="text-white"/>
                 </div>
                 <div>
-                  <h6 className="text-white font-semibold text-sm">{label}</h6>
-                  <p className="text-white/60 text-sm">{value}</p>
+                  <h6 className="text-white font-semibold text-[10px] uppercase tracking-tight">{label}</h6>
+                  <p className="text-white/50 text-[11px]">{value}</p>
                 </div>
               </div>
             ))}
@@ -147,37 +150,20 @@ export default function Contact() {
 
       </div>
 
-      {/* ===== TOAST NOTIFICATION BIOLUMINESCENT OCEAN VIBE ===== */}
+      {/* ===== TOAST (ASLI) ===== */}
       <AnimatePresence>
         {sent && (
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-            // Warnanya dinaikkan sedikit lebih cerah dari background gelap, ditambah bayangan glow biru/cyan
-            className="fixed bottom-6 right-6 z-[100] w-80 bg-gradient-to-br from-[#061b36]/95 to-[#022c4d]/95 backdrop-blur-md border border-light-blue-400/40 rounded-2xl shadow-[0_0_25px_rgba(34,211,238,0.25)] overflow-hidden"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="fixed bottom-4 right-4 z-[100] w-64 bg-[#061b36] border border-white/20 rounded-xl shadow-2xl p-3"
           >
-            {/* Toast Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-blue-400/20 bg-blue-400/10">
-              <div className="flex items-center gap-2">
-                <CheckCircle size={18} className="text-light-blue-400" />
-                <strong className="text-light-blue-50 text-sm font-semibold tracking-wide">Success</strong>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-light-blue-100/50 text-xs font-medium">Just now</span>
-                <button 
-                  onClick={() => setSent(false)} 
-                  className="text-light-blue-100/50 hover:text-light-blue-300 hover:bg-light-blue-400/10 p-1 rounded-md transition-all"
-                  aria-label="Close"
-                >
-                  <X size={16} />
-                </button>
-              </div>
+            <div className="flex items-center gap-2 mb-1">
+              <CheckCircle size={14} className="text-cyan-400" />
+              <span className="text-white text-xs font-bold">Sent!</span>
             </div>
-            {/* Toast Body */}
-            <div className="px-4 py-4">
-              <p className="text-light-blue-50/90 text-sm">Pesan berhasil dikirim! Kami akan segera merespons.</p>
-            </div>
+            <p className="text-white/70 text-[10px]">Your message has been delivered.</p>
           </motion.div>
         )}
       </AnimatePresence>
