@@ -8,6 +8,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
+// Pastikan import komponen Skeleton-nya
+import ImageWithSkeleton from './ImageWithSkeleton'
 
 // Import gambar galeri (TIDAK BERUBAH)
 import menyelam from '../assets/galeri/Menyelam (Scuba Diving).webp'
@@ -42,7 +44,6 @@ export default function Gallery() {
   const [flippedIndex, setFlippedIndex] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
 
-  // Cek ukuran layar
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768)
     handleResize()
@@ -50,9 +51,7 @@ export default function Gallery() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // === LOGIKA AUTO CLOSE (BALIK KARTU) ===
   useEffect(() => {
-    // 1. Tutup (balik kartu) kalau user klik di luar area Galeri
     const handleClickOutside = (e) => {
       const galeriSection = document.getElementById('galeri');
       if (galeriSection && !galeriSection.contains(e.target)) {
@@ -60,13 +59,10 @@ export default function Gallery() {
       }
     };
 
-    // 2. Tutup kalau user scroll menjauh dan area Galeri hilang dari layar
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            setFlippedIndex(null);
-          }
+          if (!entry.isIntersecting) setFlippedIndex(null);
         });
       },
       { threshold: 0 }
@@ -86,34 +82,31 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="galeri" className="relative py-20 bg-gradient-to-b from-[#000]/70 to-[#010F1F]/50 overflow-hidden">
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <span className="inline-block border border-white/30 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-xl">
+    <section id="galeri" className="relative min-h-screen py-6 flex flex-col justify-center bg-transparent overflow-hidden">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10 w-full">
+        
+        <div className="text-center mb-6 lg:mb-8">
+          <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             Galeri
           </span>
         </div>
 
-        <div className="relative group px-2 sm:px-12">
+        <div className="relative group px-0 md:px-8">
           <Swiper
             key={isMobile ? 'mobile' : 'desktop'}
             modules={[Navigation, Pagination]}
-            spaceBetween={30}
+            spaceBetween={isMobile ? 16 : 24}
             slidesPerView={1}
             loop={true}
             onSlideChange={() => setFlippedIndex(null)}
             navigation={{ nextEl: '.next-g', prevEl: '.prev-g' }}
-            pagination={{ 
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            className="w-full"
+            pagination={{ clickable: true, dynamicBullets: true }}
+            className="w-full pb-10" 
           >
             {isMobile ? (
               galeriItems.map((item, idx) => (
-                <SwiperSlide key={`mob-${idx}`} className="pb-12">
-                  <div className="px-4"> 
+                <SwiperSlide key={`mob-${idx}`}>
+                  <div className="max-w-[280px] mx-auto px-2"> 
                     <GalleryCard 
                       item={item} 
                       index={`mob-${idx}`} 
@@ -127,8 +120,8 @@ export default function Gallery() {
               ))
             ) : (
               [0, 1].map((pageIdx) => (
-                <SwiperSlide key={`desk-${pageIdx}`} className="pb-12">
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <SwiperSlide key={`desk-${pageIdx}`}>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                     {galeriItems.slice(pageIdx * 6, (pageIdx + 1) * 6).map((item, i) => (
                       <GalleryCard 
                         key={i} 
@@ -146,15 +139,15 @@ export default function Gallery() {
             )}
           </Swiper>
 
-          <button className="prev-g absolute left-0 sm:-left-4 top-[45%] -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/20 bg-black/50 text-white flex items-center justify-center hover:bg-[#7CA1D3] transition-all">
-            <ChevronLeft size={24} />
+          {/* Tombol Navigasi Swiper */}
+          <button className="prev-g absolute left-0 md:-left-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all">
+            <ChevronLeft size={20} />
           </button>
-          <button className="next-g absolute right-0 sm:-right-4 top-[45%] -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/20 bg-black/50 text-white flex items-center justify-center hover:bg-[#7CA1D3] transition-all">
-            <ChevronRight size={24} />
+          <button className="next-g absolute right-0 md:-right-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all">
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>
-
     </section>
   )
 }
@@ -163,31 +156,34 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
   const isFlipped = flippedIndex === index;
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
-      className={`relative w-full perspective-1000 cursor-pointer ${isMobile ? 'aspect-[4/5]' : 'h-64 lg:h-72'}`}
+      className={`relative w-full perspective-1000 cursor-pointer ${isMobile ? 'aspect-[4/5]' : 'h-44 lg:h-[200px]'}`}
       onClick={() => setFlippedIndex(isFlipped ? null : index)}
     >
-      <div className={`flip-card-inner ${isFlipped ? 'is-flipped' : ''}`}>
-        <div className="flip-front border border-white/10 bg-zinc-900 shadow-2xl">
-          <img 
-            src={item.img} 
-            className="w-full h-full object-cover" 
+      <div className={`flip-card-inner w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'is-flipped rotate-y-180' : ''}`}>
+        
+        {/* SISI DEPAN */}
+        <div className="flip-front absolute inset-0 backface-hidden border border-white/10 shadow-lg rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-[#0B1420]">
+          {/* Implementasi ImageWithSkeleton */}
+          <ImageWithSkeleton
+            key={item.img}
+            src={item.img}
             alt={item.title}
-            style={{ 
-              imageRendering: 'high-quality',
-              WebkitBackfaceVisibility: 'hidden'
-            }} 
+            wrapperClassName="w-full h-full"
+            imgClassName="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#000]/70 via-[#010F1F]/10 to-[#010F1F]/50 flex items-end p-6">
-            <p className="text-white font-bold text-lg leading-tight tracking-wide">{item.title}</p>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-4 lg:p-5 z-10 pointer-events-none">
+            <p className="text-white font-bold text-sm lg:text-base leading-tight tracking-wide">{item.title}</p>
           </div>
         </div>
-        <div className="flip-back bg-[#010F1F] border border-[#7CA1D3]/40 p-6 flex flex-col justify-center items-center text-center">
-          <h4 className="text-[#7CA1D3] font-black mb-4 uppercase text-sm tracking-widest">{item.title}</h4>
-          <p className="text-white/90 text-[12px] leading-relaxed font-medium">
+
+        {/* SISI BELAKANG */}
+        <div className="flip-back absolute inset-0 backface-hidden rotate-y-180 bg-[#0A1626] border border-[#7CA1D3]/60 p-4 lg:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden shadow-lg">
+          <h4 className="text-[#7CA1D3] font-black mb-2 lg:mb-3 uppercase text-[11px] lg:text-xs tracking-widest">{item.title}</h4>
+          <p className="text-white/80 text-[10px] lg:text-[11px] leading-snug font-medium line-clamp-5 lg:line-clamp-none">
             {item.desc}
           </p>
         </div>
