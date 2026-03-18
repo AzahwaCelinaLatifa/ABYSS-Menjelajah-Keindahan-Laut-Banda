@@ -15,13 +15,14 @@ import OceanBackground from './components/OceanBackground'
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  // [PERBAIKAN] Sesuaikan dengan w-64 di Sidebar (64 * 4px = 256px)
+  // Sesuaikan dengan w-64 di Sidebar (64 * 4px = 256px)
   const contentWidth = isSidebarOpen ? "calc(100% - 256px)" : "100%"
 
   const transitionConfig = { type: "spring", bounce: 0, duration: 0.4 }
 
   return (
-    <div className="relative min-h-screen bg-[#07101E] text-white font-sans overflow-x-hidden">
+    // PERBAIKAN 1: Pastikan root div benar-benar mengunci width layaknya body
+    <div className="relative min-h-screen w-full max-w-[100vw] bg-[#07101E] text-white font-sans overflow-x-hidden">
       
       <div className="fixed inset-0 z-0 pointer-events-none">
         <OceanBackground />
@@ -30,7 +31,8 @@ export default function App() {
       <motion.div
         animate={{ width: contentWidth }}
         transition={transitionConfig}
-        className="fixed top-0 left-0 z-[100]"
+        // PERBAIKAN 2: Batasi max-width navbar agar tidak tembus ke kanan saat mode desktop
+        className="fixed top-0 left-0 z-[100] max-w-[100vw]"
       >
         <Navbar />
       </motion.div>
@@ -41,7 +43,8 @@ export default function App() {
         id="main-content"
         animate={{ width: contentWidth }}
         transition={transitionConfig}
-        className="relative z-10"
+        // PERBAIKAN 3: Beri w-full dan auto margin, serta batas maksimal di layar ultra-lebar
+        className="relative z-10 w-full mx-auto 2xl:max-w-[1536px] overflow-x-hidden"
       >
         <main>
           <Hero />

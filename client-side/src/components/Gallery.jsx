@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { motion } from 'framer-motion' 
+import { motion } from 'framer-motion'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-// Pastikan import komponen Skeleton-nya
+// IMPORT SKELETON (Ini yang tadi ketinggalan)
 import ImageWithSkeleton from './ImageWithSkeleton'
 
-// Import gambar galeri (TIDAK BERUBAH)
+// Import gambar galeri
 import menyelam from '../assets/galeri/Menyelam (Scuba Diving).webp'
 import gunungApi from '../assets/galeri/Gunung Api Banda.webp'
 import lumbaLumba from '../assets/galeri/Tur Lumba-Lumba.webp'
@@ -106,14 +106,14 @@ export default function Gallery() {
             {isMobile ? (
               galeriItems.map((item, idx) => (
                 <SwiperSlide key={`mob-${idx}`}>
-                  <div className="max-w-[280px] mx-auto px-2"> 
-                    <GalleryCard 
-                      item={item} 
-                      index={`mob-${idx}`} 
-                      delayIndex={0} 
-                      flippedIndex={flippedIndex} 
-                      setFlippedIndex={setFlippedIndex} 
-                      isMobile={true} 
+                  <div className="max-w-[280px] mx-auto px-2">
+                    <GalleryCard
+                      item={item}
+                      index={`mob-${idx}`}
+                      delayIndex={0}
+                      flippedIndex={flippedIndex}
+                      setFlippedIndex={setFlippedIndex}
+                      isMobile={true}
                     />
                   </div>
                 </SwiperSlide>
@@ -123,14 +123,14 @@ export default function Gallery() {
                 <SwiperSlide key={`desk-${pageIdx}`}>
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                     {galeriItems.slice(pageIdx * 6, (pageIdx + 1) * 6).map((item, i) => (
-                      <GalleryCard 
-                        key={i} 
-                        item={item} 
-                        index={`desk-${pageIdx}-${i}`} 
+                      <GalleryCard
+                        key={i}
+                        item={item}
+                        index={`desk-${pageIdx}-${i}`}
                         delayIndex={i}
-                        flippedIndex={flippedIndex} 
-                        setFlippedIndex={setFlippedIndex} 
-                        isMobile={false} 
+                        flippedIndex={flippedIndex}
+                        setFlippedIndex={setFlippedIndex}
+                        isMobile={false}
                       />
                     ))}
                   </div>
@@ -139,7 +139,6 @@ export default function Gallery() {
             )}
           </Swiper>
 
-          {/* Tombol Navigasi Swiper */}
           <button className="prev-g absolute left-0 md:-left-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all">
             <ChevronLeft size={20} />
           </button>
@@ -155,21 +154,23 @@ export default function Gallery() {
 function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, delayIndex = 0 }) {
   const isFlipped = flippedIndex === index;
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
       className={`relative w-full perspective-1000 cursor-pointer ${isMobile ? 'aspect-[4/5]' : 'h-44 lg:h-[200px]'}`}
-      onClick={() => setFlippedIndex(isFlipped ? null : index)}
+      onClick={(e) => {
+        e.stopPropagation(); // Biar nggak bentrok sama handleClickOutside
+        setFlippedIndex(isFlipped ? null : index);
+      }}
     >
       <div className={`flip-card-inner w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'is-flipped rotate-y-180' : ''}`}>
         
         {/* SISI DEPAN */}
         <div className="flip-front absolute inset-0 backface-hidden border border-white/10 shadow-lg rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-[#0B1420]">
-          {/* Implementasi ImageWithSkeleton */}
+          {/* SKELETON DIGUNAKAN DI SINI */}
           <ImageWithSkeleton
-            key={item.img}
             src={item.img}
             alt={item.title}
             wrapperClassName="w-full h-full"
@@ -181,7 +182,7 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
         </div>
 
         {/* SISI BELAKANG */}
-        <div className="flip-back absolute inset-0 backface-hidden rotate-y-180 bg-[#0A1626] border border-[#7CA1D3]/60 p-4 lg:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden shadow-lg">
+        <div className="flip-back absolute inset-0 backface-hidden rotate-y-180 bg-[#0A1626] border border-[#7CA1D3]/60 p-4 lg:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden">
           <h4 className="text-[#7CA1D3] font-black mb-2 lg:mb-3 uppercase text-[11px] lg:text-xs tracking-widest">{item.title}</h4>
           <p className="text-white/80 text-[10px] lg:text-[11px] leading-snug font-medium line-clamp-5 lg:line-clamp-none">
             {item.desc}
