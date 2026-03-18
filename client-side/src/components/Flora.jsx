@@ -97,6 +97,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
           className="relative bg-[#0B1420] border border-[#7CA1D3]/40 rounded-[1.5rem] max-w-3xl w-[92%] sm:w-full flex flex-col shadow-2xl h-[65vh] sm:h-[70vh] max-h-[600px] overflow-hidden"
           onClick={e => e.stopPropagation()}
         >
+          {/* Tombol Close */}
           <button
             onClick={onClose}
             className="absolute top-4 right-4 z-[60] bg-[#7CA1D3]/10 border border-[#7CA1D3]/50 text-[#7CA1D3] hover:bg-[#7CA1D3]/30 rounded-full p-2 transition-all shadow-md"
@@ -104,6 +105,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
             <X size={20} strokeWidth={2.5} />
           </button>
 
+          {/* Bagian Atas: Judul & Foto */}
           <div className="flex-none pt-12 sm:pt-8 px-4 sm:px-12 pb-4 flex flex-col items-center relative z-10 bg-[#0B1420]">
             <h3 className="text-lg sm:text-2xl font-bold text-white mb-4 text-center px-4 sm:px-8 leading-tight w-full">
               {item.name}
@@ -118,6 +120,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
               </button>
 
               <ImageWithSkeleton 
+                key={item.img}
                 src={item.img} 
                 alt={item.name} 
                 wrapperClassName="w-40 h-40 sm:w-auto sm:h-48 aspect-square sm:aspect-video rounded-xl shadow-lg border border-white/10"
@@ -133,6 +136,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
             </div>
           </div>
 
+          {/* Bagian Bawah: Deskripsi */}
           <div 
             className="flex-1 min-h-0 overflow-y-auto px-6 sm:px-12 pt-2 pb-10 relative"
             style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(124, 161, 211, 0.5) transparent' }}
@@ -145,13 +149,15 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
           <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-[#0B1420] to-transparent pointer-events-none z-10"></div>
         </motion.div>
 
+        {/* Pagination Modal */}
         <div className="mt-5 z-10" onClick={e => e.stopPropagation()}>
-          <div className="flex items-center gap-2 px-6 py-2 border border-[#7CA1D3]/50 rounded-[2rem] bg-[#0B1420]/80 backdrop-blur-sm text-sm sm:text-base font-bold shadow-md">
+          <div className="flex items-center gap-2 px-6 py-2 border border-[#7CA1D3]/50 rounded-[2rem] bg-[#0B1420]/80 backdrop-blur-sm text-sm sm:text-base font-bold shadow-md cursor-default select-none pointer-events-none">
             <span className="text-white">{selectedIndex + 1}</span>
             <span className="text-[#7CA1D3] font-medium">/</span>
             <span className="text-white/70">{floraData.length}</span>
           </div>
         </div>
+
       </motion.div>
     </AnimatePresence>
   )
@@ -175,27 +181,31 @@ const cardVariants = {
 export default function Flora() {
   const [page, setPage] = useState(0)
   const [modalIndex, setModalIndex] = useState(null)
-  const [isMobile, setIsMobile] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  
+  const [screenSize, setScreenSize] = useState('desktop')
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 1024)
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width < 640) setScreenSize('mobile') // Smartphone
+      else if (width < 1024) setScreenSize('tablet') // Tablet
+      else setScreenSize('desktop') // Desktop
+    }
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const itemsPerPage = isMobile ? 1 : 4
+  // Logika pembagian jumlah card
+  const itemsPerPage = screenSize === 'mobile' ? 1 : screenSize === 'tablet' ? 2 : 4
   const totalPages = Math.ceil(floraData.length / itemsPerPage)
-  
-  // Solusi aman agar layar tidak blank saat di-resize dan ESLint tidak ngomel
+
   useEffect(() => {
     if (page >= totalPages && totalPages > 0) {
-      setTimeout(() => {
-        setPage(0);
-      }, 0);
+      setTimeout(() => setPage(0), 0)
     }
-  }, [totalPages, page]);
+  }, [totalPages, page])
 
   const visibleItems = floraData.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
 
@@ -218,6 +228,7 @@ export default function Flora() {
     <section id="flora" className="relative min-h-screen py-6 flex flex-col justify-center bg-transparent overflow-hidden">
       <div className="relative z-[1] max-w-5xl mx-auto px-6 md:px-12 w-full">
         
+        {/* Header Animasi */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -232,7 +243,10 @@ export default function Flora() {
           <motion.h2 
             variants={{
               hidden: { opacity: 1 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.3 } }
+              visible: { 
+                opacity: 1, 
+                transition: { staggerChildren: 0.08, delayChildren: 0.3 } 
+              }
             }}
             initial="hidden"
             whileInView="visible"
@@ -267,8 +281,9 @@ export default function Flora() {
           </motion.h2>
         </motion.div>
 
+        {/* Grid Container */}
         <div 
-          className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-5 justify-items-center"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 justify-items-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -277,22 +292,23 @@ export default function Flora() {
 
             return (
               <motion.div
-                key={`${page}-${i}`}
+                key={`${screenSize}-${page}-${i}`}
                 custom={i}
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="w-full max-w-[280px] lg:max-w-none"
+                className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-none flex flex-col"
               >
                 <div
                   className="relative rounded-[1.2rem] overflow-hidden cursor-pointer group transition-transform duration-500 hover:scale-[1.03] shadow-lg border border-white/5 bg-[#0B1420]"
                   onClick={() => setModalIndex(realIndex)}
                 >
                   <ImageWithSkeleton
+                    key={item.img}
                     src={item.img}
                     alt={item.name}
-                    wrapperClassName="w-full h-[240px] lg:h-[200px]"
+                    wrapperClassName="w-full h-[220px] sm:h-[180px] lg:h-[180px] xl:h-[200px]"
                     imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B1420] via-[#0B1420]/70 to-transparent p-4 lg:p-3 z-20">
@@ -307,20 +323,21 @@ export default function Flora() {
           })}
         </div>
 
-        <div className="flex items-center justify-center gap-4 mt-8 lg:mt-10">
+        {/* Pagination */}
+        <div className="flex items-center justify-center gap-4 mt-4 lg:mt-6">
           <button onClick={prevPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/50 bg-transparent hover:bg-[#7CA1D3]/10 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
             <ChevronLeft size={20} />
           </button>
 
-          <div className="flex items-center px-3 py-1.5 border border-[#7CA1D3]/50 rounded-[2rem] bg-[#0B1420]/50 backdrop-blur-sm">
-            {isMobile ? (
-              <div className="px-4 py-1.5 bg-[#7CA1D3] text-white rounded-full text-sm font-bold shadow-md flex items-center gap-2">
-                <span>{page + 1}</span>
-                <span className="text-white/60 font-medium">/</span>
-                <span className="text-white/90">{totalPages}</span>
+          <div className="flex items-center px-2 py-1.5 border border-[#7CA1D3]/50 rounded-[2rem] bg-[#0B1420]/50 backdrop-blur-sm">
+            {screenSize === 'mobile' || screenSize === 'tablet' ? (
+              <div className="px-3 py-1 flex items-center gap-2 select-none cursor-default text-sm">
+                <span className="text-white font-bold">{page + 1}</span>
+                <span className="text-[#7CA1D3] font-medium">/</span>
+                <span className="text-white/70 font-bold">{totalPages}</span>
               </div>
             ) : (
-              <div className="flex gap-1.5">
+              <div className="flex gap-1.5 px-1">
                 {Array.from({ length: totalPages }).map((_, i) => (
                   <button
                     key={i}

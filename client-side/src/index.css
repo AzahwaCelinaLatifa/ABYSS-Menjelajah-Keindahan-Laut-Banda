@@ -43,3 +43,10 @@
 .i-fast { animation: jalanKanan 22s linear infinite; }
 .i-med  { animation: jalanKiri 28s linear infinite 6s; }
 .i-slow { animation: jalanKanan 35s linear infinite 12s; }
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
