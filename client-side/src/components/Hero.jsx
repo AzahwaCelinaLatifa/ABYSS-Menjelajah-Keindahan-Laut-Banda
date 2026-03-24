@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section
       id="beranda"
-      className="relative min-h-screen flex items-center text-white overflow-hidden"
+      className="relative pt-32 pb-24 md:pt-40 md:pb-32 lg:min-h-screen flex items-center text-white overflow-hidden"
       style={{
         background: `
           radial-gradient(ellipse at center, rgba(10,22,40,0) 0%, rgba(5,15,30,0.7) 70%, rgba(0,0,0,0.85) 100%), 
@@ -31,14 +31,13 @@ export default function Hero() {
         `,
       }}
     >
+      {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,67,137,0.55)]/70 to-[#000000]/70 z-0" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full pt-24 pb-16">
-        
-        {/* GAP dikecilin jadi gap-6 buat HP biar makin rapet */}
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-16 min-h-[calc(100vh-8rem)]">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-16">
 
-          {/* flex-1 diganti jadi w-full lg:flex-1 biar gak maksa belah layar 50:50 di HP */}
+          {/* Teks Hero */}
           <motion.div
             className="w-full lg:flex-1 text-center lg:text-left flex flex-col items-center lg:items-start"
             variants={containerVariants}
@@ -80,30 +79,48 @@ export default function Hero() {
             </motion.p>
           </motion.div>
 
-          {/* Sama di sini, w-full lg:flex-1 biar ngekor teks di atasnya aja */}
+          {/* Gambar Ikan Pari */}
           <motion.div
             className="w-full lg:flex-1 flex justify-center mt-2 lg:mt-0"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
           >
-            <img
+            {/* PERBAIKAN: Menggunakan motion.img untuk membuat efek mengambang (floating/bouncing) terus menerus */}
+            <motion.img
               src={ikanPari}
               alt="Ikan Pari"
-              className="w-full h-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-md lg:max-w-lg animate-float drop-shadow-2xl"
+              animate={{ 
+                y: [-15, 15, -15], // Bergerak naik turun sejauh 15px
+                rotate: [-2, 2, -2] // Rotasi sedikit agar terlihat lebih natural (seperti berenang)
+              }}
+              transition={{ 
+                duration: 6, // Waktu satu siklus penuh (6 detik agar pergerakannya lambat/elegan)
+                repeat: Infinity, // Mengulang terus menerus
+                ease: "easeInOut" 
+              }}
+              className="w-full h-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-md lg:max-w-lg drop-shadow-2xl"
             />
           </motion.div>
 
         </div>
       </div>
 
-      <a
+      {/* Tanda Panah Scroll */}
+      {/* PERBAIKAN: Menggunakan motion.a untuk efek bounce yang konsisten */}
+      <motion.a
         href="#flora"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-accent animate-bounce-y z-10"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#7CA1D3] z-10"
         aria-label="Scroll ke bawah"
+        animate={{ y: [0, 10, 0] }} // Bergerak ke bawah 10px lalu kembali
+        transition={{ 
+          duration: 1.5, // Kecepatan pantulan panah (1.5 detik)
+          repeat: Infinity, // Mengulang terus menerus
+          ease: "easeInOut" 
+        }}
       >
         <ChevronDown size={32} strokeWidth={2.5} />
-      </a>
+      </motion.a>
     </section>
   )
 }

@@ -1,6 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#001123] border-t border-white/10 py-6">
+    // PERBAIKAN: Ditambahkan 'relative z-10' agar posisi footer aman dan tidak tertembus background animasi
+    <footer className="relative z-10 bg-[#001123] border-t border-white/10 py-6">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Teks copyright dibuat lebih kecil (xs) dan sedikit redup agar tidak mencolok */}
