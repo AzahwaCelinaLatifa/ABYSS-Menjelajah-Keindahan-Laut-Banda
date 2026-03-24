@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 import Navbar from './components/Navbar'
@@ -14,47 +14,59 @@ import OceanBackground from './components/OceanBackground'
 
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  
+  // PERBAIKAN: Deteksi mobile di App.jsx agar tahu kapan konten harus digeser
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  )
 
-  // Sesuaikan dengan w-64 di Sidebar (64 * 4px = 256px)
-  const contentWidth = isSidebarOpen ? "calc(100% - 256px)" : "100%"
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const transitionConfig = { type: "spring", bounce: 0, duration: 0.4 }
 
   return (
-    // PERBAIKAN 1: Pastikan root div benar-benar mengunci width layaknya body
-    <div className="relative min-h-screen w-full max-w-[100vw] bg-[#07101E] text-white font-sans overflow-x-hidden">
+    <div className="relative min-h-screen w-full bg-[#07101E] text-white font-sans overflow-x-hidden">
       
       <div className="fixed inset-0 z-0 pointer-events-none">
         <OceanBackground />
       </div>
 
+      {/* PERBAIKAN NAVBAR: Gunakan paddingRight bukan merubah width */}
       <motion.div
-        animate={{ width: contentWidth }}
+        animate={{ paddingRight: isSidebarOpen && !isMobile ? 256 : 0 }}
         transition={transitionConfig}
-        // PERBAIKAN 2: Batasi max-width navbar agar tidak tembus ke kanan saat mode desktop
-        className="fixed top-0 left-0 z-[100] max-w-[100vw]"
+        className="fixed top-0 left-0 right-0 z-[100]"
       >
         <Navbar />
       </motion.div>
 
       <Sidebar open={isSidebarOpen} setOpen={setIsSidebarOpen} />
       
+      {/* PERBAIKAN MAIN CONTENT: 
+          1. Gunakan paddingRight untuk mendorong konten ke kiri (hanya di mode desktop)
+          2. Pisahkan pembungkus 'mx-auto' ke dalam div baru agar centering tidak rusak
+      */}
       <motion.div 
         id="main-content"
-        animate={{ width: contentWidth }}
+        animate={{ paddingRight: isSidebarOpen && !isMobile ? 256 : 0 }}
         transition={transitionConfig}
-        // PERBAIKAN 3: Beri w-full dan auto margin, serta batas maksimal di layar ultra-lebar
-        className="relative z-10 w-full mx-auto 2xl:max-w-[1536px] overflow-x-hidden"
+        className="relative z-10 w-full min-h-screen"
       >
-        <main>
-          <Hero />
-          <InfoSections />
-          <Gallery />
-          <Fakta />
-          <Location />
-          <Contact />
-        </main>
-        <Footer />
+        <div className="w-full mx-auto 2xl:max-w-[1536px] flex flex-col">
+          <main>
+            <Hero />
+            <InfoSections />
+            <Gallery />
+            <Fakta />
+            <Location />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
       </motion.div>
 
     </div>

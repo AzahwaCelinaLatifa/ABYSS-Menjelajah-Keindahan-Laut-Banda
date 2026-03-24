@@ -17,12 +17,13 @@ export default function Fakta() {
   return (
     // PERBAIKAN 1: Hapus overflow-hidden dan warna background solid. 
     // Pakai bg-transparent agar ikan/animasi yang melilingi web bisa lewat bebas di sini.
-    <section id="fakta" className="relative py-8 md:py-10 min-h-screen flex flex-col justify-center bg-transparent w-full z-10">
+    // PERBAIKAN RESPONSIVE: Hapus min-h-screen dan ubah padding ke py-16 md:py-24 agar konsisten
+    <section id="fakta" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent w-full z-10">
       <div className="max-w-4xl mx-auto px-4 md:px-6 w-full flex flex-col items-center">
         
         {/* PERBAIKAN 2: Warna diganti ke Biru Terang (#38BDF8) */}
         <div className="mb-6">
-          <span className="inline-block border border-[#38BDF8] rounded-full px-8 py-2 text-[#38BDF8] font-bold tracking-[0.2em] text-xs uppercase bg-transparent">
+          <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             FAQ
           </span>
         </div>
@@ -40,7 +41,7 @@ export default function Fakta() {
               <div key={i} className="w-full z-20">
                 {/* PERBAIKAN 4: Style dikembalikan sesuai image_aa7be4.png 
                     (Gelap, border biru terang saat dibuka, text tetap putih) */}
-                <div className={`transition-colors duration-300 rounded-[1.5rem] md:rounded-[2rem] border ${isOpen ? 'bg-[#0B1420] border-[#38BDF8]' : 'bg-[#0B1420]/50 border-white/10 hover:border-white/20'}`}>
+                <div className={`transition-colors duration-300 rounded-[1.5rem] md:rounded-[2rem] border ${isOpen ? 'bg-[#0B1420] border-[#7CA1D3]' : 'bg-[#0B1420]/50 border-white/10 hover:border-white/20'}`}>
                   <button
                     onClick={() => toggle(i)}
                     className="w-full flex items-center justify-between gap-4 px-6 md:px-8 py-4 text-left text-white outline-none"
@@ -48,7 +49,7 @@ export default function Fakta() {
                     <span className="text-xs md:text-sm font-semibold tracking-wide">
                       {item.q}
                     </span>
-                    <ChevronDown size={18} className={`flex-shrink-0 text-[#38BDF8] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown size={18} className={`flex-shrink-0 text-[#7CA1D3] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
 
                   <AnimatePresence>

@@ -7,9 +7,8 @@ export default function Location() {
   return (
     <section
       id="lokasi"
-      // PERBAIKAN: Gunakan min-h-screen agar section mengisi satu layar penuh, 
-      // tapi padding dikurangi drastis (py-4) supaya konten tidak terdorong keluar.
-      className="relative min-h-screen py-4 flex flex-col justify-center bg-gradient-to-b from-[#000204] to-[#001123]/50 overflow-hidden"
+      // PERBAIKAN RESPONSIVE: Hapus min-h-screen dan ubah padding ke py-16 md:py-24 agar konsisten
+      className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#000204] to-[#001123]/50 overflow-hidden"
     >
       <div className="max-w-5xl mx-auto px-6 w-full flex flex-col items-center">
         
@@ -23,7 +22,7 @@ export default function Location() {
           className="text-center mb-4"
         >
           {/* Badge: Ukuran diturunkan ke text-sm agar proporsional di monitor */}
-          <span className="inline-flex items-center justify-center border border-white/30 rounded-full px-5 py-1 text-light-blue font-bold tracking-widest uppercase text-sm">
+          <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             Lokasi
           </span>        
           
@@ -95,7 +94,7 @@ export default function Location() {
             target="_blank"
             rel="noopener noreferrer"
             // Style asli tetap dipertahankan
-            className="self-start inline-flex items-center gap-2 bg-dark border border-white hover:bg-light-blue hover:text-white text-light-blue font-semibold px-8 py-2.5 rounded-full transition-colors duration-300 text-sm"
+            className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm hover:bg-[#7CA1D3] hover:text-white hover:border-[#7CA1D3] hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#7CA1D3]/40"
           >
             MORE
           </a>

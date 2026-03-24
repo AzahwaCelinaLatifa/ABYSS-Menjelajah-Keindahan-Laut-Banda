@@ -29,8 +29,8 @@ export default function Contact() {
   return (
     <section 
       id="kontak" 
-      // PERBAIKAN: min-h-screen dan py-6 agar konten benar-benar masuk di satu layar penuh
-      className="relative min-h-screen py-6 flex flex-col justify-center bg-gradient-to-b from-[#001123]/50 to-[#04070B]/100 overflow-hidden"
+      // PERBAIKAN RESPONSIVE: Hapus min-h-screen dan ubah padding ke py-16 md:py-24 agar konsisten
+      className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#001123]/50 to-[#04070B]/100 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-6 lg:px-8 w-full">
 
@@ -110,7 +110,7 @@ export default function Contact() {
               variants={formItemVariants}
               type="submit"
               // IDENTITAS ASLI: Warna dan hover tetap dijaga 100%
-              className="self-start inline-flex items-center gap-2 bg-dark border border-white hover:bg-light-blue hover:text-white text-light-blue font-semibold px-6 py-2 rounded-full transition-colors duration-300 text-[10px] tracking-widest"
+              className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm hover:bg-[#7CA1D3] hover:text-white hover:border-[#7CA1D3] hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#7CA1D3]/40"
             >
               SUBMIT
             </motion.button>

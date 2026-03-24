@@ -236,7 +236,7 @@ export default function Fauna() {
   const headerLine2 = "perairan tropis yang masih alami.".split(" ")
 
   return (
-    <section id="fauna" className="relative min-h-screen py-6 flex flex-col justify-center bg-transparent overflow-hidden">
+    <section id="fauna" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent overflow-hidden">
       <div className="relative z-[1] max-w-5xl mx-auto px-6 md:px-12 w-full">
         
         {/* Header Animasi */}

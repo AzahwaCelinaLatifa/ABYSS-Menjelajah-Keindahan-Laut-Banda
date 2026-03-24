@@ -8,7 +8,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-// IMPORT SKELETON (Ini yang tadi ketinggalan)
+// IMPORT SKELETON
 import ImageWithSkeleton from './ImageWithSkeleton'
 
 // Import gambar galeri
@@ -82,7 +82,7 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="galeri" className="relative min-h-screen py-6 flex flex-col justify-center bg-transparent overflow-hidden">
+    <section id="galeri" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10 w-full">
         
         <div className="text-center mb-6 lg:mb-8">
@@ -91,7 +91,7 @@ export default function Gallery() {
           </span>
         </div>
 
-        <div className="relative group px-0 md:px-8">
+        <div className="relative group mx-auto max-w-[300px] sm:max-w-[400px] md:max-w-full px-0 md:px-8">
           <Swiper
             key={isMobile ? 'mobile' : 'desktop'}
             modules={[Navigation, Pagination]}
@@ -106,7 +106,7 @@ export default function Gallery() {
             {isMobile ? (
               galeriItems.map((item, idx) => (
                 <SwiperSlide key={`mob-${idx}`}>
-                  <div className="max-w-[280px] mx-auto px-2">
+                  <div className="w-full px-1">
                     <GalleryCard
                       item={item}
                       index={`mob-${idx}`}
@@ -139,10 +139,10 @@ export default function Gallery() {
             )}
           </Swiper>
 
-          <button className="prev-g absolute left-0 md:-left-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all">
+          <button className="prev-g absolute -left-3 sm:-left-4 md:-left-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all">
             <ChevronLeft size={20} />
           </button>
-          <button className="next-g absolute right-0 md:-right-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all">
+          <button className="next-g absolute -right-3 sm:-right-4 md:-right-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all">
             <ChevronRight size={20} />
           </button>
         </div>
@@ -159,16 +159,19 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
-      className={`relative w-full perspective-1000 cursor-pointer ${isMobile ? 'aspect-[4/5]' : 'h-44 lg:h-[200px]'}`}
+      // PERBAIKAN: Gunakan arbitrary class Tailwind [perspective:1000px]
+      className={`relative w-full cursor-pointer [perspective:1000px] ${isMobile ? 'aspect-[4/5]' : 'h-44 lg:h-[200px]'}`}
       onClick={(e) => {
         e.stopPropagation(); // Biar nggak bentrok sama handleClickOutside
         setFlippedIndex(isFlipped ? null : index);
       }}
     >
-      <div className={`flip-card-inner w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'is-flipped rotate-y-180' : ''}`}>
+      {/* PERBAIKAN: Gunakan [transform-style:preserve-3d] dan [transform:rotateY(180deg)] */}
+      <div className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
         
         {/* SISI DEPAN */}
-        <div className="flip-front absolute inset-0 backface-hidden border border-white/10 shadow-lg rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-[#0B1420]">
+        {/* PERBAIKAN: Tambahkan [backface-visibility:hidden] */}
+        <div className="absolute inset-0 [backface-visibility:hidden] border border-white/10 shadow-lg rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-[#0B1420]">
           {/* SKELETON DIGUNAKAN DI SINI */}
           <ImageWithSkeleton
             src={item.img}
@@ -182,12 +185,14 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
         </div>
 
         {/* SISI BELAKANG */}
-        <div className="flip-back absolute inset-0 backface-hidden rotate-y-180 bg-[#0A1626] border border-[#7CA1D3]/60 p-4 lg:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden">
+        {/* PERBAIKAN: Tambahkan [backface-visibility:hidden] dan putar 180 derajat sebagai default */}
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#0A1626] border border-[#7CA1D3]/60 p-4 lg:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden">
           <h4 className="text-[#7CA1D3] font-black mb-2 lg:mb-3 uppercase text-[11px] lg:text-xs tracking-widest">{item.title}</h4>
           <p className="text-white/80 text-[10px] lg:text-[11px] leading-snug font-medium line-clamp-5 lg:line-clamp-none">
             {item.desc}
           </p>
         </div>
+        
       </div>
     </motion.div>
   )

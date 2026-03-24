@@ -225,7 +225,7 @@ export default function Flora() {
   const headerLine2 = "keseimbangan ekosistemnya".split(" ")
 
   return (
-    <section id="flora" className="relative min-h-screen py-6 flex flex-col justify-center bg-transparent overflow-hidden">
+    <section id="flora" className="relative py-16 lg:py-24 flex flex-col bg-transparent overflow-hidden">
       <div className="relative z-[1] max-w-5xl mx-auto px-6 md:px-12 w-full">
         
         {/* Header Animasi */}

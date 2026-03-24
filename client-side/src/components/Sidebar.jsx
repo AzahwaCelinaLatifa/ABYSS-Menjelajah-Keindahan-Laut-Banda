@@ -74,15 +74,18 @@ export default function Sidebar({ open, setOpen }) {
   return (
     <>
       <AnimatePresence>
-        {open && isMobile && (
+        {/* PERBAIKAN: Overlay ini sekarang aktif di SEMUA layar. 
+            Di HP akan blur & gelap, di Desktop akan transparan tapi tetap bisa diklik untuk nutup */}
+        {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setOpen(false)}
-            // [PERBAIKAN] Naikkan z-index overlay ke 105
-            className="fixed inset-0 z-[105] bg-black/60 backdrop-blur-md overscroll-none"
+            className={`fixed inset-0 z-[105] ${
+              isMobile ? 'bg-black/60 backdrop-blur-md overscroll-none' : 'bg-transparent'
+            }`}
           />
         )}
       </AnimatePresence>
@@ -92,7 +95,6 @@ export default function Sidebar({ open, setOpen }) {
         initial={false}
         animate={{ x: open && !isMobile ? -256 : 0 }}
         transition={transitionConfig}
-        // [PERBAIKAN] Naikkan z-index tombol ke 115
         className="fixed top-1/2 right-0 -translate-y-1/2 z-[115] bg-secondary hover:bg-[#7CA1D3] rounded-l-2xl p-2 shadow-xl"
         aria-label={open ? 'Tutup berita' : 'Buka berita'}
       >
@@ -109,7 +111,6 @@ export default function Sidebar({ open, setOpen }) {
         initial={{ x: '100%' }}
         animate={{ x: open ? '0%' : '100%' }}
         transition={transitionConfig}
-        // [PERBAIKAN] Naikkan z-index panel ke 110
         className="fixed inset-y-0 right-0 w-64 z-[110] bg-[#001123] border-l border-white/20 shadow-2xl thin-scrollbar overflow-y-auto overscroll-contain"
       >
         <div className="p-4">
