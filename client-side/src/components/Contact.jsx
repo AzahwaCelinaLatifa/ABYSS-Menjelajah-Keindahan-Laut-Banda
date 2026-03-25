@@ -29,13 +29,11 @@ export default function Contact() {
   return (
     <section 
       id="kontak" 
-      // PERBAIKAN: Hapus /50 dari from-[#001123] agar menyambung mulus dengan section Lokasi
-      // Hapus juga /100 karena redundant (standar Tailwind sudah 100%)
       className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#001123] to-[#04070B] overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-6 lg:px-8 w-full">
 
-        {/* ===== TOP ROW: Judul Form + Form ===== */}
+        {/* Contact Form */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-center">
           
           <motion.div 
@@ -118,7 +116,7 @@ export default function Contact() {
         {/* Divider Ramping */}
         <div className="w-full h-[1px] bg-white/10 mb-6" />
 
-        {/* ===== BOTTOM ROW: Judul Info + Info ===== */}
+        {/* ContactInfo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,20 +146,29 @@ export default function Contact() {
 
       </div>
 
-      {/* ===== TOAST (ASLI) ===== */}
+      {/* TOAST notification */}
       <AnimatePresence>
         {sent && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="fixed bottom-4 right-4 z-[100] w-64 bg-[#061b36] border border-white/20 rounded-xl shadow-2xl p-3"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-[100] w-auto min-w-[260px] bg-[#001123]/95 backdrop-blur-xl border border-[#7CA1D3]/40 rounded-2xl shadow-[0_8px_30px_rgba(124,161,211,0.2)] p-4 flex items-start justify-between gap-4"
           >
-            <div className="flex items-center gap-2 mb-1">
-              <CheckCircle size={14} className="text-cyan-400" />
-              <span className="text-white text-xs font-bold">Sent!</span>
+            <div>
+              <div className="flex items-center gap-2.5 mb-1">
+                <CheckCircle size={18} className="text-[#7CA1D3]" />
+                <span className="text-white text-sm font-semibold tracking-wide">Message Sent!</span>
+              </div>
+              <p className="text-white/70 text-xs ml-[28px]">Your message has been delivered.</p>
             </div>
-            <p className="text-white/70 text-[10px]">Your message has been delivered.</p>
+            <button 
+              onClick={() => setSent(false)}
+              className="text-white/40 hover:text-[#7CA1D3] transition-colors mt-0.5"
+              aria-label="Close notification"
+            >
+              <X size={16} />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

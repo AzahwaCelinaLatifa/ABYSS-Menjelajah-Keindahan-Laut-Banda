@@ -15,7 +15,6 @@ import OceanBackground from './components/OceanBackground'
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   
-  // PERBAIKAN: Deteksi mobile di App.jsx agar tahu kapan konten harus digeser
   const [isMobile, setIsMobile] = useState(
     typeof window !== 'undefined' ? window.innerWidth < 768 : false
   )
@@ -27,6 +26,8 @@ export default function App() {
   }, [])
 
   const transitionConfig = { type: "spring", bounce: 0, duration: 0.4 }
+  
+  const SIDEBAR_WIDTH = 240; 
 
   return (
     <div className="relative min-h-screen w-full bg-[#07101E] text-white font-sans overflow-x-hidden">
@@ -35,24 +36,19 @@ export default function App() {
         <OceanBackground />
       </div>
 
-      {/* PERBAIKAN NAVBAR: Gunakan paddingRight bukan merubah width */}
       <motion.div
-        animate={{ paddingRight: isSidebarOpen && !isMobile ? 256 : 0 }}
+        animate={{ paddingRight: isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0 }}
         transition={transitionConfig}
-        className="fixed top-0 left-0 right-0 z-[100]"
+        className="fixed top-0 left-0 right-0 z-[999]"
       >
         <Navbar />
       </motion.div>
 
       <Sidebar open={isSidebarOpen} setOpen={setIsSidebarOpen} />
       
-      {/* PERBAIKAN MAIN CONTENT: 
-          1. Gunakan paddingRight untuk mendorong konten ke kiri (hanya di mode desktop)
-          2. Pisahkan pembungkus 'mx-auto' ke dalam div baru agar centering tidak rusak
-      */}
       <motion.div 
         id="main-content"
-        animate={{ paddingRight: isSidebarOpen && !isMobile ? 256 : 0 }}
+        animate={{ paddingRight: isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0 }}
         transition={transitionConfig}
         className="relative z-10 w-full min-h-screen"
       >

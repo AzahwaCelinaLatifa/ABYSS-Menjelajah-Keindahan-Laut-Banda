@@ -4,9 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import ImageWithSkeleton from './ImageWithSkeleton'
 
-/* ============================================================
-   Import semua gambar fauna
-   ============================================================ */
 import napoleon   from '../assets/fauna/Ikan Napoleon (Cheilinus undulatus).webp'
 import kakap      from '../assets/fauna/Ikan Kakap (Lutjanidae family).webp'
 import kerapu     from '../assets/fauna/Ikan Kerapu.webp'
@@ -28,9 +25,6 @@ import penyuHijau from '../assets/fauna/Penyu Hijau (Chelonia mydas).webp'
 import penyuSisik from '../assets/fauna/Penyu Sisik (Eretmochelys imbricata).webp'
 import pygmy      from '../assets/fauna/Pygmy Seahorse.webp'
 
-/* ============================================================
-   Data Fauna
-   ============================================================ */
 const faunaData = [
   { img: napoleon,    name: 'Ikan Napoleon (Cheilinus undulatus)',        desc: 'Ikan besar berwarna hijau kebiruan yang hidup soliter di terumbu karang dangkal Laut Banda.', 
     info: 'Ikan Napoleon adalah ikan karang raksasa yang memiliki ciri khas punuk di dahi dan bibir tebal. Ikan ini hidup sendiri di karang dangkal dan membantu menjaga kesehatan ekosistem dengan memakan hama laut. Karena keindahan warna dan jumlahnya yang semakin sedikit, ikan ini sekarang menjadi spesies yang sangat dilindungi.' },
@@ -74,9 +68,7 @@ const faunaData = [
     info:'Pygmy Seahorse adalah salah satu spesies kuda laut terkecil di dunia yang banyak ditemukan di kawasan Segitiga Karang, Asia Tenggara. Dengan tinggi kurang dari 2 sentimeter, ikan dari keluarga Syngnathidae ini memiliki mulut berbentuk tabung untuk menghisap makanan.' },
 ]
 
-/* ============================================================
-   Modal Component
-   ============================================================ */
+/* Modal Component */
 function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
   if (selectedIndex === null) return null;
 
@@ -111,7 +103,7 @@ function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
           {/* Tombol Close */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-[60] bg-[#7CA1D3]/10 border border-[#7CA1D3]/50 text-[#7CA1D3] hover:bg-[#7CA1D3]/30 rounded-full p-2 transition-all shadow-md"
+            className="absolute top-4 right-4 z-[60] bg-[#7CA1D3]/10 border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] hover:bg-[#7CA1D3]/20 rounded-full p-2 transition-all shadow-md"
           >
             <X size={20} strokeWidth={2.5} />
           </button>
@@ -125,7 +117,7 @@ function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
             <div className="relative w-full sm:w-[85%] md:w-[75%] flex justify-center items-center">
               <button
                 onClick={handlePrev}
-                className="absolute left-0 sm:-left-12 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#7CA1D3] bg-[#0B1420]/90 hover:bg-[#7CA1D3]/20 flex items-center justify-center text-[#7CA1D3] shadow-lg transition-colors"
+                className="prev-g absolute -left-3 sm:-left-4 md:-left-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all"
               >
                 <ChevronLeft size={22} />
               </button>
@@ -140,7 +132,7 @@ function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
 
               <button
                 onClick={handleNext}
-                className="absolute right-0 sm:-right-12 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#7CA1D3] bg-[#0B1420]/90 hover:bg-[#7CA1D3]/20 flex items-center justify-center text-[#7CA1D3] shadow-lg transition-colors"
+                className="next-g absolute -right-3 sm:-right-4 md:-right-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all"
               >
                 <ChevronRight size={22} />
               </button>
@@ -174,9 +166,7 @@ function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
   )
 }
 
-/* ============================================================
-   Card animation variants
-   ============================================================ */
+/* Card animation variants */
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: (i) => ({
@@ -186,9 +176,7 @@ const cardVariants = {
   }),
 }
 
-/* ============================================================
-   Main Fauna Section
-   ============================================================ */
+/* Main Fauna Section */
 export default function Fauna() {
   const [page, setPage] = useState(0)
   const [modalIndex, setModalIndex] = useState(null)
@@ -200,8 +188,8 @@ export default function Fauna() {
     const handleResize = () => {
       const width = window.innerWidth
       if (width < 640) setScreenSize('mobile') // Smartphone
-      else if (width < 768) setScreenSize('tablet') // Tablet (diubah dari 1024 ke 768)
-      else setScreenSize('desktop') // Desktop (768px ke atas, mengcover 980px)
+      else if (width < 768) setScreenSize('tablet') // Tablet 
+      else setScreenSize('desktop') // Desktop 
     }
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -262,7 +250,7 @@ export default function Fauna() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-white"
+            className="mt-2 text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-white max-w-3xl mx-auto"
           >
             {headerLine1.map((word, i) => (
               <motion.span 
@@ -336,7 +324,7 @@ export default function Fauna() {
 
         {/* Pagination */}
         <div className="flex items-center justify-center gap-4 mt-4 md:mt-6">
-          <button onClick={prevPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/50 bg-transparent hover:bg-[#7CA1D3]/10 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
+          <button onClick={prevPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 hover:bg-[#7CA1D3]/20 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
             <ChevronLeft size={20} />
           </button>
 
@@ -364,7 +352,7 @@ export default function Fauna() {
             )}
           </div>
 
-          <button onClick={nextPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/50 bg-transparent hover:bg-[#7CA1D3]/10 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
+          <button onClick={nextPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 hover:bg-[#7CA1D3]/20 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
             <ChevronRight size={20} />
           </button>
         </div>

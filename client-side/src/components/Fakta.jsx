@@ -12,22 +12,20 @@ const faqItems = [
 
 export default function Fakta() {
   const [openIndex, setOpenIndex] = useState(null)
-  const sectionRef = useRef(null) // Tambahkan useRef untuk memantau section ini
+  const sectionRef = useRef(null)
 
   const toggle = (i) => setOpenIndex(prev => (prev === i ? null : i))
 
-  // Tambahkan useEffect untuk IntersectionObserver
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Jika section ini sudah tidak terlihat di layar (user scroll ke tempat lain)
           if (!entry.isIntersecting) {
-            setOpenIndex(null); // Tutup semua accordion
+            setOpenIndex(null);
           }
         });
       },
-      { threshold: 0 } // Terpicu ketika elemen benar-benar keluar dari viewport
+      { threshold: 0 }
     );
 
     const currentSection = sectionRef.current;
@@ -42,34 +40,62 @@ export default function Fakta() {
     };
   }, []);
 
+  const headerText = "Kenali sejarah, keunikan, dan pentingnya Laut Banda bagi masyarakat dan dunia.".split(" ")
+
   return (
-    // PERBAIKAN 1: Hapus overflow-hidden dan warna background solid. 
-    // Pakai bg-transparent agar ikan/animasi yang melilingi web bisa lewat bebas di sini.
-    // PERBAIKAN RESPONSIVE: Hapus min-h-screen dan ubah padding ke py-16 md:py-24 agar konsisten
-    // PERBAIKAN: Tambahkan ref={sectionRef} di sini
     <section ref={sectionRef} id="fakta" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent w-full z-10">
       <div className="max-w-4xl mx-auto px-4 md:px-6 w-full flex flex-col items-center">
         
-        {/* PERBAIKAN 2: Warna diganti ke Biru Terang (#38BDF8) */}
-        <div className="mb-6">
+        {/* Header Animasi */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 w-full"
+        >
           <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             FAQ
           </span>
-        </div>
-        
-        {/* PERBAIKAN 3: max-w-4xl agar teks merentang panjang di layar besar, tidak ngumpul di tengah */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white text-center mb-10 w-full max-w-4xl">
-          Kenali sejarah, keunikan, dan pentingnya Laut Banda bagi masyarakat dan dunia.
-        </h2>
+          
+          <motion.h2 
+            variants={{
+              hidden: { opacity: 1 },
+              visible: { 
+                opacity: 1, 
+                transition: { staggerChildren: 0.08, delayChildren: 0.3 } 
+              }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            className="mt-2 text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-white max-w-3xl mx-auto"
+          >
+            {headerText.map((word, i) => (
+              <motion.span 
+                key={`faq-${i}`} 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { type: 'spring', damping: 15, stiffness: 150 } 
+                  }
+                }}
+                className="inline-block mr-[0.25em]"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h2>
+        </motion.div>
 
-        {/* LIST FAQ: ONE PAGE LAYOUT */}
+        {/* LIST FAQ */}
         <div className="w-full flex flex-col gap-3 max-w-4xl">
           {faqItems.map((item, i) => {
             const isOpen = openIndex === i
             return (
               <div key={i} className="w-full z-20">
-                {/* PERBAIKAN 4: Style dikembalikan sesuai image_aa7be4.png 
-                    (Gelap, border biru terang saat dibuka, text tetap putih) */}
                 <div className={`transition-colors duration-300 rounded-[1.5rem] md:rounded-[2rem] border ${isOpen ? 'bg-[#0B1420] border-[#7CA1D3]' : 'bg-[#0B1420]/50 border-white/10 hover:border-white/20'}`}>
                   <button
                     onClick={() => toggle(i)}

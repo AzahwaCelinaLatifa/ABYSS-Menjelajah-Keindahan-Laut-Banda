@@ -7,7 +7,6 @@ export default function Location() {
   return (
     <section
       id="lokasi"
-      // PERBAIKAN: Hapus /50 dari to-[#001123] agar gradien solid dan tidak bocor di bawah
       className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#000204] to-[#001123] overflow-hidden"
     >
       <div className="max-w-5xl mx-auto px-6 w-full flex flex-col items-center">
