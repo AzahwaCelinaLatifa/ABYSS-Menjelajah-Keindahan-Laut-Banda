@@ -48,7 +48,6 @@ export default function Navbar() {
   }, [])
 
   return (
-    // [PERBAIKAN] Cabut 'fixed top-0 left-0' biar nurut sama wadah animate width di App.jsx
     <header className="w-full z-[100] overflow-visible">
       <nav
         className={`w-full transition-all duration-300 ${
@@ -65,7 +64,8 @@ export default function Navbar() {
               <span className="text-xl font-bold tracking-tight text-white">Abyss</span>
             </a>
 
-            <ul className="hidden lg:flex items-center gap-2">
+            {/* PERBAIKAN: Ubah hidden lg:flex menjadi hidden md:flex */}
+            <ul className="hidden md:flex items-center gap-2">
               {navLinks.map(({ href, label }) => {
                 const isActive = activeLink === href
                 return (
@@ -86,8 +86,9 @@ export default function Navbar() {
               })}
             </ul>
 
+            {/* PERBAIKAN: Ubah lg:hidden menjadi md:hidden */}
             <button
-              className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+              className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
               onClick={() => setMobileOpen(o => !o)}
               aria-label="Menu"
             >
@@ -102,7 +103,8 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[110] lg:hidden origin-top-right"
+                /* PERBAIKAN: Ubah lg:hidden menjadi md:hidden di sini juga */
+                className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[110] md:hidden origin-top-right"
               >
                 <div className="bg-[#0A192F]/95 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl">
                   <div className="flex flex-col gap-0.5">

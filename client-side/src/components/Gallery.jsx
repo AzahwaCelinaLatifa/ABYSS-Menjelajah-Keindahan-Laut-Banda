@@ -45,6 +45,7 @@ export default function Gallery() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    // 768px adalah batas untuk "desktop/tablet" yang akan menangkap 980px dari browser HP
     const handleResize = () => setIsMobile(window.innerWidth < 768)
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -85,7 +86,7 @@ export default function Gallery() {
     <section id="galeri" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10 w-full">
         
-        <div className="text-center mb-6 lg:mb-8">
+        <div className="text-center mb-6 md:mb-8">
           <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             Galeri
           </span>
@@ -121,7 +122,8 @@ export default function Gallery() {
             ) : (
               [0, 1].map((pageIdx) => (
                 <SwiperSlide key={`desk-${pageIdx}`}>
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                  {/* Diubah: lg:grid-cols-3 dan lg:gap-6 menjadi md:grid-cols-3 dan md:gap-6 */}
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                     {galeriItems.slice(pageIdx * 6, (pageIdx + 1) * 6).map((item, i) => (
                       <GalleryCard
                         key={i}
@@ -159,36 +161,37 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
-      // PERBAIKAN: Gunakan arbitrary class Tailwind [perspective:1000px]
-      className={`relative w-full cursor-pointer [perspective:1000px] ${isMobile ? 'aspect-[4/5]' : 'h-44 lg:h-[200px]'}`}
+      // Diubah: lg:h-[200px] menjadi md:h-[200px]
+      className={`relative w-full cursor-pointer [perspective:1000px] ${isMobile ? 'aspect-[4/5]' : 'h-44 md:h-[200px]'}`}
       onClick={(e) => {
-        e.stopPropagation(); // Biar nggak bentrok sama handleClickOutside
+        e.stopPropagation();
         setFlippedIndex(isFlipped ? null : index);
       }}
     >
-      {/* PERBAIKAN: Gunakan [transform-style:preserve-3d] dan [transform:rotateY(180deg)] */}
       <div className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
         
         {/* SISI DEPAN */}
-        {/* PERBAIKAN: Tambahkan [backface-visibility:hidden] */}
         <div className="absolute inset-0 [backface-visibility:hidden] border border-white/10 shadow-lg rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-[#0B1420]">
-          {/* SKELETON DIGUNAKAN DI SINI */}
           <ImageWithSkeleton
             src={item.img}
             alt={item.title}
             wrapperClassName="w-full h-full"
             imgClassName="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-4 lg:p-5 z-10 pointer-events-none">
-            <p className="text-white font-bold text-sm lg:text-base leading-tight tracking-wide">{item.title}</p>
+          {/* Diubah: lg:p-5 menjadi md:p-5 */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-4 md:p-5 z-10 pointer-events-none">
+            {/* Diubah: lg:text-base menjadi md:text-base */}
+            <p className="text-white font-bold text-sm md:text-base leading-tight tracking-wide">{item.title}</p>
           </div>
         </div>
 
         {/* SISI BELAKANG */}
-        {/* PERBAIKAN: Tambahkan [backface-visibility:hidden] dan putar 180 derajat sebagai default */}
-        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#0A1626] border border-[#7CA1D3]/60 p-4 lg:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden">
-          <h4 className="text-[#7CA1D3] font-black mb-2 lg:mb-3 uppercase text-[11px] lg:text-xs tracking-widest">{item.title}</h4>
-          <p className="text-white/80 text-[10px] lg:text-[11px] leading-snug font-medium line-clamp-5 lg:line-clamp-none">
+        {/* Diubah: lg:p-5 menjadi md:p-5 */}
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#0A1626] border border-[#7CA1D3]/60 p-4 md:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden">
+          {/* Diubah: lg:mb-3 dan lg:text-xs menjadi md:mb-3 dan md:text-xs */}
+          <h4 className="text-[#7CA1D3] font-black mb-2 md:mb-3 uppercase text-[11px] md:text-xs tracking-widest">{item.title}</h4>
+          {/* Diubah: lg:text-[11px] dan lg:line-clamp-none menjadi md:text-[11px] dan md:line-clamp-none */}
+          <p className="text-white/80 text-[10px] md:text-[11px] leading-snug font-medium line-clamp-5 md:line-clamp-none">
             {item.desc}
           </p>
         </div>
