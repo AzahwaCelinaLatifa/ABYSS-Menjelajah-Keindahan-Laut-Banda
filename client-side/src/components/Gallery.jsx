@@ -100,6 +100,11 @@ export default function Gallery() {
             navigation={{ nextEl: '.next-g', prevEl: '.prev-g' }}
             pagination={{ clickable: true, dynamicBullets: true }}
             className="w-full pb-10" 
+            style={{
+              '--swiper-pagination-color': '#7CA1D3',
+              '--swiper-pagination-bullet-inactive-color': '#ffffff',
+              '--swiper-pagination-bullet-inactive-opacity': '0.3'
+            }}
           >
             {isMobile ? (
               galeriItems.map((item, idx) => (

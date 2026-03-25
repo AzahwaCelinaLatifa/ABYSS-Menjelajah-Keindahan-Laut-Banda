@@ -39,7 +39,8 @@ export default function App() {
       <motion.div
         animate={{ paddingRight: isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0 }}
         transition={transitionConfig}
-        className="fixed top-0 left-0 right-0 z-[999]"
+        // PERBAIKAN: Ubah z-[999] menjadi z-[40]
+        className="fixed top-0 left-0 right-0 z-[40]"
       >
         <Navbar />
       </motion.div>

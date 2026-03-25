@@ -81,7 +81,7 @@ export default function Sidebar({ open, setOpen }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setOpen(false)}
-            className={`fixed inset-0 z-[105] ${
+            className={`fixed inset-0 z-[50] ${
               isMobile ? 'bg-black/60 backdrop-blur-md overscroll-none' : 'bg-transparent'
             }`}
           />
@@ -93,7 +93,7 @@ export default function Sidebar({ open, setOpen }) {
         initial={false}
         animate={{ x: open && !isMobile ? -240 : 0 }}
         transition={transitionConfig}
-        className="fixed top-1/2 right-0 -translate-y-1/2 z-[115] bg-secondary hover:bg-[#7CA1D3] rounded-l-2xl p-2 shadow-xl"
+        className="fixed top-1/2 right-0 -translate-y-1/2 z-[70] bg-secondary hover:bg-[#7CA1D3] active:bg-[#7CA1D3] rounded-l-2xl p-2 shadow-xl"
         aria-label={open ? 'Tutup berita' : 'Buka berita'}
       >
         <motion.img
@@ -109,33 +109,36 @@ export default function Sidebar({ open, setOpen }) {
         initial={{ x: '100%' }}
         animate={{ x: open ? '0%' : '100%' }}
         transition={transitionConfig}
-        className="fixed inset-y-0 right-0 w-60 z-[110] bg-[#001123] border-l border-white/20 shadow-2xl thin-scrollbar overflow-y-auto overscroll-contain"
+        // PERBAIKAN: Hapus overflow-y-auto di sini, ganti jadi flex flex-col
+        className="fixed inset-y-0 right-0 w-60 z-[60] bg-[#001123] border-l border-white/20 shadow-2xl flex flex-col overscroll-contain"
       >
-        <div className="p-4">
-          <div className="flex items-center justify-between mt-1 mb-5 border-b border-white/10 pb-2.5">
-            <h5 className="text-[15px] font-bold text-white">Berita Terkini</h5>
-            <button 
-              onClick={() => setOpen(false)} 
-              className="text-white/50 hover:text-white transition-colors"
-            >
-              <X size={16} />
-            </button>
-          </div>
+        {/* PERBAIKAN: Header dipisah dan diberi shrink-0 agar tidak menyusut dan tidak ikut di-scroll */}
+        <div className="flex items-center justify-between px-4 pt-5 pb-2.5 border-b border-white/10 shrink-0 bg-[#001123] z-10 relative shadow-sm">
+          <h5 className="text-[15px] font-bold text-white">Berita Terkini</h5>
+          <button 
+            onClick={() => setOpen(false)} 
+            className="text-white/50 hover:text-white active:text-white transition-colors"
+          >
+            <X size={16} />
+          </button>
+        </div>
 
-          <div className="flex flex-col gap-4 pb-4">
+        {/* PERBAIKAN: Konten berita dibungkus flex-1 dan overflow-y-auto agar bagian ini saja yang nge-scroll */}
+        <div className="flex-1 overflow-y-auto thin-scrollbar p-4 pb-8">
+          <div className="flex flex-col gap-4">
             {newsItems.map((item, i) => (
               <a
                 key={i}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col rounded-lg bg-[#001123]/60 hover:bg-[#001123] border border-white/20 hover:border-blue-400/70 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 overflow-hidden group mx-0.5"
+                className="flex flex-col rounded-lg bg-[#001123]/60 hover:bg-[#7CA1D3] active:bg-[#7CA1D3] border border-white/20 hover:border-[#7CA1D3] active:border-[#7CA1D3] hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] active:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 overflow-hidden group mx-0.5"
               >
                 <div className="w-full h-20 overflow-hidden">
                   <img
                     src={item.img}
                     alt={item.alt}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-110 group-active:scale-110 transition-transform duration-300"
                   />
                 </div>
                 

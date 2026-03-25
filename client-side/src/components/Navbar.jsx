@@ -72,7 +72,6 @@ export default function Navbar() {
                     <a
                       href={href}
                       onClick={() => handleClick(href)}
-
                       className={`relative whitespace-nowrap px-2.5 py-1.5 lg:px-4 rounded-full text-[13px] lg:text-[15px] font-medium transition-all duration-300
                         ${isActive
                           ? 'text-[#7CA1D3] border border-[#7CA1D3] bg-[#7CA1D3]/10'
@@ -102,7 +101,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[110] md:hidden origin-top-right"
+                className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[50] md:hidden origin-top-right"
               >
                 <div className="bg-[#0B1420]/95 backdrop-blur-xl border border-[#7CA1D3]/40 p-2 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.6)]">
                   <div className="flex flex-col gap-0.5">

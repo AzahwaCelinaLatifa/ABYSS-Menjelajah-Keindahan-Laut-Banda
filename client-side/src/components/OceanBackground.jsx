@@ -7,9 +7,8 @@ const DodgeElement = ({ src, parentClassName, imgClassName, alt }) => {
   const requestRef = useRef();
 
   useEffect(() => {
-    // Mengecek apakah pengguna mengaktifkan mode "Kurangi Animasi" di HP/PC mereka
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return; // Hentikan interaksi jika pengguna sensitif terhadap gerakan
+    if (prefersReducedMotion) return;
 
     const handleMove = (e) => {
       if (!imgRef.current) return;
@@ -148,11 +147,8 @@ export default function OceanBackground() {
 
         {/* Gelembung */}
         <DodgeElement src={circleSvg} parentClassName="absolute left-[5%] -bottom-16 w-3 opacity-30 b-visible" imgClassName="mix-blend-screen" alt="" />
-        <DodgeElement src={circleSvg} parentClassName="absolute left-[15%] -bottom-16 w-5 opacity-20 blur-[1px] b-visible b-delay-2" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[35%] -bottom-16 w-2 opacity-40 b-visible b-delay-1" imgClassName="mix-blend-screen" alt="" />
-        <DodgeElement src={circleSvg} parentClassName="absolute left-[50%] -bottom-16 w-6 opacity-20 blur-[2px] b-visible b-delay-3" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[60%] -bottom-16 w-4 opacity-30 b-visible" imgClassName="mix-blend-screen" alt="" />
-        <DodgeElement src={circleSvg} parentClassName="absolute left-[80%] -bottom-16 w-5 opacity-20 blur-[1px] b-visible b-delay-2" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[92%] -bottom-16 w-3 opacity-30 b-visible b-delay-1" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[20%] -bottom-16 w-4 opacity-20 b-visible b-delay-3 delay-[8s]" imgClassName="mix-blend-screen" alt="" />
 
