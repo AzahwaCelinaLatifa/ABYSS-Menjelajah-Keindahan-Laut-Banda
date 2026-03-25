@@ -45,7 +45,6 @@ export default function Gallery() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    // 768px adalah batas untuk "desktop/tablet" yang akan menangkap 980px dari browser HP
     const handleResize = () => setIsMobile(window.innerWidth < 768)
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -122,7 +121,7 @@ export default function Gallery() {
             ) : (
               [0, 1].map((pageIdx) => (
                 <SwiperSlide key={`desk-${pageIdx}`}>
-                  {/* Diubah: lg:grid-cols-3 dan lg:gap-6 menjadi md:grid-cols-3 dan md:gap-6 */}
+                  
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                     {galeriItems.slice(pageIdx * 6, (pageIdx + 1) * 6).map((item, i) => (
                       <GalleryCard
@@ -161,7 +160,7 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
-      // Diubah: lg:h-[200px] menjadi md:h-[200px]
+      
       className={`relative w-full cursor-pointer [perspective:1000px] ${isMobile ? 'aspect-[4/5]' : 'h-44 md:h-[200px]'}`}
       onClick={(e) => {
         e.stopPropagation();
@@ -178,19 +177,18 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
             wrapperClassName="w-full h-full"
             imgClassName="w-full h-full object-cover"
           />
-          {/* Diubah: lg:p-5 menjadi md:p-5 */}
+          
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-4 md:p-5 z-10 pointer-events-none">
-            {/* Diubah: lg:text-base menjadi md:text-base */}
+            
             <p className="text-white font-bold text-sm md:text-base leading-tight tracking-wide">{item.title}</p>
           </div>
         </div>
 
         {/* SISI BELAKANG */}
-        {/* Diubah: lg:p-5 menjadi md:p-5 */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#0A1626] border border-[#7CA1D3]/60 p-4 md:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden">
-          {/* Diubah: lg:mb-3 dan lg:text-xs menjadi md:mb-3 dan md:text-xs */}
+          
           <h4 className="text-[#7CA1D3] font-black mb-2 md:mb-3 uppercase text-[11px] md:text-xs tracking-widest">{item.title}</h4>
-          {/* Diubah: lg:text-[11px] dan lg:line-clamp-none menjadi md:text-[11px] dan md:line-clamp-none */}
+        
           <p className="text-white/80 text-[10px] md:text-[11px] leading-snug font-medium line-clamp-5 md:line-clamp-none">
             {item.desc}
           </p>

@@ -100,7 +100,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
           {/* Tombol Close */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-[60] bg-[#7CA1D3]/10 border border-[#7CA1D3]/50 text-[#7CA1D3] hover:bg-[#7CA1D3]/30 rounded-full p-2 transition-all shadow-md"
+            className="absolute top-4 right-4 z-[60] bg-[#7CA1D3]/10 border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] hover:bg-[#7CA1D3]/20 rounded-full p-2 transition-all shadow-md"
           >
             <X size={20} strokeWidth={2.5} />
           </button>
@@ -111,11 +111,10 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
               {item.name}
             </h3>
 
-            {/* PERBAIKAN: lg:w-[75%] menjadi md:w-[75%] */}
             <div className="relative w-full sm:w-[85%] md:w-[75%] flex justify-center items-center">
               <button
                 onClick={handlePrev}
-                className="absolute left-0 sm:-left-12 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#7CA1D3] bg-[#0B1420]/90 hover:bg-[#7CA1D3]/20 flex items-center justify-center text-[#7CA1D3] shadow-lg transition-colors"
+                className="prev-g absolute -left-3 sm:-left-4 md:-left-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all"
               >
                 <ChevronLeft size={22} />
               </button>
@@ -130,7 +129,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
 
               <button
                 onClick={handleNext}
-                className="absolute right-0 sm:-right-12 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#7CA1D3] bg-[#0B1420]/90 hover:bg-[#7CA1D3]/20 flex items-center justify-center text-[#7CA1D3] shadow-lg transition-colors"
+                className="next-g absolute -right-3 sm:-right-4 md:-right-2 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 text-[#7CA1D3] flex items-center justify-center hover:bg-[#7CA1D3]/20 transition-all"
               >
                 <ChevronRight size={22} />
               </button>
@@ -189,17 +188,15 @@ export default function Flora() {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth
-      // PERBAIKAN: Ubah ambang batas desktop dari 1024 menjadi 768 agar Desktop Mode HP (980px) terbaca sebagai desktop.
-      if (width < 640) setScreenSize('mobile') // Smartphone
-      else if (width < 768) setScreenSize('tablet') // Tablet kecil
-      else setScreenSize('desktop') // Desktop & Desktop Mode di HP
+      if (width < 640) setScreenSize('mobile') 
+      else if (width < 768) setScreenSize('tablet') 
+      else setScreenSize('desktop') 
     }
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Logika pembagian jumlah card
   const itemsPerPage = screenSize === 'mobile' ? 1 : screenSize === 'tablet' ? 2 : 4
   const totalPages = Math.ceil(floraData.length / itemsPerPage)
 
@@ -223,11 +220,11 @@ export default function Flora() {
     return () => clearInterval(timer)
   }, [totalPages, modalIndex, isHovered])
 
+  // Memecah kalimat persis seperti yang ada sebelumnya untuk mempertahankan <br /> 
   const headerLine1 = "Macam flora laut Banda yang menjaga".split(" ")
   const headerLine2 = "keseimbangan ekosistemnya".split(" ")
 
   return (
-    // PERBAIKAN: lg:py-24 menjadi md:py-24
     <section id="flora" className="relative py-16 md:py-24 flex flex-col bg-transparent overflow-hidden">
       <div className="relative z-[1] max-w-5xl mx-auto px-6 md:px-12 w-full">
         
@@ -237,13 +234,13 @@ export default function Flora() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-8 w-full"
         >
           <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             Flora
           </span>
           
-          {/* PERBAIKAN: lg:text-4xl menjadi md:text-4xl */}
+          {/* PERBAIKAN: Penyelarasan class typography dengan menu lainnya */}
           <motion.h2 
             variants={{
               hidden: { opacity: 1 },
@@ -255,13 +252,13 @@ export default function Flora() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-white"
+            className="mt-2 text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-white max-w-3xl mx-auto"
           >
             {headerLine1.map((word, i) => (
               <motion.span 
                 key={`fl1-${i}`} 
                 variants={{
-                  hidden: { opacity: 0, y: 40 },
+                  hidden: { opacity: 0, y: 30 },
                   visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 15, stiffness: 150 } }
                 }}
                 className="inline-block mr-[0.25em]"
@@ -274,7 +271,7 @@ export default function Flora() {
               <motion.span 
                 key={`fl2-${i}`} 
                 variants={{
-                  hidden: { opacity: 0, y: 40 },
+                  hidden: { opacity: 0, y: 30 },
                   visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 15, stiffness: 150 } }
                 }}
                 className="inline-block mr-[0.25em]"
@@ -286,7 +283,6 @@ export default function Flora() {
         </motion.div>
 
         {/* Grid Container */}
-        {/* PERBAIKAN: lg:grid-cols-4 dan lg:gap-5 menjadi md:* */}
         <div 
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-5 justify-items-center"
           onMouseEnter={() => setIsHovered(true)}
@@ -303,7 +299,6 @@ export default function Flora() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                // PERBAIKAN: lg:max-w-none menjadi md:max-w-none
                 className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-none flex flex-col"
               >
                 <div
@@ -314,17 +309,13 @@ export default function Flora() {
                     key={item.img}
                     src={item.img}
                     alt={item.name}
-                    // PERBAIKAN: lg:h-[180px] menjadi md:h-[180px]
                     wrapperClassName="w-full h-[220px] sm:h-[180px] xl:h-[200px]"
                     imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  {/* PERBAIKAN: lg:p-3 menjadi md:p-3 */}
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B1420] via-[#0B1420]/70 to-transparent p-4 md:p-3 z-20">
-                    {/* PERBAIKAN: lg:text-sm lg:truncate menjadi md:* */}
                     <h5 className="text-white font-semibold text-base md:text-sm leading-tight md:truncate">{item.name}</h5>
                   </div>
                 </div>
-                {/* PERBAIKAN: lg:text-[11px] menjadi md:text-[11px] */}
                 <p className="mt-3 text-white/70 text-sm md:text-[11px] lg:text-xs leading-relaxed px-1 line-clamp-2">
                   {item.desc}
                 </p>
@@ -334,9 +325,8 @@ export default function Flora() {
         </div>
 
         {/* Pagination */}
-        {/* PERBAIKAN: lg:mt-6 menjadi md:mt-6 */}
         <div className="flex items-center justify-center gap-4 mt-4 md:mt-6">
-          <button onClick={prevPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/50 bg-transparent hover:bg-[#7CA1D3]/10 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
+          <button onClick={prevPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 hover:bg-[#7CA1D3]/20 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
             <ChevronLeft size={20} />
           </button>
 
@@ -364,7 +354,7 @@ export default function Flora() {
             )}
           </div>
 
-          <button onClick={nextPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/50 bg-transparent hover:bg-[#7CA1D3]/10 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
+          <button onClick={nextPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/30 bg-black/60 hover:bg-[#7CA1D3]/20 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
             <ChevronRight size={20} />
           </button>
         </div>

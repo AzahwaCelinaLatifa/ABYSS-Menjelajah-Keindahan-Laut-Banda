@@ -48,11 +48,11 @@ export default function Navbar() {
   }, [])
 
   return (
-    <header className="w-full z-[100] overflow-visible">
+    <header className="w-full overflow-visible">
       <nav
-        className={`w-full transition-all duration-300 ${
+        className={`w-full transition-colors duration-300 ${
           scrolled 
-            ? 'bg-[#001123]/80 backdrop-blur-md shadow-lg border-b border-white/5 py-2.5' 
+            ? 'bg-[#0B1420]/80 backdrop-blur-md shadow-lg border-b border-[#7CA1D3]/20 py-2.5' 
             : 'bg-transparent py-4'
         }`}
       >
@@ -61,11 +61,11 @@ export default function Navbar() {
 
             <a href="#beranda" className="flex items-center gap-2.5 shrink-0" onClick={() => handleClick('#beranda')}>
               <img src={logoSvg} alt="Abyss" className="w-7 h-7 object-contain" />
-              <span className="text-xl font-bold tracking-tight text-white">Abyss</span>
+              <span className="text-xl font-bold tracking-tight text-white shrink-0">Abyss</span>
             </a>
 
-            {/* PERBAIKAN: Ubah hidden lg:flex menjadi hidden md:flex */}
-            <ul className="hidden md:flex items-center gap-2">
+            {/* PERBAIKAN: Jarak gap dikurangi di layar nanggung agar menu muat & tidak tumpah */}
+            <ul className="hidden md:flex items-center gap-1 lg:gap-2">
               {navLinks.map(({ href, label }) => {
                 const isActive = activeLink === href
                 return (
@@ -73,9 +73,11 @@ export default function Navbar() {
                     <a
                       href={href}
                       onClick={() => handleClick(href)}
-                      className={`relative px-4 py-1.5 rounded-full text-[15px] font-medium transition-all duration-300
+                      /* PERBAIKAN: Tambahkan whitespace-nowrap agar teks menu tidak turun ke bawah.
+                         Ubah ukuran font dan padding menyesuaikan layar. */
+                      className={`relative whitespace-nowrap px-2.5 py-1.5 lg:px-4 rounded-full text-[13px] lg:text-[15px] font-medium transition-all duration-300
                         ${isActive
-                          ? 'text-white border border-white'
+                          ? 'text-[#7CA1D3] border border-[#7CA1D3] bg-[#7CA1D3]/10'
                           : 'text-white/80 hover:text-white hover:bg-white/10 border border-transparent'
                         }`}
                     >
@@ -86,9 +88,8 @@ export default function Navbar() {
               })}
             </ul>
 
-            {/* PERBAIKAN: Ubah lg:hidden menjadi md:hidden */}
             <button
-              className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+              className="md:hidden text-white p-2 rounded-lg hover:bg-[#7CA1D3]/20 hover:text-[#7CA1D3] transition-colors shrink-0"
               onClick={() => setMobileOpen(o => !o)}
               aria-label="Menu"
             >
@@ -103,10 +104,9 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                /* PERBAIKAN: Ubah lg:hidden menjadi md:hidden di sini juga */
                 className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[110] md:hidden origin-top-right"
               >
-                <div className="bg-[#0A192F]/95 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl">
+                <div className="bg-[#0B1420]/95 backdrop-blur-xl border border-[#7CA1D3]/40 p-2 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.6)]">
                   <div className="flex flex-col gap-0.5">
                     {navLinks.map(({ href, label }) => {
                       const isActive = activeLink === href
@@ -117,7 +117,7 @@ export default function Navbar() {
                           onClick={() => handleClick(href)}
                           className={`block px-4 py-2.5 text-left rounded-xl text-sm font-medium transition-all duration-300
                             ${isActive
-                              ? 'text-white bg-white/15 shadow-sm'
+                              ? 'text-[#7CA1D3] bg-[#7CA1D3]/15 shadow-sm'
                               : 'text-white/70 hover:text-white hover:bg-white/10'
                             }`}
                         >

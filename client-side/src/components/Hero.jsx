@@ -23,21 +23,27 @@ export default function Hero() {
   return (
     <section
       id="beranda"
-      className="relative pt-28 pb-20 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 lg:min-h-screen flex items-center text-white overflow-hidden"
-      style={{
-        background: `
-          radial-gradient(ellipse at center, rgba(10,22,40,0) 0%, rgba(5,15,30,0.7) 70%, rgba(0,0,0,0.85) 100%), 
-          url(${backgroundHeader}) center / cover no-repeat
-        `,
-      }}
+      /* PERBAIKAN: 
+         - Di mobile biasa: pakai min-h-[100dvh] biar pas.
+         - Di mode desktop/laptop (md ke atas): pakai h-[100vh] TAPI dikunci dengan max-h-[850px] dan lg:max-h-[950px].
+         Ini mencegah efek "melar ke bawah" yang lebay saat HP masuk Desktop Mode.
+      */
+      className="relative pt-24 md:pt-28 pb-16 min-h-[100dvh] md:min-h-[600px] md:h-[100vh] md:max-h-[850px] lg:max-h-[950px] flex items-center text-white overflow-hidden"
     >
-      {/* 1. Overlay Gradient Asli */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,67,137,0.55)]/70 to-[#000000]/70 z-0 pointer-events-none" />
+      {/* Background Image Absolute */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${backgroundHeader})` }}
+      />
 
-      {/* 2. Jembatan Blending (Menyatukan Hero secara halus dengan OceanBackground) */}
-      <div className="absolute inset-x-0 bottom-0 h-32 sm:h-40 md:h-48 bg-gradient-to-t from-[#07101E] to-transparent z-0 pointer-events-none" />
+      {/* Overlay Warna Biru Gelap ke Hitam (Smooth fade) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#004389]/60 via-[#030A14]/80 to-[#0A1628] z-0 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-12 w-full">
+      {/* Jembatan Blending Ekstra */}
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/80 to-transparent z-0 pointer-events-none" />
+
+      {/* Konten Utama */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-12 w-full mt-8 md:mt-0">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 md:gap-8 lg:gap-16">
 
           {/* Teks Hero */}
@@ -108,19 +114,16 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* === PERBAIKAN FINAL TANDA PANAH SCROLL === */}
+      {/* Tanda Panah Scroll */}
       <motion.a
         href="#flora"
         onClick={(e) => {
-          // Mencegah error bawaan React saat klik link anchor
           e.preventDefault();
           const targetElement = document.getElementById('flora');
           if (targetElement) {
-            // Memaksa browser scroll ke bagian id="flora" secara halus
             targetElement.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        // Penambahan z-[100] dan p-4 (padding) agar area klik lebih lebar dan nyaman di HP
         className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 text-[#7CA1D3] z-[100] p-4 cursor-pointer pointer-events-auto hover:text-white transition-colors duration-300 flex items-center justify-center"
         aria-label="Scroll ke bawah"
         animate={{ y: [0, 10, 0] }}

@@ -162,7 +162,7 @@ export default function OceanBackground() {
         <DodgeElement src={circleSvg} parentClassName="absolute left-[20%] -bottom-16 w-4 opacity-20 b-visible b-delay-3 delay-[8s]" imgClassName="mix-blend-screen" alt="" />
 
         {/* Pasukan Ikan */}
-        <DodgeElement src={ikanKecil} parentClassName="absolute top-[25%] w-10 opacity-30 i-fast" imgClassName="mix-blend-plus-lighter" alt="" />
+        <DodgeElement src={ikanKecil} parentClassName="absolute top-[25%] w-8 opacity-30 i-fast" imgClassName="mix-blend-plus-lighter" alt="" />
         <DodgeElement src={ikanKecil} parentClassName="absolute top-[55%] w-8 opacity-20 i-med" imgClassName="mix-blend-plus-lighter" alt="" />
         <DodgeElement src={ikanKecil} parentClassName="absolute top-[85%] w-6 opacity-15 i-slow" imgClassName="mix-blend-plus-lighter" alt="" />
 
