@@ -23,8 +23,7 @@ export default function Hero() {
   return (
     <section
       id="beranda"
-      /* PERBAIKAN: md:min-h-screen memastikan tinggi penuh saat desktop mode HP aktif */
-      className="relative pt-32 pb-24 md:pt-40 md:pb-32 md:min-h-screen flex items-center text-white overflow-hidden"
+      className="relative pt-28 pb-20 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 lg:min-h-screen flex items-center text-white overflow-hidden"
       style={{
         background: `
           radial-gradient(ellipse at center, rgba(10,22,40,0) 0%, rgba(5,15,30,0.7) 70%, rgba(0,0,0,0.85) 100%), 
@@ -32,23 +31,23 @@ export default function Hero() {
         `,
       }}
     >
-      {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,67,137,0.55)]/70 to-[#000000]/70 z-0" />
+      {/* 1. Overlay Gradient Asli */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,67,137,0.55)]/70 to-[#000000]/70 z-0 pointer-events-none" />
+
+      {/* 2. Jembatan Blending (Menyatukan Hero secara halus dengan OceanBackground) */}
+      <div className="absolute inset-x-0 bottom-0 h-32 sm:h-40 md:h-48 bg-gradient-to-t from-[#07101E] to-transparent z-0 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-12 w-full">
-        {/* PERBAIKAN: Ubah lg:flex-row dan lg:justify-between menjadi md:flex-row dan md:justify-between */}
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 md:gap-12 lg:gap-16">
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 md:gap-8 lg:gap-16">
 
           {/* Teks Hero */}
           <motion.div
-            /* PERBAIKAN: Ubah lg:flex-1, lg:text-left, lg:items-start menjadi md:* */
             className="w-full md:flex-1 text-center md:text-left flex flex-col items-center md:items-start"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             <h1
-              /* PERBAIKAN: Penyesuaian ukuran font pada md agar pas */
               className="text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.5rem] xl:text-6xl font-bold leading-tight mb-4 sm:mb-6"
               style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}
             >
@@ -75,7 +74,6 @@ export default function Hero() {
             
             <motion.p
               variants={itemVariants}
-              /* PERBAIKAN: md:text-base md:max-w-lg untuk transisi mulus */
               className="text-sm sm:text-base md:text-base lg:text-lg text-white/85 leading-relaxed max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl"
               style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
             >
@@ -86,7 +84,6 @@ export default function Hero() {
 
           {/* Gambar Ikan Pari */}
           <motion.div
-            /* PERBAIKAN: md:flex-1 dan md:mt-0 agar sejajar di mode desktop HP */
             className="w-full md:flex-1 flex justify-center mt-6 md:mt-0"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -104,18 +101,27 @@ export default function Hero() {
                 repeat: Infinity, 
                 ease: "easeInOut" 
               }}
-              /* PERBAIKAN: md:max-w-[350px] sebagai jembatan antara sm dan lg */
-              className="w-full h-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-lg drop-shadow-2xl"
+              className="w-full h-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-lg drop-shadow-2xl pointer-events-none"
             />
           </motion.div>
 
         </div>
       </div>
 
-      {/* Tanda Panah Scroll */}
+      {/* === PERBAIKAN FINAL TANDA PANAH SCROLL === */}
       <motion.a
         href="#flora"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#7CA1D3] z-10"
+        onClick={(e) => {
+          // Mencegah error bawaan React saat klik link anchor
+          e.preventDefault();
+          const targetElement = document.getElementById('flora');
+          if (targetElement) {
+            // Memaksa browser scroll ke bagian id="flora" secara halus
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        // Penambahan z-[100] dan p-4 (padding) agar area klik lebih lebar dan nyaman di HP
+        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 text-[#7CA1D3] z-[100] p-4 cursor-pointer pointer-events-auto hover:text-white transition-colors duration-300 flex items-center justify-center"
         aria-label="Scroll ke bawah"
         animate={{ y: [0, 10, 0] }}
         transition={{ 

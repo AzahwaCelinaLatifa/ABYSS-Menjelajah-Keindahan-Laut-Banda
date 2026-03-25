@@ -7,8 +7,8 @@ export default function Location() {
   return (
     <section
       id="lokasi"
-      // PERBAIKAN RESPONSIVE: Hapus min-h-screen dan ubah padding ke py-16 md:py-24 agar konsisten
-      className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#000204] to-[#001123]/50 overflow-hidden"
+      // PERBAIKAN: Hapus /50 dari to-[#001123] agar gradien solid dan tidak bocor di bawah
+      className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#000204] to-[#001123] overflow-hidden"
     >
       <div className="max-w-5xl mx-auto px-6 w-full flex flex-col items-center">
         
@@ -18,10 +18,8 @@ export default function Location() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
-          // PERBAIKAN: Margin bawah diperkecil (mb-4) agar header tidak rakus ruang
           className="text-center mb-4"
         >
-          {/* Badge: Ukuran diturunkan ke text-sm agar proporsional di monitor */}
           <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             Lokasi
           </span>        
@@ -37,7 +35,6 @@ export default function Location() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            // PERBAIKAN: text-2xl di desktop sudah cukup besar & elegan, mencegah teks turun ke baris baru yang terlalu banyak
             className="mt-2 text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-white max-w-3xl"
           >
             {headerText.map((word, i) => (
@@ -65,14 +62,11 @@ export default function Location() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          // PERBAIKAN: Membatasi lebar peta agar tidak terlalu melebar di monitor ultra-wide
           className="w-full max-w-4xl rounded-3xl overflow-hidden border border-white/10 shadow-lg"
         >
           <iframe
             title="Banda Sea map"
             src={mapSrc}
-            // PERBAIKAN UTAMA: Gunakan h-[50vh] atau h-[60vh] agar tinggi peta menyesuaikan tinggi layar user.
-            // Di monitor besar, 350px - 400px adalah 'sweet spot' agar elemen lain tetap terlihat.
             className="w-full h-[40vh] min-h-[300px] max-h-[400px] border-0"
             allowFullScreen
             loading="lazy"
@@ -80,20 +74,18 @@ export default function Location() {
           />
         </motion.div>
 
-        {/* CTA - Identitas asli (Warna & Hover) 100% DIJAGA */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          // PERBAIKAN: Margin top diperkecil (mt-6) agar tombol naik ke atas layar
           className="mt-6 text-center"
         >
           <a
             href="https://www.google.com/maps?ll=-4.517902,129.90406&z=14&t=h&hl=id&gl=ID&mapclient=embed&q=Banda+Neira+Kp.+Baru+Kec.+Banda+Kabupaten+Maluku+Tengah,+Maluku"
             target="_blank"
             rel="noopener noreferrer"
-            // Style asli tetap dipertahankan
             className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm hover:bg-[#7CA1D3] hover:text-white hover:border-[#7CA1D3] hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#7CA1D3]/40"
           >
             MORE

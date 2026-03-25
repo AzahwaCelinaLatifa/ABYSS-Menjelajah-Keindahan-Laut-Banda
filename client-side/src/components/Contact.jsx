@@ -29,13 +29,13 @@ export default function Contact() {
   return (
     <section 
       id="kontak" 
-      // PERBAIKAN RESPONSIVE: Hapus min-h-screen dan ubah padding ke py-16 md:py-24 agar konsisten
-      className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#001123]/50 to-[#04070B]/100 overflow-hidden"
+      // PERBAIKAN: Hapus /50 dari from-[#001123] agar menyambung mulus dengan section Lokasi
+      // Hapus juga /100 karena redundant (standar Tailwind sudah 100%)
+      className="relative py-16 md:py-24 flex flex-col justify-center bg-gradient-to-b from-[#001123] to-[#04070B] overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-6 lg:px-8 w-full">
 
         {/* ===== TOP ROW: Judul Form + Form ===== */}
-        {/* PERBAIKAN: gap-6 dan mb-6 untuk menghemat ruang vertikal */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-center">
           
           <motion.div 
@@ -45,7 +45,6 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center"
           >
-            {/* PERBAIKAN: text-2xl di desktop agar pas */}
             <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white mb-1">Contact Form</h2>
             <p className="text-white/70 text-xs">Please fill out this form</p>
           </motion.div>
@@ -109,7 +108,6 @@ export default function Contact() {
             <motion.button
               variants={formItemVariants}
               type="submit"
-              // IDENTITAS ASLI: Warna dan hover tetap dijaga 100%
               className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm hover:bg-[#7CA1D3] hover:text-white hover:border-[#7CA1D3] hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#7CA1D3]/40"
             >
               SUBMIT
