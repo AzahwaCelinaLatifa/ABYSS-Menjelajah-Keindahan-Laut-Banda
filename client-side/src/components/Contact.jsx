@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { Phone, Mail, MapPin, CheckCircle, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -8,23 +8,34 @@ const contactInfo = [
   { icon: MapPin,  label: 'Address',  value: 'Kepulauan Banda, Maluku Tengah, Indonesia' },
 ]
 
-export default function Contact() {
+const formItemVariants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+}
+
+function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [sent, setSent] = useState(false)
+  const timeoutRef = useRef(null)
 
-  const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target
+    setForm((f) => ({ ...f, [name]: value }))
+  }, [])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault()
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
     setSent(true)
     setForm({ name: '', email: '', message: '' })
-    setTimeout(() => setSent(false), 5000) 
-  }
+    timeoutRef.current = setTimeout(() => setSent(false), 5000)
+  }, [])
 
-  const formItemVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
-  }
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [])
 
   return (
     <section 
@@ -130,17 +141,20 @@ export default function Contact() {
           </div>
 
           <div className="flex flex-col gap-3 justify-center">
-            {contactInfo.map(({ icon: IconComponent, label, value }) => (
-              <div key={label} className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
-                  <IconComponent size={12} className="text-white"/>
+            {contactInfo.map((item) => {
+              const Icon = item.icon
+              return (
+                <div key={item.label} className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
+                    <Icon size={12} className="text-white" />
+                  </div>
+                  <div>
+                    <h6 className="text-white font-semibold text-[10px] uppercase tracking-tight">{item.label}</h6>
+                    <p className="text-white/50 text-[11px]">{item.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <h6 className="text-white font-semibold text-[10px] uppercase tracking-tight">{label}</h6>
-                  <p className="text-white/50 text-[11px]">{value}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </motion.div>
 
@@ -175,3 +189,5 @@ export default function Contact() {
     </section>
   )
 }
+
+export default memo(Contact)

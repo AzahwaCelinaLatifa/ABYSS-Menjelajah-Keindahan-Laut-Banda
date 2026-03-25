@@ -1,8 +1,11 @@
+import { memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-export default function Location() {
-  const mapSrc = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15915.244033284768!2d129.9042578!3d-4.5208643!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d6f7f6a738c82a5%3A0xc3f0b069695d8526!2sBanda%20Neira!5e1!3m2!1sid!2sid!4v1708520000000!5m2!1sid!2sid&maptype=satellite";
-  const headerText = "Laut Banda terletak di provinsi Maluku, Indonesia".split(" ")
+const mapSrc =
+  'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15915.244033284768!2d129.9042578!3d-4.5208643!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d6f7f6a738c82a5%3A0xc3f0b069695d8526!2sBanda%20Neira!5e1!3m2!1sid!2sid!4v1708520000000!5m2!1sid!2sid&maptype=satellite'
+
+function Location() {
+  const headerText = useMemo(() => 'Laut Banda terletak di provinsi Maluku, Indonesia'.split(' '), [])
 
   return (
     <section
@@ -94,3 +97,5 @@ export default function Location() {
     </section>
   )
 }
+
+export default memo(Location)

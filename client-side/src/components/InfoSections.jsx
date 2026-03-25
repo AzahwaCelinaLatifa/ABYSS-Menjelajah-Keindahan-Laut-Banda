@@ -1,8 +1,9 @@
+import { memo } from 'react'
 import Flora from './Flora'
 import Fauna from './Fauna'
 
 
-export default function InfoSections() {
+function InfoSections() {
   return (
     <>
       <Flora />
@@ -10,3 +11,5 @@ export default function InfoSections() {
     </>
   )
 }
+
+export default memo(InfoSections)

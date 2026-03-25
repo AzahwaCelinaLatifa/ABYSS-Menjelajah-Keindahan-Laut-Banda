@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { memo, useState, useEffect, useCallback, useRef } from 'react'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import logoSvg from '../assets/logo.webp'
@@ -13,15 +13,48 @@ const navLinks = [
   { href: '#kontak',  label: 'Kontak'  },
 ]
 
-export default function Navbar() {
+function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeLink, setActiveLink] = useState('#beranda')
+  const scrollRafRef = useRef(0)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const getScrollTop = () => {
+      if (typeof window === 'undefined') return 0
+      return (
+        window.scrollY ||
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0
+      )
+    }
+
+    const applyScrolledState = () => {
+      const next = getScrollTop() > 50
+      setScrolled((prev) => (prev === next ? prev : next))
+    }
+
+    const scheduleScrollCheck = () => {
+      if (scrollRafRef.current) return
+      scrollRafRef.current = window.requestAnimationFrame(() => {
+        scrollRafRef.current = 0
+        applyScrolledState()
+      })
+    }
+
+    // Ensure initial state is correct on hard refresh at non-zero scroll position.
+    applyScrolledState()
+
+    window.addEventListener('scroll', scheduleScrollCheck, { passive: true })
+    document.addEventListener('scroll', scheduleScrollCheck, { passive: true, capture: true })
+
+    return () => {
+      window.removeEventListener('scroll', scheduleScrollCheck)
+      document.removeEventListener('scroll', scheduleScrollCheck, true)
+      if (scrollRafRef.current) window.cancelAnimationFrame(scrollRafRef.current)
+    }
   }, [])
 
   useEffect(() => {
@@ -52,7 +85,7 @@ export default function Navbar() {
       <nav
         className={`w-full transition-colors duration-300 ${
           scrolled 
-            ? 'bg-[#0B1420]/80 backdrop-blur-md shadow-lg border-b border-[#7CA1D3]/20 py-2.5' 
+            ? 'bg-[#0B1420]/80 backdrop-blur-md shadow-[0_14px_34px_rgba(3,10,24,0.65)] border-b border-[#7CA1D3]/20 py-2.5' 
             : 'bg-transparent py-4'
         }`}
       >
@@ -60,7 +93,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
 
             <a href="#beranda" className="flex items-center gap-2.5 shrink-0" onClick={() => handleClick('#beranda')}>
-              <img src={logoSvg} alt="Abyss" className="w-7 h-7 object-contain" />
+              <img src={logoSvg} alt="Abyss" loading="eager" decoding="async" className="w-7 h-7 object-contain" />
               <span className="text-xl font-bold tracking-tight text-white shrink-0">Abyss</span>
             </a>
 
@@ -72,7 +105,6 @@ export default function Navbar() {
                     <a
                       href={href}
                       onClick={() => handleClick(href)}
-
                       className={`relative whitespace-nowrap px-2.5 py-1.5 lg:px-4 rounded-full text-[13px] lg:text-[15px] font-medium transition-all duration-300
                         ${isActive
                           ? 'text-[#7CA1D3] border border-[#7CA1D3] bg-[#7CA1D3]/10'
@@ -102,7 +134,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[110] md:hidden origin-top-right"
+                className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[50] md:hidden origin-top-right"
               >
                 <div className="bg-[#0B1420]/95 backdrop-blur-xl border border-[#7CA1D3]/40 p-2 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.6)]">
                   <div className="flex flex-col gap-0.5">
@@ -133,3 +165,5 @@ export default function Navbar() {
     </header>
   )
 }
+
+export default memo(Navbar)

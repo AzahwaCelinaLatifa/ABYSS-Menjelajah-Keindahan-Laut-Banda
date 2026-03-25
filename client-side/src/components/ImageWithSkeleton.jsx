@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { motion } from 'framer-motion'
 
-export default function ImageWithSkeleton({ src, alt, wrapperClassName, imgClassName }) {
+function ImageWithSkeleton({ src, alt, wrapperClassName, imgClassName, loading = 'lazy' }) {
   const [isLoaded, setIsLoaded] = useState(false)
 
   return (
@@ -15,12 +15,17 @@ export default function ImageWithSkeleton({ src, alt, wrapperClassName, imgClass
         key={src}
         src={src}
         alt={alt}
+        loading={loading}
+        decoding="async"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 0.5 }}
+        onLoadStart={() => setIsLoaded(false)}
         onLoad={() => setIsLoaded(true)}
-        className={`relative z-10 ${imgClassName}`}
+        className={`relative z-10 transform-gpu ${imgClassName}`}
       />
     </div>
   )
 }
+
+export default memo(ImageWithSkeleton)

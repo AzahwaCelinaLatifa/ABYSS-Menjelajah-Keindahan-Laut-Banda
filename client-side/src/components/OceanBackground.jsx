@@ -1,15 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import circleSvg from '../assets/circle.webp';
 import ikanKecil from '../assets/ikan kecil.webp';
 
-const DodgeElement = ({ src, parentClassName, imgClassName, alt }) => {
+const DodgeElement = memo(function DodgeElement({ src, parentClassName, imgClassName, alt }) {
   const imgRef = useRef(null);
   const requestRef = useRef();
 
   useEffect(() => {
-    // Mengecek apakah pengguna mengaktifkan mode "Kurangi Animasi" di HP/PC mereka
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return; // Hentikan interaksi jika pengguna sensitif terhadap gerakan
+    if (prefersReducedMotion) return;
 
     const handleMove = (e) => {
       if (!imgRef.current) return;
@@ -62,14 +61,16 @@ const DodgeElement = ({ src, parentClassName, imgClassName, alt }) => {
         ref={imgRef}
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
 
         className={`w-full h-full object-contain transition-transform duration-500 ease-out select-none pointer-events-none will-change-transform ${imgClassName}`}
       />
     </div>
   );
-};
+});
 
-export default function OceanBackground() {
+function OceanBackground() {
   const interactiveLightRef = useRef(null);
   const lightRequestRef = useRef();
 
@@ -148,11 +149,8 @@ export default function OceanBackground() {
 
         {/* Gelembung */}
         <DodgeElement src={circleSvg} parentClassName="absolute left-[5%] -bottom-16 w-3 opacity-30 b-visible" imgClassName="mix-blend-screen" alt="" />
-        <DodgeElement src={circleSvg} parentClassName="absolute left-[15%] -bottom-16 w-5 opacity-20 blur-[1px] b-visible b-delay-2" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[35%] -bottom-16 w-2 opacity-40 b-visible b-delay-1" imgClassName="mix-blend-screen" alt="" />
-        <DodgeElement src={circleSvg} parentClassName="absolute left-[50%] -bottom-16 w-6 opacity-20 blur-[2px] b-visible b-delay-3" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[60%] -bottom-16 w-4 opacity-30 b-visible" imgClassName="mix-blend-screen" alt="" />
-        <DodgeElement src={circleSvg} parentClassName="absolute left-[80%] -bottom-16 w-5 opacity-20 blur-[1px] b-visible b-delay-2" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[92%] -bottom-16 w-3 opacity-30 b-visible b-delay-1" imgClassName="mix-blend-screen" alt="" />
         <DodgeElement src={circleSvg} parentClassName="absolute left-[20%] -bottom-16 w-4 opacity-20 b-visible b-delay-3 delay-[8s]" imgClassName="mix-blend-screen" alt="" />
 
@@ -165,3 +163,5 @@ export default function OceanBackground() {
     </>
   );
 }
+
+export default memo(OceanBackground)

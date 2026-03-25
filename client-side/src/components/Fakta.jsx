@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -10,11 +10,11 @@ const faqItems = [
   { q: 'Bagaimana peran Laut Banda dalam peta perdagangan dan kolonialisme dunia?', a: 'Menjadi pusat perdagangan rempah global yang memberikan kekuatan ekonomi besar bagi Eropa, memicu persaingan kolonial di Nusantara.' },
 ]
 
-export default function Fakta() {
+function Fakta() {
   const [openIndex, setOpenIndex] = useState(null)
   const sectionRef = useRef(null)
 
-  const toggle = (i) => setOpenIndex(prev => (prev === i ? null : i))
+  const toggle = useCallback((i) => setOpenIndex((prev) => (prev === i ? null : i)), [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,7 +40,10 @@ export default function Fakta() {
     };
   }, []);
 
-  const headerText = "Kenali sejarah, keunikan, dan pentingnya Laut Banda bagi masyarakat dan dunia.".split(" ")
+  const headerText = useMemo(
+    () => 'Kenali sejarah, keunikan, dan pentingnya Laut Banda bagi masyarakat dan dunia.'.split(' '),
+    []
+  )
 
   return (
     <section ref={sectionRef} id="fakta" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent w-full z-10">
@@ -132,3 +135,5 @@ export default function Fakta() {
     </section>
   )
 }
+
+export default memo(Fakta)
