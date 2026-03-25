@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -12,13 +12,42 @@ const faqItems = [
 
 export default function Fakta() {
   const [openIndex, setOpenIndex] = useState(null)
+  const sectionRef = useRef(null) // Tambahkan useRef untuk memantau section ini
+
   const toggle = (i) => setOpenIndex(prev => (prev === i ? null : i))
+
+  // Tambahkan useEffect untuk IntersectionObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Jika section ini sudah tidak terlihat di layar (user scroll ke tempat lain)
+          if (!entry.isIntersecting) {
+            setOpenIndex(null); // Tutup semua accordion
+          }
+        });
+      },
+      { threshold: 0 } // Terpicu ketika elemen benar-benar keluar dari viewport
+    );
+
+    const currentSection = sectionRef.current;
+    if (currentSection) {
+      observer.observe(currentSection);
+    }
+
+    return () => {
+      if (currentSection) {
+        observer.unobserve(currentSection);
+      }
+    };
+  }, []);
 
   return (
     // PERBAIKAN 1: Hapus overflow-hidden dan warna background solid. 
     // Pakai bg-transparent agar ikan/animasi yang melilingi web bisa lewat bebas di sini.
     // PERBAIKAN RESPONSIVE: Hapus min-h-screen dan ubah padding ke py-16 md:py-24 agar konsisten
-    <section id="fakta" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent w-full z-10">
+    // PERBAIKAN: Tambahkan ref={sectionRef} di sini
+    <section ref={sectionRef} id="fakta" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent w-full z-10">
       <div className="max-w-4xl mx-auto px-4 md:px-6 w-full flex flex-col items-center">
         
         {/* PERBAIKAN 2: Warna diganti ke Biru Terang (#38BDF8) */}

@@ -111,7 +111,8 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
               {item.name}
             </h3>
 
-            <div className="relative w-full sm:w-[85%] lg:w-[75%] flex justify-center items-center">
+            {/* PERBAIKAN: lg:w-[75%] menjadi md:w-[75%] */}
+            <div className="relative w-full sm:w-[85%] md:w-[75%] flex justify-center items-center">
               <button
                 onClick={handlePrev}
                 className="absolute left-0 sm:-left-12 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#7CA1D3] bg-[#0B1420]/90 hover:bg-[#7CA1D3]/20 flex items-center justify-center text-[#7CA1D3] shadow-lg transition-colors"
@@ -188,9 +189,10 @@ export default function Flora() {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth
+      // PERBAIKAN: Ubah ambang batas desktop dari 1024 menjadi 768 agar Desktop Mode HP (980px) terbaca sebagai desktop.
       if (width < 640) setScreenSize('mobile') // Smartphone
-      else if (width < 1024) setScreenSize('tablet') // Tablet
-      else setScreenSize('desktop') // Desktop
+      else if (width < 768) setScreenSize('tablet') // Tablet kecil
+      else setScreenSize('desktop') // Desktop & Desktop Mode di HP
     }
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -225,7 +227,8 @@ export default function Flora() {
   const headerLine2 = "keseimbangan ekosistemnya".split(" ")
 
   return (
-    <section id="flora" className="relative py-16 lg:py-24 flex flex-col bg-transparent overflow-hidden">
+    // PERBAIKAN: lg:py-24 menjadi md:py-24
+    <section id="flora" className="relative py-16 md:py-24 flex flex-col bg-transparent overflow-hidden">
       <div className="relative z-[1] max-w-5xl mx-auto px-6 md:px-12 w-full">
         
         {/* Header Animasi */}
@@ -240,6 +243,7 @@ export default function Flora() {
             Flora
           </span>
           
+          {/* PERBAIKAN: lg:text-4xl menjadi md:text-4xl */}
           <motion.h2 
             variants={{
               hidden: { opacity: 1 },
@@ -251,7 +255,7 @@ export default function Flora() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-white"
+            className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-white"
           >
             {headerLine1.map((word, i) => (
               <motion.span 
@@ -282,8 +286,9 @@ export default function Flora() {
         </motion.div>
 
         {/* Grid Container */}
+        {/* PERBAIKAN: lg:grid-cols-4 dan lg:gap-5 menjadi md:* */}
         <div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 justify-items-center"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-5 justify-items-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -298,7 +303,8 @@ export default function Flora() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-none flex flex-col"
+                // PERBAIKAN: lg:max-w-none menjadi md:max-w-none
+                className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-none flex flex-col"
               >
                 <div
                   className="relative rounded-[1.2rem] overflow-hidden cursor-pointer group transition-transform duration-500 hover:scale-[1.03] shadow-lg border border-white/5 bg-[#0B1420]"
@@ -308,14 +314,18 @@ export default function Flora() {
                     key={item.img}
                     src={item.img}
                     alt={item.name}
-                    wrapperClassName="w-full h-[220px] sm:h-[180px] lg:h-[180px] xl:h-[200px]"
+                    // PERBAIKAN: lg:h-[180px] menjadi md:h-[180px]
+                    wrapperClassName="w-full h-[220px] sm:h-[180px] xl:h-[200px]"
                     imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B1420] via-[#0B1420]/70 to-transparent p-4 lg:p-3 z-20">
-                    <h5 className="text-white font-semibold text-base lg:text-sm leading-tight lg:truncate">{item.name}</h5>
+                  {/* PERBAIKAN: lg:p-3 menjadi md:p-3 */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B1420] via-[#0B1420]/70 to-transparent p-4 md:p-3 z-20">
+                    {/* PERBAIKAN: lg:text-sm lg:truncate menjadi md:* */}
+                    <h5 className="text-white font-semibold text-base md:text-sm leading-tight md:truncate">{item.name}</h5>
                   </div>
                 </div>
-                <p className="mt-3 text-white/70 text-sm lg:text-[11px] leading-relaxed px-1 line-clamp-2">
+                {/* PERBAIKAN: lg:text-[11px] menjadi md:text-[11px] */}
+                <p className="mt-3 text-white/70 text-sm md:text-[11px] lg:text-xs leading-relaxed px-1 line-clamp-2">
                   {item.desc}
                 </p>
               </motion.div>
@@ -324,7 +334,8 @@ export default function Flora() {
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-center gap-4 mt-4 lg:mt-6">
+        {/* PERBAIKAN: lg:mt-6 menjadi md:mt-6 */}
+        <div className="flex items-center justify-center gap-4 mt-4 md:mt-6">
           <button onClick={prevPage} className="w-10 h-10 rounded-full border border-[#7CA1D3]/50 bg-transparent hover:bg-[#7CA1D3]/10 transition-colors flex items-center justify-center text-[#7CA1D3] shrink-0">
             <ChevronLeft size={20} />
           </button>
