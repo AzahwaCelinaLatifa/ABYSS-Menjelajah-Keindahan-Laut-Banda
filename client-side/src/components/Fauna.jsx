@@ -4,9 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import ImageWithSkeleton from './ImageWithSkeleton'
 
-/* ============================================================
-   Import semua gambar fauna
-   ============================================================ */
 import napoleon   from '../assets/fauna/Ikan Napoleon (Cheilinus undulatus).webp'
 import kakap      from '../assets/fauna/Ikan Kakap (Lutjanidae family).webp'
 import kerapu     from '../assets/fauna/Ikan Kerapu.webp'
@@ -28,9 +25,6 @@ import penyuHijau from '../assets/fauna/Penyu Hijau (Chelonia mydas).webp'
 import penyuSisik from '../assets/fauna/Penyu Sisik (Eretmochelys imbricata).webp'
 import pygmy      from '../assets/fauna/Pygmy Seahorse.webp'
 
-/* ============================================================
-   Data Fauna
-   ============================================================ */
 const faunaData = [
   { img: napoleon,    name: 'Ikan Napoleon (Cheilinus undulatus)',        desc: 'Ikan besar berwarna hijau kebiruan yang hidup soliter di terumbu karang dangkal Laut Banda.', 
     info: 'Ikan Napoleon adalah ikan karang raksasa yang memiliki ciri khas punuk di dahi dan bibir tebal. Ikan ini hidup sendiri di karang dangkal dan membantu menjaga kesehatan ekosistem dengan memakan hama laut. Karena keindahan warna dan jumlahnya yang semakin sedikit, ikan ini sekarang menjadi spesies yang sangat dilindungi.' },
@@ -74,9 +68,7 @@ const faunaData = [
     info:'Pygmy Seahorse adalah salah satu spesies kuda laut terkecil di dunia yang banyak ditemukan di kawasan Segitiga Karang, Asia Tenggara. Dengan tinggi kurang dari 2 sentimeter, ikan dari keluarga Syngnathidae ini memiliki mulut berbentuk tabung untuk menghisap makanan.' },
 ]
 
-/* ============================================================
-   Modal Component
-   ============================================================ */
+/* Modal Component */
 function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
   if (selectedIndex === null) return null;
 
@@ -174,9 +166,7 @@ function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
   )
 }
 
-/* ============================================================
-   Card animation variants
-   ============================================================ */
+/* Card animation variants */
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: (i) => ({
@@ -186,9 +176,7 @@ const cardVariants = {
   }),
 }
 
-/* ============================================================
-   Main Fauna Section
-   ============================================================ */
+/* Main Fauna Section */
 export default function Fauna() {
   const [page, setPage] = useState(0)
   const [modalIndex, setModalIndex] = useState(null)
@@ -251,7 +239,6 @@ export default function Fauna() {
             Fauna
           </span>
           
-          {/* PERBAIKAN: Mengganti class teks menjadi identik dengan header menu Lokasi */}
           <motion.h2 
             variants={{
               hidden: { opacity: 1 },

@@ -6,14 +6,13 @@ export default function ImageWithSkeleton({ src, alt, wrapperClassName, imgClass
 
   return (
     <div className={`relative overflow-hidden bg-[#7CA1D3]/10 ${wrapperClassName}`}>
-      {/* Skeleton / Placeholder yang loading */}
       {!isLoaded && (
         <div className="absolute inset-0 z-0 animate-pulse bg-[#7CA1D3]/20" />
       )}
       
-      {/* Gambar Aslinya */}
+      {/* Gambar Asli */}
       <motion.img
-        key={src} // Ini kunci rahasianya biar state kereset otomatis tiap gambar ganti
+        key={src}
         src={src}
         alt={alt}
         initial={{ opacity: 0 }}

@@ -64,7 +64,6 @@ export default function Navbar() {
               <span className="text-xl font-bold tracking-tight text-white shrink-0">Abyss</span>
             </a>
 
-            {/* PERBAIKAN: Jarak gap dikurangi di layar nanggung agar menu muat & tidak tumpah */}
             <ul className="hidden md:flex items-center gap-1 lg:gap-2">
               {navLinks.map(({ href, label }) => {
                 const isActive = activeLink === href
@@ -73,8 +72,7 @@ export default function Navbar() {
                     <a
                       href={href}
                       onClick={() => handleClick(href)}
-                      /* PERBAIKAN: Tambahkan whitespace-nowrap agar teks menu tidak turun ke bawah.
-                         Ubah ukuran font dan padding menyesuaikan layar. */
+
                       className={`relative whitespace-nowrap px-2.5 py-1.5 lg:px-4 rounded-full text-[13px] lg:text-[15px] font-medium transition-all duration-300
                         ${isActive
                           ? 'text-[#7CA1D3] border border-[#7CA1D3] bg-[#7CA1D3]/10'

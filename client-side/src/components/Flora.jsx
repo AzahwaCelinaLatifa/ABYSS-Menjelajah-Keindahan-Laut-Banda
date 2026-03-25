@@ -2,12 +2,8 @@ import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-// Pastikan path-nya sesuai dengan folder kamu
 import ImageWithSkeleton from './ImageWithSkeleton' 
 
-/* ============================================================
-   Import semua gambar flora
-   ============================================================ */
 import terumbu from '../assets/flora/Terumbu Karang (Coral Reefs).webp'
 import kima from '../assets/flora/Kima (Giant Clams).webp'
 import lamun from '../assets/flora/Padang Lamun (Seagrass Beds).webp'
@@ -33,9 +29,7 @@ import syringodium from '../assets/flora/Syringodium isoetifolium.webp'
 import thalassia from '../assets/flora/Thalassia hemprichii .webp'
 import turbinaria from '../assets/flora/Turbinaria sp..webp'
 
-/* ============================================================
-   Data Flora
-   ============================================================ */
+
 const floraData = [
   { img: terumbu, name: 'Terumbu Karang (Coral Reefs)', desc: 'Ekosistem laut yang dibentuk oleh karang keras dan penting sebagai habitat utama biota laut.', info:'Terumbu Karang Laut Banda adalah ekosistem bawah laut di Kepulauan Banda yang kaya akan ratusan spesies ikan dan didominasi oleh karang jenis Acropora. Selain menjadi habitat alami yang sangat beragam, area ini memiliki nilai ekonomi penting namun kini terancam oleh pencemaran dan aktivitas manusia.' },
   { img: kima, name: 'Kima (Giant Clams)', desc: 'Moluska besar yang menyumbang kalsium karbonat untuk pertumbuhan terumbu karang.', info:'Kima (giant clams) merupakan moluska laut berukuran besar dari famili Tridacnidae yang hidup menempel pada terumbu karang di perairan tropis, terutama di kawasan Indo-Pasifik. Selain dikenal sebagai salah satu moluska terbesar di dunia, kima memiliki peran ekologis penting karena cangkangnya tersusun dari kalsium karbonat yang turut menyumbang material bagi pembentukan dan pertumbuhan terumbu karang. Kima juga bersimbiosis dengan alga zooxanthellae di dalam jaringan tubuhnya, yang membantu proses fotosintesis sehingga meningkatkan produktivitas ekosistem karang dan menjaga keseimbangan lingkungan laut.' },
@@ -63,9 +57,7 @@ const floraData = [
   { img: turbinaria, name: 'Turbinaria sp.', desc: 'Alga coklat berbentuk corong berlapis yang membentuk koloni padat di terumbu terbuka.', info:'Flora laut ini memiliki tekstur yang sangat keras dan kaku, dengan bentuk daun yang menyerupai corong atau payung terbalik yang tepinya bergerigi tajam. Turbinaria biasanya melekat sangat kuat pada bebatuan karang di area yang terkena hempasan ombak kuat, karena struktur tubuhnya yang kokoh mampu menahan tekanan mekanis dari energi laut.' },
 ]
 
-/* ============================================================
-   Modal Component
-   ============================================================ */
+/* Modal Component */
 function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
   if (selectedIndex === null) return null;
 
@@ -163,9 +155,7 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
   )
 }
 
-/* ============================================================
-   Card animation variants
-   ============================================================ */
+/* Card animation */
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: (i) => ({
@@ -175,9 +165,7 @@ const cardVariants = {
   }),
 }
 
-/* ============================================================
-   Main Flora Section
-   ============================================================ */
+/* Main Flora Section */
 export default function Flora() {
   const [page, setPage] = useState(0)
   const [modalIndex, setModalIndex] = useState(null)
@@ -219,8 +207,7 @@ export default function Flora() {
     }, 5000)
     return () => clearInterval(timer)
   }, [totalPages, modalIndex, isHovered])
-
-  // Memecah kalimat persis seperti yang ada sebelumnya untuk mempertahankan <br /> 
+ 
   const headerLine1 = "Macam flora laut Banda yang menjaga".split(" ")
   const headerLine2 = "keseimbangan ekosistemnya".split(" ")
 
@@ -240,7 +227,6 @@ export default function Flora() {
             Flora
           </span>
           
-          {/* PERBAIKAN: Penyelarasan class typography dengan menu lainnya */}
           <motion.h2 
             variants={{
               hidden: { opacity: 1 },

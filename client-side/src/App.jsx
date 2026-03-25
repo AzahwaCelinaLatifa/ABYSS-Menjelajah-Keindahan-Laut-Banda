@@ -27,7 +27,6 @@ export default function App() {
 
   const transitionConfig = { type: "spring", bounce: 0, duration: 0.4 }
   
-  // PERBAIKAN: Lebar menyesuaikan w-60 yang baru di Sidebar.jsx
   const SIDEBAR_WIDTH = 240; 
 
   return (

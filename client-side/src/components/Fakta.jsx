@@ -40,14 +40,13 @@ export default function Fakta() {
     };
   }, []);
 
-  // Memecah kalimat menjadi array kata untuk animasi yang sama dengan menu lain
   const headerText = "Kenali sejarah, keunikan, dan pentingnya Laut Banda bagi masyarakat dan dunia.".split(" ")
 
   return (
     <section ref={sectionRef} id="fakta" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent w-full z-10">
       <div className="max-w-4xl mx-auto px-4 md:px-6 w-full flex flex-col items-center">
         
-        {/* Header Animasi dengan ukuran serasi */}
+        {/* Header Animasi */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +90,7 @@ export default function Fakta() {
           </motion.h2>
         </motion.div>
 
-        {/* LIST FAQ: ONE PAGE LAYOUT */}
+        {/* LIST FAQ */}
         <div className="w-full flex flex-col gap-3 max-w-4xl">
           {faqItems.map((item, i) => {
             const isOpen = openIndex === i

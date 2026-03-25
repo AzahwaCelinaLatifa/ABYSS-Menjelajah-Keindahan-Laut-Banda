@@ -23,26 +23,17 @@ export default function Hero() {
   return (
     <section
       id="beranda"
-      /* PERBAIKAN: 
-         - Di mobile biasa: pakai min-h-[100dvh] biar pas.
-         - Di mode desktop/laptop (md ke atas): pakai h-[100vh] TAPI dikunci dengan max-h-[850px] dan lg:max-h-[950px].
-         Ini mencegah efek "melar ke bawah" yang lebay saat HP masuk Desktop Mode.
-      */
       className="relative pt-24 md:pt-28 pb-16 min-h-[100dvh] md:min-h-[600px] md:h-[100vh] md:max-h-[850px] lg:max-h-[950px] flex items-center text-white overflow-hidden"
     >
-      {/* Background Image Absolute */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${backgroundHeader})` }}
       />
 
-      {/* Overlay Warna Biru Gelap ke Hitam (Smooth fade) */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#004389]/60 via-[#030A14]/80 to-[#0A1628] z-0 pointer-events-none" />
 
-      {/* Jembatan Blending Ekstra */}
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/80 to-transparent z-0 pointer-events-none" />
 
-      {/* Konten Utama */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-12 w-full mt-8 md:mt-0">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 md:gap-8 lg:gap-16">
 

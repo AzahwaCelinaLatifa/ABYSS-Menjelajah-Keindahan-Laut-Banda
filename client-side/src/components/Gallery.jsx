@@ -8,10 +8,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-// IMPORT SKELETON
 import ImageWithSkeleton from './ImageWithSkeleton'
 
-// Import gambar galeri
 import menyelam from '../assets/galeri/Menyelam (Scuba Diving).webp'
 import gunungApi from '../assets/galeri/Gunung Api Banda.webp'
 import lumbaLumba from '../assets/galeri/Tur Lumba-Lumba.webp'

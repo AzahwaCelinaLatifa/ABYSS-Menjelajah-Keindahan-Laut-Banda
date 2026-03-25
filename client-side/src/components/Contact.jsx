@@ -33,7 +33,7 @@ export default function Contact() {
     >
       <div className="max-w-4xl mx-auto px-6 lg:px-8 w-full">
 
-        {/* ===== TOP ROW: Judul Form + Form ===== */}
+        {/* Contact Form */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-center">
           
           <motion.div 
@@ -116,7 +116,7 @@ export default function Contact() {
         {/* Divider Ramping */}
         <div className="w-full h-[1px] bg-white/10 mb-6" />
 
-        {/* ===== BOTTOM ROW: Judul Info + Info ===== */}
+        {/* ContactInfo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +146,7 @@ export default function Contact() {
 
       </div>
 
-      {/* ===== TOAST (UPDATED STYLE) ===== */}
+      {/* TOAST notification */}
       <AnimatePresence>
         {sent && (
           <motion.div

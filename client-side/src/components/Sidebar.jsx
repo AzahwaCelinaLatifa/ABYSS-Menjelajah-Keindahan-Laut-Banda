@@ -91,7 +91,6 @@ export default function Sidebar({ open, setOpen }) {
       <motion.button
         onClick={() => setOpen(!open)}
         initial={false}
-        // PERBAIKAN: Ubah pergeseran tombol jadi -240px sejalan dengan lebar sidebar yang baru
         animate={{ x: open && !isMobile ? -240 : 0 }}
         transition={transitionConfig}
         className="fixed top-1/2 right-0 -translate-y-1/2 z-[115] bg-secondary hover:bg-[#7CA1D3] rounded-l-2xl p-2 shadow-xl"
@@ -110,7 +109,6 @@ export default function Sidebar({ open, setOpen }) {
         initial={{ x: '100%' }}
         animate={{ x: open ? '0%' : '100%' }}
         transition={transitionConfig}
-        // PERBAIKAN: Ubah w-56 menjadi w-60 (240px)
         className="fixed inset-y-0 right-0 w-60 z-[110] bg-[#001123] border-l border-white/20 shadow-2xl thin-scrollbar overflow-y-auto overscroll-contain"
       >
         <div className="p-4">
