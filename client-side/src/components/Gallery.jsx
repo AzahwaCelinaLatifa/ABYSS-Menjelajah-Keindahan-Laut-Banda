@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -9,6 +9,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 import ImageWithSkeleton from './ImageWithSkeleton'
+import { useIsMobileRaf } from '../hooks/useViewportRaf'
 
 import menyelam from '../assets/galeri/Menyelam (Scuba Diving).webp'
 import gunungApi from '../assets/galeri/Gunung Api Banda.webp'
@@ -38,45 +39,62 @@ const galeriItems = [
   { img: pulauRun, title: 'Pulau Run', desc: 'Pulau kecil yang memiliki nilai sejarah luar biasa karena pernah ditukar dengan Manhattan, New York, dalam Perjanjian Breda 1667. Pertukaran ini dilakukan demi mendapatkan kendali penuh atas monopoli perdagangan pala.' },
 ]
 
-export default function Gallery() {
+function Gallery() {
   const [flippedIndex, setFlippedIndex] = useState(null)
-  const [isMobile, setIsMobile] = useState(false)
+  const isMobile = useIsMobileRaf(768)
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+  const swiperModules = useMemo(() => [Navigation, Pagination], [])
+  const swiperStyle = useMemo(
+    () => ({
+      '--swiper-pagination-color': '#7CA1D3',
+      '--swiper-pagination-bullet-inactive-color': '#ffffff',
+      '--swiper-pagination-bullet-inactive-opacity': '0.3',
+    }),
+    []
+  )
+  const desktopPages = useMemo(() => [0, 1], [])
+
+  const resetFlippedIndex = useCallback(() => {
+    setFlippedIndex(null)
+  }, [])
+
+  const handleCardToggle = useCallback((cardIndex) => {
+    setFlippedIndex((prev) => (prev === cardIndex ? null : cardIndex))
   }, [])
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      const galeriSection = document.getElementById('galeri');
+      const galeriSection = document.getElementById('galeri')
       if (galeriSection && !galeriSection.contains(e.target)) {
-        setFlippedIndex(null);
+        setFlippedIndex(null)
       }
-    };
+    }
+
+    const handleHashChange = () => {
+      setFlippedIndex(null)
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) setFlippedIndex(null);
-        });
+          if (!entry.isIntersecting) setFlippedIndex(null)
+        })
       },
       { threshold: 0 }
-    );
+    )
 
-    const galeriEl = document.getElementById('galeri');
+    const galeriEl = document.getElementById('galeri')
     if (galeriEl) observer.observe(galeriEl);
     
-    document.addEventListener('click', handleClickOutside);
-    window.addEventListener('hashchange', () => setFlippedIndex(null));
+    document.addEventListener('click', handleClickOutside)
+    window.addEventListener('hashchange', handleHashChange)
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
-      window.removeEventListener('hashchange', () => setFlippedIndex(null));
-      if (galeriEl) observer.unobserve(galeriEl);
-    };
+      document.removeEventListener('click', handleClickOutside)
+      window.removeEventListener('hashchange', handleHashChange)
+      if (galeriEl) observer.unobserve(galeriEl)
+      observer.disconnect()
+    }
   }, []);
 
   return (
@@ -92,19 +110,15 @@ export default function Gallery() {
         <div className="relative group mx-auto max-w-[300px] sm:max-w-[400px] md:max-w-full px-0 md:px-8">
           <Swiper
             key={isMobile ? 'mobile' : 'desktop'}
-            modules={[Navigation, Pagination]}
+            modules={swiperModules}
             spaceBetween={isMobile ? 16 : 24}
             slidesPerView={1}
             loop={true}
-            onSlideChange={() => setFlippedIndex(null)}
+            onSlideChange={resetFlippedIndex}
             navigation={{ nextEl: '.next-g', prevEl: '.prev-g' }}
             pagination={{ clickable: true, dynamicBullets: true }}
             className="w-full pb-10" 
-            style={{
-              '--swiper-pagination-color': '#7CA1D3',
-              '--swiper-pagination-bullet-inactive-color': '#ffffff',
-              '--swiper-pagination-bullet-inactive-opacity': '0.3'
-            }}
+            style={swiperStyle}
           >
             {isMobile ? (
               galeriItems.map((item, idx) => (
@@ -115,14 +129,14 @@ export default function Gallery() {
                       index={`mob-${idx}`}
                       delayIndex={0}
                       flippedIndex={flippedIndex}
-                      setFlippedIndex={setFlippedIndex}
+                      onToggle={handleCardToggle}
                       isMobile={true}
                     />
                   </div>
                 </SwiperSlide>
               ))
             ) : (
-              [0, 1].map((pageIdx) => (
+              desktopPages.map((pageIdx) => (
                 <SwiperSlide key={`desk-${pageIdx}`}>
                   
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -133,7 +147,7 @@ export default function Gallery() {
                         index={`desk-${pageIdx}-${i}`}
                         delayIndex={i}
                         flippedIndex={flippedIndex}
-                        setFlippedIndex={setFlippedIndex}
+                        onToggle={handleCardToggle}
                         isMobile={false}
                       />
                     ))}
@@ -155,8 +169,18 @@ export default function Gallery() {
   )
 }
 
-function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, delayIndex = 0 }) {
-  const isFlipped = flippedIndex === index;
+export default memo(Gallery)
+
+const GalleryCard = memo(function GalleryCard({ item, index, flippedIndex, onToggle, isMobile, delayIndex = 0 }) {
+  const isFlipped = flippedIndex === index
+  const handleClick = useCallback(
+    (e) => {
+      e.stopPropagation()
+      onToggle(index)
+    },
+    [index, onToggle]
+  )
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -164,13 +188,10 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
       
-      className={`relative w-full cursor-pointer [perspective:1000px] ${isMobile ? 'aspect-[4/5]' : 'h-44 md:h-[200px]'}`}
-      onClick={(e) => {
-        e.stopPropagation();
-        setFlippedIndex(isFlipped ? null : index);
-      }}
+      className={`relative w-full cursor-pointer [perspective:1000px] transform-gpu ${isMobile ? 'aspect-[4/5]' : 'h-44 md:h-[200px]'}`}
+      onClick={handleClick}
     >
-      <div className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
+      <div className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] will-change-transform ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
         
         {/* SISI DEPAN */}
         <div className="absolute inset-0 [backface-visibility:hidden] border border-white/10 shadow-lg rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-[#0B1420]">
@@ -200,4 +221,4 @@ function GalleryCard({ item, index, flippedIndex, setFlippedIndex, isMobile, del
       </div>
     </motion.div>
   )
-}
+})

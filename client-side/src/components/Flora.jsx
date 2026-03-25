@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useScreenTierRaf } from '../hooks/useViewportRaf'
 
 import ImageWithSkeleton from './ImageWithSkeleton' 
 
@@ -170,20 +171,8 @@ export default function Flora() {
   const [page, setPage] = useState(0)
   const [modalIndex, setModalIndex] = useState(null)
   const [isHovered, setIsHovered] = useState(false)
-  
-  const [screenSize, setScreenSize] = useState('desktop')
 
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth
-      if (width < 640) setScreenSize('mobile') 
-      else if (width < 768) setScreenSize('tablet') 
-      else setScreenSize('desktop') 
-    }
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  const screenSize = useScreenTierRaf()
 
   const itemsPerPage = screenSize === 'mobile' ? 1 : screenSize === 'tablet' ? 2 : 4
   const totalPages = Math.ceil(floraData.length / itemsPerPage)

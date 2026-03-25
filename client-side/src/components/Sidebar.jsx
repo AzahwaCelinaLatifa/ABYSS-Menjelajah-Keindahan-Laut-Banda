@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIsMobileRaf } from '../hooks/useViewportRaf'
 
 import toggleSvg from '../assets/toggle-button-sidebar.webp'
 import berita1 from '../assets/berita/Berita1.webp'
@@ -37,15 +38,7 @@ const newsItems = [
 const transitionConfig = { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
 
 export default function Sidebar({ open, setOpen }) {
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth < 768 : false
-  )
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  const isMobile = useIsMobileRaf(768)
 
   useEffect(() => {
     if (isMobile) {
@@ -138,6 +131,8 @@ export default function Sidebar({ open, setOpen }) {
                   <img
                     src={item.img}
                     alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 group-active:scale-110 transition-transform duration-300"
                   />
                 </div>

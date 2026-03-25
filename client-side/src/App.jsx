@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import Navbar from './components/Navbar'
@@ -11,23 +11,15 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Sidebar from './components/Sidebar'
 import OceanBackground from './components/OceanBackground' 
+import { useIsMobileRaf } from './hooks/useViewportRaf'
+
+const SIDEBAR_WIDTH = 240
 
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth < 768 : false
-  )
+  const isMobile = useIsMobileRaf(768)
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const transitionConfig = { type: "spring", bounce: 0, duration: 0.4 }
-  
-  const SIDEBAR_WIDTH = 240; 
+  const transitionConfig = useMemo(() => ({ type: 'spring', bounce: 0, duration: 0.4 }), [])
 
   return (
     <div className="relative min-h-screen w-full bg-[#07101E] text-white font-sans overflow-x-hidden">
@@ -39,8 +31,8 @@ export default function App() {
       <motion.div
         animate={{ paddingRight: isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0 }}
         transition={transitionConfig}
-        // PERBAIKAN: Ubah z-[999] menjadi z-[40]
         className="fixed top-0 left-0 right-0 z-[40]"
+        style={{ willChange: 'padding-right' }}
       >
         <Navbar />
       </motion.div>
@@ -52,6 +44,7 @@ export default function App() {
         animate={{ paddingRight: isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0 }}
         transition={transitionConfig}
         className="relative z-10 w-full min-h-screen"
+        style={{ willChange: 'padding-right' }}
       >
         <div className="w-full mx-auto 2xl:max-w-[1536px] flex flex-col">
           <main>

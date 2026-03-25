@@ -1,3 +1,4 @@
+import { memo, useCallback, useMemo } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 import backgroundHeader from '../assets/background-header.webp'
@@ -16,9 +17,17 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
-export default function Hero() {
-  const line1 = "Menjelajahi Keindahan".split(" ")
-  const line2 = "Laut Banda".split(" ")
+function Hero() {
+  const line1 = useMemo(() => 'Menjelajahi Keindahan'.split(' '), [])
+  const line2 = useMemo(() => 'Laut Banda'.split(' '), [])
+
+  const handleScrollToFlora = useCallback((e) => {
+    e.preventDefault()
+    const targetElement = document.getElementById('flora')
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [])
 
   return (
     <section
@@ -89,6 +98,8 @@ export default function Hero() {
             <motion.img
               src={ikanPari}
               alt="Ikan Pari"
+              loading="eager"
+              decoding="async"
               animate={{ 
                 y: [-15, 15, -15], 
                 rotate: [-2, 2, -2] 
@@ -98,7 +109,7 @@ export default function Hero() {
                 repeat: Infinity, 
                 ease: "easeInOut" 
               }}
-              className="w-full h-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-lg drop-shadow-2xl pointer-events-none"
+              className="w-full h-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-lg drop-shadow-2xl pointer-events-none will-change-transform transform-gpu"
             />
           </motion.div>
 
@@ -108,13 +119,7 @@ export default function Hero() {
       {/* Tanda Panah Scroll */}
       <motion.a
         href="#flora"
-        onClick={(e) => {
-          e.preventDefault();
-          const targetElement = document.getElementById('flora');
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        }}
+        onClick={handleScrollToFlora}
         className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 text-[#7CA1D3] z-[100] p-4 cursor-pointer pointer-events-auto hover:text-white transition-colors duration-300 flex items-center justify-center"
         aria-label="Scroll ke bawah"
         animate={{ y: [0, 10, 0] }}
@@ -129,3 +134,5 @@ export default function Hero() {
     </section>
   )
 }
+
+export default memo(Hero)

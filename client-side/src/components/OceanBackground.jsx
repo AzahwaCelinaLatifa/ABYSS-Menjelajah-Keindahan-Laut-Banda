@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import circleSvg from '../assets/circle.webp';
 import ikanKecil from '../assets/ikan kecil.webp';
 
-const DodgeElement = ({ src, parentClassName, imgClassName, alt }) => {
+const DodgeElement = memo(function DodgeElement({ src, parentClassName, imgClassName, alt }) {
   const imgRef = useRef(null);
   const requestRef = useRef();
 
@@ -61,14 +61,16 @@ const DodgeElement = ({ src, parentClassName, imgClassName, alt }) => {
         ref={imgRef}
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
 
         className={`w-full h-full object-contain transition-transform duration-500 ease-out select-none pointer-events-none will-change-transform ${imgClassName}`}
       />
     </div>
   );
-};
+});
 
-export default function OceanBackground() {
+function OceanBackground() {
   const interactiveLightRef = useRef(null);
   const lightRequestRef = useRef();
 
@@ -161,3 +163,5 @@ export default function OceanBackground() {
     </>
   );
 }
+
+export default memo(OceanBackground)
