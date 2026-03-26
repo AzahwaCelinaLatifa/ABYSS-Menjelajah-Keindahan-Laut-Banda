@@ -2,23 +2,76 @@ import React, { memo, useEffect, useRef } from 'react';
 import circleSvg from '../assets/circle.webp';
 import ikanKecil from '../assets/ikan kecil.webp';
 
+let pointerFrame = 0;
+let pointerListening = false;
+let pointerLastX = null;
+let pointerLastY = null;
+const pointerSubscribers = new Set();
+
+const emitPointer = () => {
+  pointerFrame = 0;
+  if (pointerLastX === null || pointerLastY === null) return;
+  pointerSubscribers.forEach((cb) => cb(pointerLastX, pointerLastY));
+};
+
+const schedulePointerEmit = (x, y) => {
+  pointerLastX = x;
+  pointerLastY = y;
+  if (pointerFrame) return;
+  pointerFrame = window.requestAnimationFrame(emitPointer);
+};
+
+const handlePointerMove = (e) => {
+  schedulePointerEmit(e.clientX, e.clientY);
+};
+
+const handlePointerDown = (e) => {
+  schedulePointerEmit(e.clientX, e.clientY);
+};
+
+const startPointerListener = () => {
+  if (pointerListening || typeof window === 'undefined') return;
+  pointerListening = true;
+  window.addEventListener('pointermove', handlePointerMove, { passive: true });
+  window.addEventListener('pointerdown', handlePointerDown, { passive: true });
+};
+
+const stopPointerListener = () => {
+  if (!pointerListening || typeof window === 'undefined') return;
+  pointerListening = false;
+  window.removeEventListener('pointermove', handlePointerMove);
+  window.removeEventListener('pointerdown', handlePointerDown);
+  if (pointerFrame) {
+    window.cancelAnimationFrame(pointerFrame);
+    pointerFrame = 0;
+  }
+};
+
+const subscribePointer = (callback) => {
+  pointerSubscribers.add(callback);
+  startPointerListener();
+  return () => {
+    pointerSubscribers.delete(callback);
+    if (pointerSubscribers.size === 0) {
+      stopPointerListener();
+    }
+  };
+};
+
 const DodgeElement = memo(function DodgeElement({ src, parentClassName, imgClassName, alt }) {
   const imgRef = useRef(null);
-  const requestRef = useRef();
+  const isDodgingRef = useRef(false);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const handleMove = (e) => {
+    const unsubscribe = subscribePointer((clientX, clientY) => {
       if (!imgRef.current) return;
       
       const rect = imgRef.current.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
       const y = rect.top + rect.height / 2;
-
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
       const dx = clientX - x;
       const dy = clientY - y;
@@ -26,32 +79,24 @@ const DodgeElement = memo(function DodgeElement({ src, parentClassName, imgClass
 
       const interactionRadius = 120; 
 
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
-
-      requestRef.current = requestAnimationFrame(() => {
-        if (!imgRef.current) return;
+      if (distance < interactionRadius) {
+        const force = (interactionRadius - distance) / interactionRadius;
+        const safeDistance = Math.max(distance, 1);
+        const pushX = -(dx / safeDistance) * force * 50; 
+        const pushY = -(dy / safeDistance) * force * 50;
         
-        if (distance < interactionRadius) {
-          const force = (interactionRadius - distance) / interactionRadius;
-          const pushX = -(dx / distance) * force * 50; 
-          const pushY = -(dy / distance) * force * 50;
-          
-          imgRef.current.style.transform = `translate(${pushX}px, ${pushY}px) scale(0.95)`;
-        } else {
-          imgRef.current.style.transform = `translate(0px, 0px) scale(1)`;
+        imgRef.current.style.transform = `translate(${pushX}px, ${pushY}px) scale(0.95)`;
+        isDodgingRef.current = true;
+      } else {
+        if (isDodgingRef.current) {
+          imgRef.current.style.transform = '';
+          isDodgingRef.current = false;
         }
-      });
-    };
-
-    window.addEventListener('mousemove', handleMove);
-    window.addEventListener('touchmove', handleMove, { passive: true });
-    window.addEventListener('touchstart', handleMove, { passive: true });
+      }
+    });
 
     return () => {
-      window.removeEventListener('mousemove', handleMove);
-      window.removeEventListener('touchmove', handleMove);
-      window.removeEventListener('touchstart', handleMove);
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+      unsubscribe();
     };
   }, []);
 
@@ -63,8 +108,8 @@ const DodgeElement = memo(function DodgeElement({ src, parentClassName, imgClass
         alt={alt}
         loading="lazy"
         decoding="async"
-
-        className={`w-full h-full object-contain transition-transform duration-500 ease-out select-none pointer-events-none will-change-transform ${imgClassName}`}
+        /* Hapus will-change-transform untuk mencegah bug "membeku" di awal render */
+        className={`w-full h-full object-contain transition-transform duration-500 ease-out select-none pointer-events-none ${imgClassName}`}
       />
     </div>
   );
@@ -72,27 +117,15 @@ const DodgeElement = memo(function DodgeElement({ src, parentClassName, imgClass
 
 function OceanBackground() {
   const interactiveLightRef = useRef(null);
-  const lightRequestRef = useRef();
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const handleLightMove = (e) => {
-      if (lightRequestRef.current) cancelAnimationFrame(lightRequestRef.current);
-
-      lightRequestRef.current = requestAnimationFrame(() => {
-        if (!interactiveLightRef.current) return;
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        const y = e.touches ? e.touches[0].clientY : e.clientY;
-        
-        interactiveLightRef.current.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(56, 189, 248, 0.12), transparent 80%)`;
-      });
-    };
-
-    window.addEventListener('mousemove', handleLightMove);
-    window.addEventListener('touchmove', handleLightMove, { passive: true });
-    window.addEventListener('touchstart', handleLightMove, { passive: true });
+    const unsubscribe = subscribePointer((x, y) => {
+      if (!interactiveLightRef.current) return;
+      interactiveLightRef.current.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(56, 189, 248, 0.12), transparent 80%)`;
+    });
 
     if (interactiveLightRef.current) {
       const centerX = window.innerWidth / 2;
@@ -101,10 +134,7 @@ function OceanBackground() {
     }
 
     return () => {
-      window.removeEventListener('mousemove', handleLightMove);
-      window.removeEventListener('touchmove', handleLightMove);
-      window.removeEventListener('touchstart', handleLightMove);
-      if (lightRequestRef.current) cancelAnimationFrame(lightRequestRef.current);
+      unsubscribe();
     };
   }, []);
 
@@ -126,6 +156,13 @@ function OceanBackground() {
           animation: oceanSparkle 12s infinite alternate ease-in-out;
           will-change: background-position, opacity;
         }
+
+        /* * FIX IKAN: Memaksa jalan secara otomatis saat web dibuka!
+         * Menggunakan nilai negatif agar letaknya menyebar dan tidak saling menunggu. 
+         */
+        .i-fast { animation-play-state: running !important; animation-delay: -3s !important; }
+        .i-med  { animation-play-state: running !important; animation-delay: -12s !important; }
+        .i-slow { animation-play-state: running !important; animation-delay: -25s !important; }
 
         /* Matikan semua animasi otomatis jika pengguna memiliki masalah sensitivitas gerakan */
         @media (prefers-reduced-motion: reduce) {

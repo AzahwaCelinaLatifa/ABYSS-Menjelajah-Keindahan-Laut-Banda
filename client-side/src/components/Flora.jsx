@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { memo, useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useScreenTierRaf } from '../hooks/useViewportRaf'
@@ -167,7 +167,7 @@ const cardVariants = {
 }
 
 /* Main Flora Section */
-export default function Flora() {
+function Flora() {
   const [page, setPage] = useState(0)
   const [modalIndex, setModalIndex] = useState(null)
   const [isHovered, setIsHovered] = useState(false)
@@ -197,65 +197,22 @@ export default function Flora() {
     return () => clearInterval(timer)
   }, [totalPages, modalIndex, isHovered])
  
-  const headerLine1 = "Macam flora laut Banda yang menjaga".split(" ")
-  const headerLine2 = "keseimbangan ekosistemnya".split(" ")
-
   return (
     <section id="flora" className="relative py-16 md:py-24 flex flex-col bg-transparent overflow-hidden">
       <div className="relative z-[1] max-w-5xl mx-auto px-6 md:px-12 w-full">
         
-        {/* Header Animasi */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8 w-full"
-        >
+        {/* Header */}
+        <div className="text-center mb-8 w-full">
           <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             Flora
           </span>
           
-          <motion.h2 
-            variants={{
-              hidden: { opacity: 1 },
-              visible: { 
-                opacity: 1, 
-                transition: { staggerChildren: 0.08, delayChildren: 0.3 } 
-              }
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            className="mt-2 text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-white max-w-3xl mx-auto"
-          >
-            {headerLine1.map((word, i) => (
-              <motion.span 
-                key={`fl1-${i}`} 
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 15, stiffness: 150 } }
-                }}
-                className="inline-block mr-[0.25em]"
-              >
-                {word}
-              </motion.span>
-            ))}
+          <h2 className="mt-2 text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-white max-w-3xl mx-auto">
+            Macam flora laut Banda yang menjaga
             <br className="hidden sm:block" />
-            {headerLine2.map((word, i) => (
-              <motion.span 
-                key={`fl2-${i}`} 
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 15, stiffness: 150 } }
-                }}
-                className="inline-block mr-[0.25em]"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.h2>
-        </motion.div>
+            keseimbangan ekosistemnya
+          </h2>
+        </div>
 
         {/* Grid Container */}
         <div 
@@ -344,3 +301,5 @@ export default function Flora() {
     </section>
   )
 }
+
+export default memo(Flora)

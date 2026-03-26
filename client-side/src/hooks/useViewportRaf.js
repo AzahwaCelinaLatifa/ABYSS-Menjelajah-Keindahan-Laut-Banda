@@ -1,68 +1,72 @@
-import { useEffect, useState } from 'react'
+import { useMemo, useSyncExternalStore } from 'react'
+
+const DEFAULT_WIDTH = 1024
+
+const getWidth = () => (typeof window !== 'undefined' ? window.innerWidth : DEFAULT_WIDTH)
+
+let widthSnapshot = getWidth()
+let resizeFrame = 0
+let isListening = false
+const subscribers = new Set()
+
+const notifyIfNeeded = () => {
+  const next = getWidth()
+  if (next === widthSnapshot) return
+  widthSnapshot = next
+  subscribers.forEach((cb) => cb())
+}
+
+const onResize = () => {
+  if (resizeFrame) return
+  resizeFrame = window.requestAnimationFrame(() => {
+    resizeFrame = 0
+    notifyIfNeeded()
+  })
+}
+
+const startListening = () => {
+  if (isListening || typeof window === 'undefined') return
+  isListening = true
+  widthSnapshot = getWidth()
+  window.addEventListener('resize', onResize)
+}
+
+const stopListening = () => {
+  if (!isListening || typeof window === 'undefined') return
+  isListening = false
+  window.removeEventListener('resize', onResize)
+  if (resizeFrame) {
+    window.cancelAnimationFrame(resizeFrame)
+    resizeFrame = 0
+  }
+}
+
+const subscribeWidth = (callback) => {
+  subscribers.add(callback)
+  startListening()
+  return () => {
+    subscribers.delete(callback)
+    if (subscribers.size === 0) stopListening()
+  }
+}
+
+const getClientSnapshot = () => widthSnapshot
+const getServerSnapshot = () => DEFAULT_WIDTH
+
+function useViewportWidth() {
+  return useSyncExternalStore(subscribeWidth, getClientSnapshot, getServerSnapshot)
+}
 
 export function useIsMobileRaf(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth < breakpoint : false
-  )
-
-  useEffect(() => {
-    let frameId = 0
-
-    const update = () => {
-      frameId = 0
-      const next = window.innerWidth < breakpoint
-      setIsMobile((prev) => (prev === next ? prev : next))
-    }
-
-    const onResize = () => {
-      if (frameId) return
-      frameId = window.requestAnimationFrame(update)
-    }
-
-    onResize()
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      if (frameId) window.cancelAnimationFrame(frameId)
-    }
-  }, [breakpoint])
-
-  return isMobile
+  const width = useViewportWidth()
+  return useMemo(() => width < breakpoint, [width, breakpoint])
 }
 
 export function useScreenTierRaf() {
-  const [screenSize, setScreenSize] = useState(() => {
-    if (typeof window === 'undefined') return 'desktop'
-    const width = window.innerWidth
+  const width = useViewportWidth()
+  return useMemo(() => {
     if (width < 640) return 'mobile'
     if (width < 768) return 'tablet'
     return 'desktop'
-  })
-
-  useEffect(() => {
-    let frameId = 0
-
-    const update = () => {
-      frameId = 0
-      const width = window.innerWidth
-      const next = width < 640 ? 'mobile' : width < 768 ? 'tablet' : 'desktop'
-      setScreenSize((prev) => (prev === next ? prev : next))
-    }
-
-    const onResize = () => {
-      if (frameId) return
-      frameId = window.requestAnimationFrame(update)
-    }
-
-    onResize()
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      if (frameId) window.cancelAnimationFrame(frameId)
-    }
-  }, [])
-
-  return screenSize
+  }, [width])
 }

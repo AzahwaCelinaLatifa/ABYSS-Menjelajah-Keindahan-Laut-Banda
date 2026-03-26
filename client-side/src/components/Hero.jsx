@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 import backgroundHeader from '../assets/background-header.webp'
@@ -17,10 +17,20 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
-function Hero() {
-  const line1 = useMemo(() => 'Menjelajahi Keindahan'.split(' '), [])
-  const line2 = useMemo(() => 'Laut Banda'.split(' '), [])
+const heroLine1 = 'Menjelajahi Keindahan'.split(' ')
+const heroLine2 = 'Laut Banda'.split(' ')
 
+const fishInitial = { opacity: 0, scale: 0.85 }
+const fishAnimate = { opacity: 1, scale: 1 }
+const fishTransition = { duration: 0.8, delay: 0.6, ease: 'easeOut' }
+
+const fishLoopAnimate = { y: [-15, 15, -15], rotate: [-2, 2, -2] }
+const fishLoopTransition = { duration: 6, repeat: Infinity, ease: 'easeInOut' }
+
+const arrowAnimate = { y: [0, 10, 0] }
+const arrowTransition = { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
+
+function Hero() {
   const handleScrollToFlora = useCallback((e) => {
     e.preventDefault()
     const targetElement = document.getElementById('flora')
@@ -41,7 +51,8 @@ function Hero() {
 
       <div className="absolute inset-0 bg-gradient-to-b from-[#004389]/60 via-[#030A14]/80 to-[#0A1628] z-0 pointer-events-none" />
 
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/80 to-transparent z-0 pointer-events-none" />
+      {/* PERBAIKAN DI SINI: Shadow bawah dibuat lebih tipis (h-24) dan transisinya dihaluskan (tanpa via) */}
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A1628] to-transparent z-0 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-12 w-full mt-8 md:mt-0">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 md:gap-8 lg:gap-16">
@@ -57,7 +68,7 @@ function Hero() {
               className="text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.5rem] xl:text-6xl font-bold leading-tight mb-4 sm:mb-6"
               style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}
             >
-              {line1.map((word, i) => (
+              {heroLine1.map((word, i) => (
                 <motion.span 
                   key={`line1-${i}`} 
                   variants={itemVariants} 
@@ -67,7 +78,7 @@ function Hero() {
                 </motion.span>
               ))}
               <br />
-              {line2.map((word, i) => (
+              {heroLine2.map((word, i) => (
                 <motion.span 
                   key={`line2-${i}`} 
                   variants={itemVariants} 
@@ -91,24 +102,17 @@ function Hero() {
           {/* Gambar Ikan Pari */}
           <motion.div
             className="w-full md:flex-1 flex justify-center mt-6 md:mt-0"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+            initial={fishInitial}
+            animate={fishAnimate}
+            transition={fishTransition}
           >
             <motion.img
               src={ikanPari}
               alt="Ikan Pari"
               loading="eager"
               decoding="async"
-              animate={{ 
-                y: [-15, 15, -15], 
-                rotate: [-2, 2, -2] 
-              }}
-              transition={{ 
-                duration: 6, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
+              animate={fishLoopAnimate}
+              transition={fishLoopTransition}
               className="w-full h-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-lg drop-shadow-2xl pointer-events-none will-change-transform transform-gpu"
             />
           </motion.div>
@@ -122,12 +126,8 @@ function Hero() {
         onClick={handleScrollToFlora}
         className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 text-[#7CA1D3] z-[100] p-4 cursor-pointer pointer-events-auto hover:text-white transition-colors duration-300 flex items-center justify-center"
         aria-label="Scroll ke bawah"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ 
-          duration: 1.5, 
-          repeat: Infinity, 
-          ease: "easeInOut" 
-        }}
+        animate={arrowAnimate}
+        transition={arrowTransition}
       >
         <ChevronDown size={32} strokeWidth={2.5} />
       </motion.a>
