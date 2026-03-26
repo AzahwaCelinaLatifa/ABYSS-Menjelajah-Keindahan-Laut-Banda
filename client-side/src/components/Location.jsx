@@ -1,10 +1,13 @@
 import { memo } from 'react'
 import { motion } from 'framer-motion'
+import { useIsMobileRaf } from '../hooks/useViewportRaf' 
 
 const mapSrc =
   'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15915.244033284768!2d129.9042578!3d-4.5208643!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d6f7f6a738c82a5%3A0xc3f0b069695d8526!2sBanda%20Neira!5e1!3m2!1sid!2sid!4v1708520000000!5m2!1sid!2sid&maptype=satellite'
 
 function Location() {
+  const isMobile = useIsMobileRaf(768)
+
   return (
     <section
       id="lokasi"
@@ -25,10 +28,10 @@ function Location() {
 
         {/* Map Container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
+          whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
+          viewport={isMobile ? undefined : { once: true, amount: 0.3 }}
+          transition={isMobile ? undefined : { duration: 0.5, delay: 0.15 }}
           className="w-full max-w-4xl rounded-3xl overflow-hidden border border-white/10 shadow-lg"
         >
           <iframe
@@ -43,17 +46,17 @@ function Location() {
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+          viewport={isMobile ? undefined : { once: true, amount: 0.5 }}
+          transition={isMobile ? undefined : { duration: 0.5, delay: 0.25 }}
           className="mt-6 text-center"
         >
           <a
             href="https://www.google.com/maps?ll=-4.517902,129.90406&z=14&t=h&hl=id&gl=ID&mapclient=embed&q=Banda+Neira+Kp.+Baru+Kec.+Banda+Kabupaten+Maluku+Tengah,+Maluku"
             target="_blank"
             rel="noopener noreferrer"
-            className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm hover:bg-[#7CA1D3] hover:text-white hover:border-[#7CA1D3] hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#7CA1D3]/40"
+            className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm active:scale-95 active:bg-[#7CA1D3] active:text-white active:border-[#7CA1D3] md:hover:bg-[#7CA1D3] md:hover:text-white md:hover:border-[#7CA1D3] md:hover:scale-105 shadow-lg md:hover:shadow-[#7CA1D3]/40"
           >
             MORE
           </a>

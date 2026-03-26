@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIsMobileRaf } from '../hooks/useViewportRaf'
 
 const faqItems = [
   { q: 'Apa latar belakang geografi dan sejarah awal Laut Banda?', a: 'Sejarah awalnya terkait dengan masyarakat Banda yang sudah sejak ribuan tahun lalu hidup dari perdagangan dan pelayaran. Kepulauan Banda menjadi pusat penting karena merupakan satu-satunya penghasil pala dan fuli di dunia pada masa itu.' },
@@ -10,28 +11,26 @@ const faqItems = [
   { q: 'Bagaimana peran Laut Banda dalam peta perdagangan dan kolonialisme dunia?', a: 'Menjadi pusat perdagangan rempah global yang memberikan kekuatan ekonomi besar bagi Eropa, memicu persaingan kolonial di Nusantara.' },
 ]
 
-// Tambahan: Variant ringan untuk List (Container)
 const listVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 }, // Jeda waktu kemunculan antar kotak
+    transition: { staggerChildren: 0.15 }, 
   },
 }
 
-// Tambahan: Variant ringan untuk Item FAQ
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.5, ease: 'easeOut' } // Pakai easeOut, BUKAN spring
+    transition: { duration: 0.5, ease: 'easeOut' } 
   },
 }
 
-const FaqItem = memo(function FaqItem({ item, index, isOpen, onToggle }) {
+const FaqItem = memo(function FaqItem({ item, index, isOpen, onToggle, isMobile }) {
   return (
-    <motion.div variants={itemVariants} className="w-full z-20">
+    <motion.div variants={isMobile ? undefined : itemVariants} className="w-full z-20">
       <div className={`transition-colors duration-300 rounded-[1.5rem] md:rounded-[2rem] border ${isOpen ? 'bg-[#0B1420] border-[#7CA1D3]' : 'bg-[#0B1420]/50 border-white/10 hover:border-white/20'}`}>
         <button
           onClick={() => onToggle(index)}
@@ -67,6 +66,7 @@ const FaqItem = memo(function FaqItem({ item, index, isOpen, onToggle }) {
 function Fakta() {
   const [openIndex, setOpenIndex] = useState(null)
   const sectionRef = useRef(null)
+  const isMobile = useIsMobileRaf(768)
 
   const toggle = useCallback((i) => setOpenIndex((prev) => (prev === i ? null : i)), [])
 
@@ -98,7 +98,7 @@ function Fakta() {
     <section ref={sectionRef} id="fakta" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent w-full z-10">
       <div className="max-w-4xl mx-auto px-4 md:px-6 w-full flex flex-col items-center">
         
-        {/* Header (Dibiarkan statis agar tidak membebani render) */}
+        {/* Header */}
         <div className="text-center mb-8 w-full">
           <span className="inline-block border border-[#7CA1D3]/50 rounded-full px-8 py-2 text-[#7CA1D3] font-bold tracking-widest uppercase text-sm md:text-base bg-[#7CA1D3]/5">
             FAQ
@@ -109,13 +109,13 @@ function Fakta() {
           </h2>
         </div>
 
-        {/* LIST FAQ - Menggunakan motion.div untuk memicu animasi masuk */}
+        {/* LIST FAQ - Matikan trigger animasi saat di mobile */}
         <motion.div 
           className="w-full flex flex-col gap-3 max-w-4xl"
-          variants={listVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          variants={isMobile ? undefined : listVariants}
+          initial={isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
+          viewport={isMobile ? undefined : { once: true, amount: 0.1 }}
         >
           {faqItems.map((item, i) => {
             return (
@@ -125,6 +125,7 @@ function Fakta() {
                 index={i}
                 isOpen={openIndex === i}
                 onToggle={toggle}
+                isMobile={isMobile}
               />
             )
           })}

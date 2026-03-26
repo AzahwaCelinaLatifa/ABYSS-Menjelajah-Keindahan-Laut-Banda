@@ -49,7 +49,6 @@ function Navbar() {
       })
     }
 
-    // Ensure initial state is correct on hard refresh at non-zero scroll position.
     applyScrolledState()
 
     window.addEventListener('scroll', scheduleScrollCheck, { passive: true })
