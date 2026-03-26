@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -42,6 +42,7 @@ const galeriItems = [
 function Gallery() {
   const [flippedIndex, setFlippedIndex] = useState(null)
   const isMobile = useIsMobileRaf(768)
+  const sectionRef = useRef(null)
 
   const swiperModules = useMemo(() => [Navigation, Pagination], [])
   const swiperStyle = useMemo(
@@ -53,6 +54,8 @@ function Gallery() {
     []
   )
   const desktopPages = useMemo(() => [0, 1], [])
+  const navigationConfig = useMemo(() => ({ nextEl: '.next-g', prevEl: '.prev-g' }), [])
+  const paginationConfig = useMemo(() => ({ clickable: true, dynamicBullets: true }), [])
 
   const resetFlippedIndex = useCallback(() => {
     setFlippedIndex(null)
@@ -64,7 +67,7 @@ function Gallery() {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      const galeriSection = document.getElementById('galeri')
+      const galeriSection = sectionRef.current
       if (galeriSection && !galeriSection.contains(e.target)) {
         setFlippedIndex(null)
       }
@@ -83,7 +86,7 @@ function Gallery() {
       { threshold: 0 }
     )
 
-    const galeriEl = document.getElementById('galeri')
+    const galeriEl = sectionRef.current
     if (galeriEl) observer.observe(galeriEl);
     
     document.addEventListener('click', handleClickOutside)
@@ -98,7 +101,7 @@ function Gallery() {
   }, []);
 
   return (
-    <section id="galeri" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent overflow-hidden">
+    <section ref={sectionRef} id="galeri" className="relative py-16 md:py-24 flex flex-col justify-center bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10 w-full">
         
         <div className="text-center mb-6 md:mb-8">
@@ -115,8 +118,8 @@ function Gallery() {
             slidesPerView={1}
             loop={true}
             onSlideChange={resetFlippedIndex}
-            navigation={{ nextEl: '.next-g', prevEl: '.prev-g' }}
-            pagination={{ clickable: true, dynamicBullets: true }}
+            navigation={navigationConfig}
+            pagination={paginationConfig}
             className="w-full pb-10" 
             style={swiperStyle}
           >
@@ -128,7 +131,7 @@ function Gallery() {
                       item={item}
                       index={`mob-${idx}`}
                       delayIndex={0}
-                      flippedIndex={flippedIndex}
+                      isFlipped={flippedIndex === `mob-${idx}`}
                       onToggle={handleCardToggle}
                       isMobile={true}
                     />
@@ -146,7 +149,7 @@ function Gallery() {
                         item={item}
                         index={`desk-${pageIdx}-${i}`}
                         delayIndex={i}
-                        flippedIndex={flippedIndex}
+                        isFlipped={flippedIndex === `desk-${pageIdx}-${i}`}
                         onToggle={handleCardToggle}
                         isMobile={false}
                       />
@@ -171,8 +174,7 @@ function Gallery() {
 
 export default memo(Gallery)
 
-const GalleryCard = memo(function GalleryCard({ item, index, flippedIndex, onToggle, isMobile, delayIndex = 0 }) {
-  const isFlipped = flippedIndex === index
+const GalleryCard = memo(function GalleryCard({ item, index, isFlipped, onToggle, isMobile, delayIndex = 0 }) {
   const handleClick = useCallback(
     (e) => {
       e.stopPropagation()

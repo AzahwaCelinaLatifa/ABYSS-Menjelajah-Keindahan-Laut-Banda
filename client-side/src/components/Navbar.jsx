@@ -13,6 +13,11 @@ const navLinks = [
   { href: '#kontak',  label: 'Kontak'  },
 ]
 
+const mobileMenuInitial = { opacity: 0, y: -10, scale: 0.95 }
+const mobileMenuAnimate = { opacity: 1, y: 0, scale: 1 }
+const mobileMenuExit = { opacity: 0, y: -10, scale: 0.95 }
+const mobileMenuTransition = { duration: 0.2 }
+
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -64,7 +69,8 @@ function Navbar() {
       entries => {
         for (const e of entries) {
           if (e.isIntersecting) {
-            setActiveLink(`#${e.target.id}`)
+            const next = `#${e.target.id}`
+            setActiveLink((prev) => (prev === next ? prev : next))
             break
           }
         }
@@ -76,8 +82,18 @@ function Navbar() {
   }, [])
 
   const handleClick = useCallback((href) => {
-    setActiveLink(href)
+    setActiveLink((prev) => (prev === href ? prev : href))
     setMobileOpen(false) 
+  }, [])
+
+  const handleNavLinkClick = useCallback((e) => {
+    const href = e.currentTarget.getAttribute('href')
+    if (!href) return
+    handleClick(href)
+  }, [handleClick])
+
+  const toggleMobileMenu = useCallback(() => {
+    setMobileOpen((prev) => !prev)
   }, [])
 
   return (
@@ -92,7 +108,7 @@ function Navbar() {
         <div className="max-w-7xl mx-auto px-5 md:px-8 relative">
           <div className="flex items-center justify-between">
 
-            <a href="#beranda" className="flex items-center gap-2.5 shrink-0" onClick={() => handleClick('#beranda')}>
+            <a href="#beranda" className="flex items-center gap-2.5 shrink-0" onClick={handleNavLinkClick}>
               <img src={logoSvg} alt="Abyss" loading="eager" decoding="async" className="w-7 h-7 object-contain" />
               <span className="text-xl font-bold tracking-tight text-white shrink-0">Abyss</span>
             </a>
@@ -104,7 +120,7 @@ function Navbar() {
                   <li key={href}>
                     <a
                       href={href}
-                      onClick={() => handleClick(href)}
+                      onClick={handleNavLinkClick}
                       className={`relative whitespace-nowrap px-2.5 py-1.5 lg:px-4 rounded-full text-[13px] lg:text-[15px] font-medium transition-all duration-300
                         ${isActive
                           ? 'text-[#7CA1D3] border border-[#7CA1D3] bg-[#7CA1D3]/10'
@@ -120,7 +136,7 @@ function Navbar() {
 
             <button
               className="md:hidden text-white p-2 rounded-lg hover:bg-[#7CA1D3]/20 hover:text-[#7CA1D3] transition-colors shrink-0"
-              onClick={() => setMobileOpen(o => !o)}
+              onClick={toggleMobileMenu}
               aria-label="Menu"
             >
               {mobileOpen ? <X size={26} /> : <Menu size={26} />}
@@ -130,10 +146,10 @@ function Navbar() {
           <AnimatePresence>
             {mobileOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
+                initial={mobileMenuInitial}
+                animate={mobileMenuAnimate}
+                exit={mobileMenuExit}
+                transition={mobileMenuTransition}
                 className="absolute right-5 sm:right-8 top-full mt-3 w-48 z-[50] md:hidden origin-top-right"
               >
                 <div className="bg-[#0B1420]/95 backdrop-blur-xl border border-[#7CA1D3]/40 p-2 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.6)]">
@@ -144,7 +160,7 @@ function Navbar() {
                         <a
                           key={href}
                           href={href}
-                          onClick={() => handleClick(href)}
+                          onClick={handleNavLinkClick}
                           className={`block px-4 py-2.5 text-left rounded-xl text-sm font-medium transition-all duration-300
                             ${isActive
                               ? 'text-[#7CA1D3] bg-[#7CA1D3]/15 shadow-sm'

@@ -20,6 +20,8 @@ export default function App() {
   const isMobile = useIsMobileRaf(768)
 
   const transitionConfig = useMemo(() => ({ type: 'spring', bounce: 0, duration: 0.4 }), [])
+  const sidebarPadding = isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0
+  const layoutAnimate = useMemo(() => ({ paddingRight: sidebarPadding }), [sidebarPadding])
 
   return (
     <div className="relative min-h-screen w-full bg-[#07101E] text-white font-sans overflow-x-hidden">
@@ -29,7 +31,7 @@ export default function App() {
       </div>
 
       <motion.div
-        animate={{ paddingRight: isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0 }}
+        animate={layoutAnimate}
         transition={transitionConfig}
         className="fixed top-0 left-0 right-0 z-[40]"
         style={{ willChange: 'padding-right' }}
@@ -41,7 +43,7 @@ export default function App() {
       
       <motion.div 
         id="main-content"
-        animate={{ paddingRight: isSidebarOpen && !isMobile ? SIDEBAR_WIDTH : 0 }}
+        animate={layoutAnimate}
         transition={transitionConfig}
         className="relative z-10 w-full min-h-screen"
         style={{ willChange: 'padding-right' }}

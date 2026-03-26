@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIsMobileRaf } from '../hooks/useViewportRaf'
@@ -37,7 +37,7 @@ const newsItems = [
 
 const transitionConfig = { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
 
-export default function Sidebar({ open, setOpen }) {
+function Sidebar({ open, setOpen }) {
   const isMobile = useIsMobileRaf(768)
 
   useEffect(() => {
@@ -154,3 +154,5 @@ export default function Sidebar({ open, setOpen }) {
     </>
   )
 }
+
+export default memo(Sidebar)

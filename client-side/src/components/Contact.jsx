@@ -8,10 +8,24 @@ const contactInfo = [
   { icon: MapPin,  label: 'Address',  value: 'Kepulauan Banda, Maluku Tengah, Indonesia' },
 ]
 
-const formItemVariants = {
-  hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-}
+const formHeaderInitial = { opacity: 0, x: -50 }
+const formHeaderAnimate = { opacity: 1, x: 0 }
+const formHeaderViewport = { once: true, amount: 0.2 }
+const formHeaderTransition = { duration: 0.6 }
+
+const formInitial = { opacity: 0, y: 20 }
+const formAnimate = { opacity: 1, y: 0 }
+const formViewport = { once: true, amount: 0.3 }
+const formTransition = { type: 'tween', duration: 0.6, delay: 0.1 }
+
+const contactInfoInitial = { opacity: 0, y: 20 }
+const contactInfoAnimate = { opacity: 1, y: 0 }
+const contactInfoViewport = { once: true, amount: 0.3 }
+const contactInfoTransition = { duration: 0.6, delay: 0.1 }
+
+const toastInitial = { opacity: 0, y: 50, scale: 0.95 }
+const toastAnimate = { opacity: 1, y: 0, scale: 1 }
+const toastExit = { opacity: 0, y: 20, scale: 0.95 }
 
 function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -48,10 +62,10 @@ function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-center">
           
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
+            initial={formHeaderInitial}
+            whileInView={formHeaderAnimate}
+            viewport={formHeaderViewport}
+            transition={formHeaderTransition}
             className="flex flex-col justify-center"
           >
             <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white mb-1">Contact Form</h2>
@@ -61,18 +75,12 @@ function Contact() {
           <motion.form 
             onSubmit={handleSubmit} 
             className="flex flex-col gap-2"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.1 } 
-              }
-            }}
+            initial={formInitial}
+            whileInView={formAnimate}
+            viewport={formViewport}
+            transition={formTransition}
           >
-            <motion.div variants={formItemVariants}>
+            <div>
               <label htmlFor="name" className="block text-[10px] uppercase tracking-wider text-white/50 mb-1">Name</label>
               <input
                 id="name"
@@ -84,9 +92,9 @@ function Contact() {
                 required
                 className="w-full bg-transparent border border-white/40 focus:border-white text-white placeholder-white/20 rounded-full px-4 py-2 text-xs outline-none transition-all"
               />
-            </motion.div>
+            </div>
             
-            <motion.div variants={formItemVariants}>
+            <div>
               <label htmlFor="email" className="block text-[10px] uppercase tracking-wider text-white/50 mb-1">Email</label>
               <input
                 id="email"
@@ -98,9 +106,9 @@ function Contact() {
                 required
                 className="w-full bg-transparent border border-white/40 focus:border-white text-white placeholder-white/20 rounded-full px-4 py-2 text-xs outline-none transition-all"
               />
-            </motion.div>
+            </div>
             
-            <motion.div variants={formItemVariants}>
+            <div>
               <label htmlFor="message" className="block text-[10px] uppercase tracking-wider text-white/50 mb-1">Message</label>
               <textarea
                 id="message"
@@ -112,15 +120,14 @@ function Contact() {
                 required
                 className="w-full bg-transparent border border-white/40 focus:border-white text-white placeholder-white/20 rounded-xl px-4 py-2 text-xs outline-none transition-all resize-none"
               />
-            </motion.div>
+            </div>
             
-            <motion.button
-              variants={formItemVariants}
+            <button
               type="submit"
               className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm hover:bg-[#7CA1D3] hover:text-white hover:border-[#7CA1D3] hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#7CA1D3]/40"
             >
               SUBMIT
-            </motion.button>
+            </button>
           </motion.form>
         </div>
 
@@ -129,10 +136,10 @@ function Contact() {
 
         {/* ContactInfo */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={contactInfoInitial}
+          whileInView={contactInfoAnimate}
+          viewport={contactInfoViewport}
+          transition={contactInfoTransition}
           className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
         >
           <div className="flex flex-col justify-center">
@@ -164,9 +171,9 @@ function Contact() {
       <AnimatePresence>
         {sent && (
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={toastInitial}
+            animate={toastAnimate}
+            exit={toastExit}
             className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-[100] w-auto min-w-[260px] bg-[#001123]/95 backdrop-blur-xl border border-[#7CA1D3]/40 rounded-2xl shadow-[0_8px_30px_rgba(124,161,211,0.2)] p-4 flex items-start justify-between gap-4"
           >
             <div>
