@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -44,7 +44,7 @@ function Gallery() {
   const isMobile = useIsMobileRaf(768)
   const sectionRef = useRef(null)
 
-  const swiperModules = useMemo(() => [Navigation, Pagination], [])
+  const swiperModules = useMemo(() => [Navigation, Pagination, Autoplay], [])
   const swiperStyle = useMemo(
     () => ({
       '--swiper-pagination-color': '#7CA1D3',
@@ -117,6 +117,11 @@ function Gallery() {
             spaceBetween={isMobile ? 16 : 24}
             slidesPerView={1}
             loop={true}
+            autoplay={{
+              delay: 5000, 
+              disableOnInteraction: false, 
+              pauseOnMouseEnter: true, 
+            }}
             onSlideChange={resetFlippedIndex}
             navigation={navigationConfig}
             pagination={paginationConfig}
@@ -185,10 +190,11 @@ const GalleryCard = memo(function GalleryCard({ item, index, isFlipped, onToggle
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
+      // Kondisional: matikan initial dan whileInView saat isMobile
+      initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+      viewport={isMobile ? undefined : { once: true, amount: 0.2 }}
+      transition={isMobile ? undefined : { duration: 0.5, delay: delayIndex * 0.1 }}
       
       className={`relative w-full cursor-pointer [perspective:1000px] transform-gpu ${isMobile ? 'aspect-[4/5]' : 'h-44 md:h-[200px]'}`}
       onClick={handleClick}
@@ -205,16 +211,13 @@ const GalleryCard = memo(function GalleryCard({ item, index, isFlipped, onToggle
           />
           
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-4 md:p-5 z-10 pointer-events-none">
-            
             <p className="text-white font-bold text-sm md:text-base leading-tight tracking-wide">{item.title}</p>
           </div>
         </div>
 
         {/* SISI BELAKANG */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#0A1626] border border-[#7CA1D3]/60 p-4 md:p-5 flex flex-col justify-center items-center text-center rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden">
-          
           <h4 className="text-[#7CA1D3] font-black mb-2 md:mb-3 uppercase text-[11px] md:text-xs tracking-widest">{item.title}</h4>
-        
           <p className="text-white/80 text-[10px] md:text-[11px] leading-snug font-medium line-clamp-5 md:line-clamp-none">
             {item.desc}
           </p>

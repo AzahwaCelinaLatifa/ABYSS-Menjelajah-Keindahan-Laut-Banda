@@ -108,7 +108,6 @@ const DodgeElement = memo(function DodgeElement({ src, parentClassName, imgClass
         alt={alt}
         loading="lazy"
         decoding="async"
-        /* Hapus will-change-transform untuk mencegah bug "membeku" di awal render */
         className={`w-full h-full object-contain transition-transform duration-500 ease-out select-none pointer-events-none ${imgClassName}`}
       />
     </div>

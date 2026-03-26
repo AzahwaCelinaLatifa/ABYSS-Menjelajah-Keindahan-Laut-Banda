@@ -102,10 +102,10 @@ function Sidebar({ open, setOpen }) {
         initial={{ x: '100%' }}
         animate={{ x: open ? '0%' : '100%' }}
         transition={transitionConfig}
-        // PERBAIKAN: Hapus overflow-y-auto di sini, ganti jadi flex flex-col
+        
         className="fixed inset-y-0 right-0 w-60 z-[60] bg-[#001123] border-l border-white/20 shadow-2xl flex flex-col overscroll-contain"
       >
-        {/* PERBAIKAN: Header dipisah dan diberi shrink-0 agar tidak menyusut dan tidak ikut di-scroll */}
+        
         <div className="flex items-center justify-between px-4 pt-5 pb-2.5 border-b border-white/10 shrink-0 bg-[#001123] z-10 relative shadow-sm">
           <h5 className="text-[15px] font-bold text-white">Berita Terkini</h5>
           <button 
@@ -116,7 +116,6 @@ function Sidebar({ open, setOpen }) {
           </button>
         </div>
 
-        {/* PERBAIKAN: Konten berita dibungkus flex-1 dan overflow-y-auto agar bagian ini saja yang nge-scroll */}
         <div className="flex-1 overflow-y-auto thin-scrollbar p-4 pb-8">
           <div className="flex flex-col gap-4">
             {newsItems.map((item, i) => (

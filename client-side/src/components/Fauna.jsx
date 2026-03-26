@@ -70,7 +70,7 @@ const faunaData = [
 ]
 
 /* Modal Component */
-function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
+function FaunaModal({ selectedIndex, setSelectedIndex, onClose, isMobile }) {
   if (selectedIndex === null) return null;
 
   const item = faunaData[selectedIndex];
@@ -94,10 +94,10 @@ function FaunaModal({ selectedIndex, setSelectedIndex, onClose }) {
         onClick={onClose}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? 0 : 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          exit={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? 0 : 20 }}
+          transition={isMobile ? { duration: 0.2 } : { type: 'spring', damping: 25, stiffness: 300 }}
           className="relative bg-[#0B1420] border border-[#7CA1D3]/40 rounded-[1.5rem] max-w-3xl w-[92%] sm:w-full flex flex-col shadow-2xl h-[65vh] sm:h-[70vh] max-h-[600px] overflow-hidden"
           onClick={e => e.stopPropagation()}
         >
@@ -184,9 +184,10 @@ function Fauna() {
   const [isHovered, setIsHovered] = useState(false)
 
   const screenSize = useScreenTierRaf()
+  const isMobile = screenSize === 'mobile'
 
   // LOGIKA RESPONSIVE Tetap: Mobile = 1, Tablet = 2, Desktop = 4
-  const itemsPerPage = screenSize === 'mobile' ? 1 : screenSize === 'tablet' ? 2 : 4
+  const itemsPerPage = isMobile ? 1 : screenSize === 'tablet' ? 2 : 4
   const totalPages = Math.ceil(faunaData.length / itemsPerPage)
 
   useEffect(() => {
@@ -239,9 +240,10 @@ function Fauna() {
               <motion.div
                 key={`${screenSize}-${page}-${i}`}
                 custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
+                // Kondisional: matikan variants dan whileInView khusus di HP
+                variants={isMobile ? undefined : cardVariants}
+                initial={isMobile ? { opacity: 1, scale: 1 } : "hidden"}
+                whileInView={isMobile ? undefined : "visible"}
                 viewport={{ once: true }}
                 className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-none flex flex-col"
               >
@@ -275,7 +277,7 @@ function Fauna() {
           </button>
 
           <div className="flex items-center px-2 py-1.5 border border-[#7CA1D3]/50 rounded-[2rem] bg-[#0B1420]/50 backdrop-blur-sm">
-            {screenSize === 'mobile' || screenSize === 'tablet' ? (
+            {isMobile || screenSize === 'tablet' ? (
               <div className="px-3 py-1 flex items-center gap-2 select-none cursor-default text-sm">
                 <span className="text-white font-bold">{page + 1}</span>
                 <span className="text-[#7CA1D3] font-medium">/</span>
@@ -308,7 +310,8 @@ function Fauna() {
       <FaunaModal 
         selectedIndex={modalIndex} 
         setSelectedIndex={setModalIndex} 
-        onClose={() => setModalIndex(null)} 
+        onClose={() => setModalIndex(null)}
+        isMobile={isMobile}
       />
     </section>
   )

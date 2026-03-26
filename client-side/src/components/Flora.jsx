@@ -30,7 +30,6 @@ import syringodium from '../assets/flora/Syringodium isoetifolium.webp'
 import thalassia from '../assets/flora/Thalassia hemprichii .webp'
 import turbinaria from '../assets/flora/Turbinaria sp..webp'
 
-
 const floraData = [
   { img: terumbu, name: 'Terumbu Karang (Coral Reefs)', desc: 'Ekosistem laut yang dibentuk oleh karang keras dan penting sebagai habitat utama biota laut.', info:'Terumbu Karang Laut Banda adalah ekosistem bawah laut di Kepulauan Banda yang kaya akan ratusan spesies ikan dan didominasi oleh karang jenis Acropora. Selain menjadi habitat alami yang sangat beragam, area ini memiliki nilai ekonomi penting namun kini terancam oleh pencemaran dan aktivitas manusia.' },
   { img: kima, name: 'Kima (Giant Clams)', desc: 'Moluska besar yang menyumbang kalsium karbonat untuk pertumbuhan terumbu karang.', info:'Kima (giant clams) merupakan moluska laut berukuran besar dari famili Tridacnidae yang hidup menempel pada terumbu karang di perairan tropis, terutama di kawasan Indo-Pasifik. Selain dikenal sebagai salah satu moluska terbesar di dunia, kima memiliki peran ekologis penting karena cangkangnya tersusun dari kalsium karbonat yang turut menyumbang material bagi pembentukan dan pertumbuhan terumbu karang. Kima juga bersimbiosis dengan alga zooxanthellae di dalam jaringan tubuhnya, yang membantu proses fotosintesis sehingga meningkatkan produktivitas ekosistem karang dan menjaga keseimbangan lingkungan laut.' },
@@ -59,7 +58,7 @@ const floraData = [
 ]
 
 /* Modal Component */
-function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
+function FloraModal({ selectedIndex, setSelectedIndex, onClose, isMobile }) {
   if (selectedIndex === null) return null;
 
   const item = floraData[selectedIndex];
@@ -83,10 +82,10 @@ function FloraModal({ selectedIndex, setSelectedIndex, onClose }) {
         onClick={onClose}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? 0 : 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          exit={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? 0 : 20 }}
+          transition={isMobile ? { duration: 0.2 } : { type: 'spring', damping: 25, stiffness: 300 }}
           className="relative bg-[#0B1420] border border-[#7CA1D3]/40 rounded-[1.5rem] max-w-3xl w-[92%] sm:w-full flex flex-col shadow-2xl h-[65vh] sm:h-[70vh] max-h-[600px] overflow-hidden"
           onClick={e => e.stopPropagation()}
         >
@@ -173,8 +172,9 @@ function Flora() {
   const [isHovered, setIsHovered] = useState(false)
 
   const screenSize = useScreenTierRaf()
+  const isMobile = screenSize === 'mobile'
 
-  const itemsPerPage = screenSize === 'mobile' ? 1 : screenSize === 'tablet' ? 2 : 4
+  const itemsPerPage = isMobile ? 1 : screenSize === 'tablet' ? 2 : 4
   const totalPages = Math.ceil(floraData.length / itemsPerPage)
 
   useEffect(() => {
@@ -196,7 +196,7 @@ function Flora() {
     }, 5000)
     return () => clearInterval(timer)
   }, [totalPages, modalIndex, isHovered])
- 
+
   return (
     <section id="flora" className="relative py-16 md:py-24 flex flex-col bg-transparent overflow-hidden">
       <div className="relative z-[1] max-w-5xl mx-auto px-6 md:px-12 w-full">
@@ -227,9 +227,10 @@ function Flora() {
               <motion.div
                 key={`${screenSize}-${page}-${i}`}
                 custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
+                // Kondisional: matikan variants dan whileInView khusus di HP
+                variants={isMobile ? undefined : cardVariants}
+                initial={isMobile ? { opacity: 1, scale: 1 } : "hidden"}
+                whileInView={isMobile ? undefined : "visible"}
                 viewport={{ once: true }}
                 className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-none flex flex-col"
               >
@@ -263,7 +264,7 @@ function Flora() {
           </button>
 
           <div className="flex items-center px-2 py-1.5 border border-[#7CA1D3]/50 rounded-[2rem] bg-[#0B1420]/50 backdrop-blur-sm">
-            {screenSize === 'mobile' || screenSize === 'tablet' ? (
+            {isMobile || screenSize === 'tablet' ? (
               <div className="px-3 py-1 flex items-center gap-2 select-none cursor-default text-sm">
                 <span className="text-white font-bold">{page + 1}</span>
                 <span className="text-[#7CA1D3] font-medium">/</span>
@@ -297,6 +298,7 @@ function Flora() {
         selectedIndex={modalIndex} 
         setSelectedIndex={setModalIndex} 
         onClose={() => setModalIndex(null)} 
+        isMobile={isMobile}
       />
     </section>
   )

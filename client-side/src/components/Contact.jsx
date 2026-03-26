@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { Phone, Mail, MapPin, CheckCircle, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIsMobileRaf } from '../hooks/useViewportRaf' 
 
 const contactInfo = [
   { icon: Phone,   label: 'Phone',    value: '+62 345 2140' },
@@ -31,6 +32,8 @@ function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [sent, setSent] = useState(false)
   const timeoutRef = useRef(null)
+  
+  const isMobile = useIsMobileRaf(768)
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target
@@ -62,10 +65,10 @@ function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-center">
           
           <motion.div 
-            initial={formHeaderInitial}
-            whileInView={formHeaderAnimate}
-            viewport={formHeaderViewport}
-            transition={formHeaderTransition}
+            initial={isMobile ? formHeaderAnimate : formHeaderInitial}
+            whileInView={isMobile ? undefined : formHeaderAnimate}
+            viewport={isMobile ? undefined : formHeaderViewport}
+            transition={isMobile ? undefined : formHeaderTransition}
             className="flex flex-col justify-center"
           >
             <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white mb-1">Contact Form</h2>
@@ -75,10 +78,10 @@ function Contact() {
           <motion.form 
             onSubmit={handleSubmit} 
             className="flex flex-col gap-2"
-            initial={formInitial}
-            whileInView={formAnimate}
-            viewport={formViewport}
-            transition={formTransition}
+            initial={isMobile ? formAnimate : formInitial}
+            whileInView={isMobile ? undefined : formAnimate}
+            viewport={isMobile ? undefined : formViewport}
+            transition={isMobile ? undefined : formTransition}
           >
             <div>
               <label htmlFor="name" className="block text-[10px] uppercase tracking-wider text-white/50 mb-1">Name</label>
@@ -124,7 +127,7 @@ function Contact() {
             
             <button
               type="submit"
-              className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm hover:bg-[#7CA1D3] hover:text-white hover:border-[#7CA1D3] hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#7CA1D3]/40"
+              className="self-start inline-flex items-center gap-2 bg-transparent border border-white text-[#7CA1D3] font-semibold px-8 py-2.5 rounded-full transition-all duration-300 text-sm active:scale-95 active:bg-[#7CA1D3] active:text-white active:border-[#7CA1D3] md:hover:bg-[#7CA1D3] md:hover:text-white md:hover:border-[#7CA1D3] md:hover:scale-105 shadow-lg md:hover:shadow-[#7CA1D3]/40"
             >
               SUBMIT
             </button>
@@ -136,10 +139,10 @@ function Contact() {
 
         {/* ContactInfo */}
         <motion.div
-          initial={contactInfoInitial}
-          whileInView={contactInfoAnimate}
-          viewport={contactInfoViewport}
-          transition={contactInfoTransition}
+          initial={isMobile ? contactInfoAnimate : contactInfoInitial}
+          whileInView={isMobile ? undefined : contactInfoAnimate}
+          viewport={isMobile ? undefined : contactInfoViewport}
+          transition={isMobile ? undefined : contactInfoTransition}
           className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
         >
           <div className="flex flex-col justify-center">
